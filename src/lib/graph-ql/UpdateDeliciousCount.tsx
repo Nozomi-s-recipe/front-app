@@ -16,7 +16,7 @@ interface Recipe {
 
 interface UpdateDeliciousCountResponse {
   data: {
-    update_recipes_recipes: {
+    update_nozomis_recipes_schema_recipes: {
       returning: Recipe[];
     };
   };
@@ -27,7 +27,7 @@ export async function updateDeliciousCount({
 }: UpdateDeliciousCountArgs) {
   const operation = `
     mutation UpdateDeliciousCount($recipe_id: String!, $delicious_count: Int!) {
-      update_recipes_recipes(where: {recipe_id: {_eq: $recipe_id}}, _set: {delicious_count: $delicious_count}) {
+      update_nozomis_recipes_schema_recipes(where: {recipe_id: {_eq: $recipe_id}}, _set: {delicious_count: $delicious_count}) {
         returning {
           id
           delicious_count

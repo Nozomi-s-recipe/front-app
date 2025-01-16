@@ -22,8 +22,8 @@ export const RecipeOverviewContainer = async ({
       }}
       recipeMetaInfo={{
         recipeName: res.name,
-        deliciousCount: data.recipes_recipes[0].delicious_count,
-        totalView: data.recipes_recipes[0].total_view,
+        deliciousCount: data.nozomis_recipes_schema_recipes[0].delicious_count,
+        totalView: data.nozomis_recipes_schema_recipes[0].total_view,
         recipeDescription: res.description,
         recipeTags: res.tags.map((tag) => {
           return {

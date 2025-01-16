@@ -17,7 +17,7 @@ interface Recipe {
 
 interface UpdateEnhancementRequestCountResponse {
   data: {
-    update_recipes_recipes: {
+    update_nozomis_recipes_schema_recipes: {
       returning: Recipe[];
     };
   };
@@ -28,7 +28,7 @@ export async function updateEnhancementRequestCount({
 }: UpdateEnhancementRequestCountArgs) {
   const operation = `
     mutation UpdateEnhancementRequestCount($recipe_id: String!, $enhancement_request_count: Int = 10) {
-      update_recipes_recipes(where: {recipe_id: {_eq: $recipe_id}}, _set: {enhancement_request_count: $enhancement_request_count}) {
+      update_nozomis_recipes_schema_recipes(where: {recipe_id: {_eq: $recipe_id}}, _set: {enhancement_request_count: $enhancement_request_count}) {
         returning {
           id
           delicious_count

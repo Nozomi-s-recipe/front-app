@@ -16,13 +16,13 @@ interface Recipe {
 
 interface GetRecipeByIdResponse {
   data: {
-    recipes_recipes: Recipe[];
+    nozomis_recipes_schema_recipes: Recipe[];
   };
 }
 export async function getRecipeById({ recipeId }: GetRecipeByIdArgs) {
   const operation = `
   query getRecipeById($recipe_id: String!) {
-    recipes_recipes(where: {recipe_id: {_eq: $recipe_id}}) {
+    nozomis_recipes_schema_recipes(where: {recipe_id: {_eq: $recipe_id}}) {
       id
       recipe_id
       delicious_count

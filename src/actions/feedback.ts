@@ -12,7 +12,8 @@ export async function incrementDeliciousCount(recipeId: string) {
 
     await updateDeliciousCount({
       recipeId,
-      deliciousCount: data.recipes_recipes[0].delicious_count + 1,
+      deliciousCount:
+        data.nozomis_recipes_schema_recipes[0].delicious_count + 1,
     });
 
     return { success: true };
@@ -31,7 +32,7 @@ export async function incrementEnhancementRequestCount(recipeId: string) {
     await updateEnhancementRequestCount({
       recipeId,
       enhancementRequestCount:
-        data.recipes_recipes[0].enhancement_request_count + 1,
+        data.nozomis_recipes_schema_recipes[0].enhancement_request_count + 1,
     });
 
     return { success: true };
