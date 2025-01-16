@@ -23,12 +23,12 @@ export const IngredientList = ({
   ingredients,
   seasonings,
 }: IngredientListProps) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   return (
     <div className='min-w-80'>
       <h2
-        className='flex justify-between w-full text-xl font-semibold border-b-4 cursor-pointer font-mincho border-secondary-B'
+        className='flex items-center justify-between w-full pb-1 text-xl font-semibold border-b-4 cursor-pointer font-mincho border-secondary-B'
         onClick={() => setIsOpen(!isOpen)}
       >
         材料

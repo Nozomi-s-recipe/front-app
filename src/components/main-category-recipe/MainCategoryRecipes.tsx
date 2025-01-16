@@ -1,5 +1,5 @@
 import { Menu } from '@/types/types';
-import { LargeRecipeCard, LargeRecipeCardProps } from './LargeRecipeCard';
+import { RecipeCard, RecipeCardProps } from './RecipeCard';
 import { ShowMore, ShowMoreProps } from './ShowMore';
 import { SmallRecipeCard, SmallRecipeCardProps } from './SmallRecipeCard';
 
@@ -7,7 +7,7 @@ export type MainSide = 'right' | 'left';
 
 type MainCategoryRecipesProps = {
   mainCategory: Menu;
-  largeRecipe: LargeRecipeCardProps;
+  largeRecipe: RecipeCardProps;
   smallRecipe: SmallRecipeCardProps;
   showMoreRecipe: ShowMoreProps;
   mainSide?: MainSide;
@@ -26,7 +26,7 @@ export const MainCategoryRecipes = ({
 
       {mainSide === 'left' ? (
         <div className='flex space-x-2'>
-          <LargeRecipeCard {...largeRecipe} />
+          <RecipeCard {...largeRecipe} />
           <div>
             <SmallRecipeCard {...smallRecipe} />
             <ShowMore {...showMoreRecipe} />
@@ -38,7 +38,7 @@ export const MainCategoryRecipes = ({
             <SmallRecipeCard {...smallRecipe} />
             <ShowMore {...showMoreRecipe} />
           </div>
-          <LargeRecipeCard {...largeRecipe} />
+          <RecipeCard {...largeRecipe} />
         </div>
       )}
     </div>

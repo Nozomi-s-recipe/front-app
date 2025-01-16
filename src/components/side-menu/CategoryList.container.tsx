@@ -1,4 +1,4 @@
-import { getRecipes } from '@/lib/micro-cms';
+import { getRecipes } from '@/lib/micro-cms/micro-cms';
 import { Menu } from '@/types/types';
 import CategoryList from './CategoryList';
 

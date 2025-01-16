@@ -1,0 +1,14 @@
+services:
+  nozomi-s-recipes-front-app:
+    build:
+      context: .
+      args:
+        - 'MICROCMS_SERVICE_DOMAIN=${MICROCMS_SERVICE_DOMAIN}'
+        - 'MICROCMS_API_KEY=${MICROCMS_API_KEY}'
+        - 'HASURA_BACKEND_URL=${HASURA_BACKEND_URL}' # ビルド時の引数として渡す場合
+    ports:
+      - '3088:3000'
+    environment:
+      - 'MICROCMS_SERVICE_DOMAIN=${MICROCMS_SERVICE_DOMAIN}'
+      - 'MICROCMS_API_KEY=${MICROCMS_API_KEY}'
+      - 'HASURA_BACKEND_URL=${HASURA_BACKEND_URL}' # ビルド時の引数として渡す場合

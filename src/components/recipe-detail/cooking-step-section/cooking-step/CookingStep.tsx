@@ -17,14 +17,14 @@ export const CookingStep = ({
   point,
 }: CookingStepProps) => {
   return (
-    <article className='cooking-step w-80 flex flex-col space-y-2'>
+    <article className='flex flex-col space-y-2 cooking-step'>
       <header>
-        <h2 className='text-xl font-mincho font-semibold'>
+        <h2 className='text-xl font-semibold font-mincho'>
           {index}.{title}
         </h2>
       </header>
-      <figure className='w-80 flex flex-col space-y-2'>
-        <div className='h-60 relative'>
+      <figure className='flex flex-col space-y-2'>
+        <div className='relative h-60'>
           <Image
             src={image.src}
             alt={image.alt}
@@ -34,13 +34,13 @@ export const CookingStep = ({
             }}
           />
         </div>
-        <figcaption className='font-mincho font-semibold leading-6'>
+        <figcaption className='font-semibold leading-6 font-mincho'>
           {description}
         </figcaption>
       </figure>
       {point && (
         <aside className='flex flex-col space-y-1'>
-          <h3 className='font-mincho font-semibold'>
+          <h3 className='font-semibold font-mincho'>
             <span className='flex border-b-2 border-secondary-A w-fit'>
               <Image
                 src='/lightbulb.svg'
@@ -52,7 +52,7 @@ export const CookingStep = ({
               <span>ポイント</span>
             </span>
           </h3>
-          <p className='font-mincho font-semibold'>{point}</p>
+          <p className='font-semibold font-mincho'>{point}</p>
         </aside>
       )}
     </article>

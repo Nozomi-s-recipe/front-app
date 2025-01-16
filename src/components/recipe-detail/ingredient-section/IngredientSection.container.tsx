@@ -1,15 +1,15 @@
-import { getRecipeById } from '@/lib/micro-cms';
+import { getRecipeById } from '@/lib/micro-cms/micro-cms';
 import { IngredientList } from './ingredient-list/IngredientList';
 import { RecipeStats } from './recipe-stats/RecipeStats';
 import { ServingsProvider } from './recipe-stats/servings.context';
 
-type IngredientSectionProps = {
+type IngredientSectionContainerProps = {
   recipeId: string;
 };
 
-export const IngredientSection = async ({
+export const IngredientSectionContainer = async ({
   recipeId,
-}: IngredientSectionProps) => {
+}: IngredientSectionContainerProps) => {
   const { ingredients, seasonings, cookingTime, nutrient } =
     await getRecipeById(recipeId);
 

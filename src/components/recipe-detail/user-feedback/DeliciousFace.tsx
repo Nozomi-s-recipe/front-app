@@ -1,7 +1,15 @@
 'use client';
 import { useState } from 'react';
 
-export const DeliciousFace = () => {
+type DeliciousFaceProps = {
+  width: number;
+  height: number;
+};
+
+export const DeliciousFace = ({
+  width = 512,
+  height = 512,
+}: DeliciousFaceProps) => {
   const [isActive, setIsActive] = useState(false);
 
   const handleClick = () => {
@@ -12,15 +20,15 @@ export const DeliciousFace = () => {
     <div className='cursor-pointer' onClick={handleClick}>
       <svg
         xmlns='http://www.w3.org/2000/svg'
-        width='512'
-        height='512'
+        width={width}
+        height={height}
         viewBox='0 0 32 32'
       >
         <style>
           {`
-            @keyframes bounce {
+            @keyframes bounce-up {
               0% { transform: translateY(0); }
-              25% { transform: translateY(-3px); }
+              25% { transform: translateY(-10px); }
               75% { transform: translateY(1px); }
               100% { transform: translateY(0); }
             }
@@ -29,12 +37,12 @@ export const DeliciousFace = () => {
               transition: fill 0.3s ease;
             }
 
-            .active-bounce {
-              animation: bounce 0.3s ease-in-out;
+            .active-bounce-up {
+              animation: bounce-up 0.3s ease-in-out;
             }
           `}
         </style>
-        <g className={isActive ? 'active-bounce' : ''}>
+        <g className={isActive ? 'active-bounce-up' : ''}>
           <path
             fill={isActive ? '#CC0B0E' : 'currentColor'}
             d='M6 2c-.5-.5-1.787-1.26-3-.9C1.4 1.575.4 4 1.4 6c.338.675.883 1.404 1.463 2.096c.404.481.825.945 1.204 1.36c.074.082.155.155.24.219c.545.407 1.29.458 1.846.034C7.383 8.772 8.911 7.383 9.5 6.5c1-1.5 1.525-3.475.25-4.75C8.168.168 6.5 1.5 6 2Z'

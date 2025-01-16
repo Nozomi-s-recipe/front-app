@@ -1,5 +1,5 @@
 import { getSubCategoryById } from '@/lib/const';
-import { getRecipes } from '@/lib/micro-cms';
+import { getRecipes } from '@/lib/micro-cms/micro-cms';
 import { Menu } from '@/types/types';
 import { MainCategoryRecipes, MainSide } from './MainCategoryRecipes';
 import { ShowMoreColor } from './ShowMore';
@@ -20,7 +20,6 @@ export const MainCategoryRecipesContainer = async ({
     limit: 3,
     filters: `mainCategory[contains]${mainCategory.id}`,
   });
-  console.log('MainCategoryRecipesContainer: ', res);
 
   if (res.totalCount === 0) return;
 

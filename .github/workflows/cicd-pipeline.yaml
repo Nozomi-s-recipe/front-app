@@ -1,0 +1,77 @@
+name: CI/CD pipeline for moment-cocoro service lp
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+
+    env:
+      IMAGE_NAME: asia-northeast1-docker.pkg.dev/moment-cocoro-425107/moment-cocoro/service-lp:latest
+      IMAGE_REPO_REGION: asia-northeast1-docker.pkg.dev
+      SERVICE_NAME: service-lp
+      REGION: asia-northeast1
+      PROJECT: nozomi-s-recipes-v2
+
+    steps:
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Build in Github
+        env:
+          MICROCMS_SERVICE_DOMAIN: ${{ vars.MICROCMS_SERVICE_DOMAIN }}
+          MICROCMS_API_KEY: ${{ secrets.MICROCMS_API_KEY }}
+          HASURA_BACKEND_URL: ${{ vars.HASURA_BACKEND_URL }}
+        run: |
+          # ビルド前に環境変数の存在確認（デバッグ用）
+          echo "Checking build args..."
+          echo "MICROCMS_SERVICE_DOMAIN exists: $([[ ! -z "$MICROCMS_SERVICE_DOMAIN" ]] && echo 'Yes' || echo 'No')"
+          echo "MICROCMS_API_KEY exists: $([[ ! -z "$MICROCMS_API_KEY" ]] && echo 'Yes' || echo 'No')"
+          echo "HASURA_BACKEND_URL exists: $([[ ! -z "$HASURA_BACKEND_URL" ]] && echo 'Yes' || echo 'No')"
+
+          docker build -t $IMAGE_NAME \
+            --build-arg MICROCMS_SERVICE_DOMAIN="$MICROCMS_SERVICE_DOMAIN" \
+            --build-arg MICROCMS_API_KEY="$MICROCMS_API_KEY" \
+            --build-arg HASURA_BACKEND_URL="$HASURA_BACKEND_URL" \
+            --progress=plain \
+            .
+
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v2'
+        with:
+          credentials_json: '${{ secrets.GCLOUD_SERVICE_ACCOUNT_JSON }}'
+
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v2'
+
+      - name: Set Google Cloud Project
+        run: gcloud config set project $PROJECT
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCLOUD_SERVICE_ACCOUNT_JSON }}
+
+      - name: Log in to Google Artifact Registry
+        run: gcloud auth configure-docker $IMAGE_REPO_REGION
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCLOUD_SERVICE_ACCOUNT_JSON }}
+
+      - name: Push to Google Artifact Registry
+        run: |
+          docker push $IMAGE_NAME
+
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy $SERVICE_NAME \
+          --image $IMAGE_NAME \
+          --region $REGION \
+          --update-env-vars MICROCMS_SERVICE_DOMAIN=${{ vars.MICROCMS_SERVICE_DOMAIN }},MICROCMS_API_KEY=${{ secrets.MICROCMS_API_KEY }},,HASURA_BACKEND_URL=${{ vars.HASURA_BACKEND_URL }},
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCLOUD_SERVICE_ACCOUNT_JSON }}

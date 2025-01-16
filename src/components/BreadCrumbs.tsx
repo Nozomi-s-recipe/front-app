@@ -11,8 +11,6 @@ export const Breadcrumbs = ({ recipeName }: BreadcrumbsProps) => {
   const pathname = usePathname();
   const segments = pathname.split('/').filter(Boolean);
 
-  console.log('segments: ', segments);
-
   // パンくずリストのアイテムを生成する関数
   const getBreadcrumbItems = () => {
     const items = [{ path: '/', label: 'トップページ' }];
@@ -48,7 +46,6 @@ export const Breadcrumbs = ({ recipeName }: BreadcrumbsProps) => {
 
         case 1: // subCategory
           const subCategory = getSubCategoryById(segment);
-          console.log('subCategory: ', subCategory);
           if (subCategory) {
             items.push({
               path: `/${segments[0]}/${segment}`,
@@ -70,7 +67,6 @@ export const Breadcrumbs = ({ recipeName }: BreadcrumbsProps) => {
   };
 
   const breadcrumbItems = getBreadcrumbItems();
-  console.log('breadcrumbItems: ', breadcrumbItems);
 
   // JSON-LDデータの生成
   const jsonLd = {

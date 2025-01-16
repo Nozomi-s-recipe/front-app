@@ -1,7 +1,15 @@
 'use client';
 import { useState } from 'react';
 
-export const ConfusedFace = () => {
+type ConfusedFaceProps = {
+  width: number;
+  height: number;
+};
+
+export const ConfusedFace = ({
+  width = 512,
+  height = 512,
+}: ConfusedFaceProps) => {
   const [isActive, setIsActive] = useState(false);
 
   const handleClick = () => {
@@ -14,12 +22,12 @@ export const ConfusedFace = () => {
         xmlns='http://www.w3.org/2000/svg'
         fill='none'
         viewBox='0 0 32 32'
-        height='512'
-        width='512'
+        width={width}
+        height={height}
       >
         <style>
           {`
-            @keyframes bounce {
+            @keyframes bounce-down {
               0% { transform: translateY(0); }
               25% { transform: translateY(1px); }
               75% { transform: translateY(3px); }
@@ -30,15 +38,15 @@ export const ConfusedFace = () => {
               transition: fill 0.5s ease;
             }
 
-            .active-bounce {
-              animation: bounce 0.5s ease-in-out;
+            .active-bounce-down {
+              animation: bounce-down 0.5s ease-in-out;
             }
           `}
         </style>
         <desc>
           Confused Face High Contrast Streamline Emoji: https://streamlinehq.com
         </desc>
-        <g className={isActive ? 'active-bounce' : ''}>
+        <g className={isActive ? 'active-bounce-down' : ''}>
           <path
             fill={isActive ? '#1597A6' : 'currentColor'}
             d='M11 15c1.6569 0 3 -1.3431 3 -3s-1.3431 -3 -3 -3c-1.65685 0 -3 1.3431 -3 3s1.34315 3 3 3Z'

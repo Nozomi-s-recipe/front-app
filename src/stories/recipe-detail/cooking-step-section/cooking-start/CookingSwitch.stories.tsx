@@ -1,16 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { CookingStep } from '@/components/recipe-detail/cooking-step-section/CookingStep';
+import { CookingSwitch } from '@/components/recipe-detail/cooking-step-section/cooking-start/CookingSwitch';
 
 const meta = {
-  component: CookingStep,
+  component: CookingSwitch,
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ['autodocs'],
   parameters: {
     // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout
     layout: 'auto',
   },
-} satisfies Meta<typeof CookingStep>;
+} satisfies Meta<typeof CookingSwitch>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

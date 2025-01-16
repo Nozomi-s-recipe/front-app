@@ -1,4 +1,4 @@
-import { getRecipeById } from '@/lib/micro-cms';
+import { getRecipeById } from '@/lib/micro-cms/micro-cms';
 import { IngredientList } from './IngredientList';
 
 type IngredientListContainerProps = {

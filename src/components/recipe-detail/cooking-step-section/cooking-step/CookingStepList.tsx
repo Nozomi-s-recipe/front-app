@@ -1,6 +1,6 @@
 import { CookingStep, CookingStepProps } from './CookingStep';
 
-type CookingStepListProps = {
+export type CookingStepListProps = {
   cookingSteps: Omit<CookingStepProps, 'index'>[];
 };
 

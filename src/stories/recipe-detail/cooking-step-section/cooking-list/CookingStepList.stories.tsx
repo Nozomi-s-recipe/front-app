@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { CookingStepList } from '@/components/recipe-detail/cooking-step-section/CookingStepList';
+import { CookingStepList } from '@/components/recipe-detail/cooking-step-section/cooking-step/CookingStepList';
 
 const meta = {
   component: CookingStepList,
