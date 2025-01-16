@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      IMAGE_NAME: asia-northeast1-docker.pkg.dev/moment-cocoro-425107/moment-cocoro/service-lp:latest
+      IMAGE_NAME: asia-northeast1-docker.pkg.dev/moment-cocoro-425107/nozomi-recipe/noz-front-app:latest
       IMAGE_REPO_REGION: asia-northeast1-docker.pkg.dev
-      SERVICE_NAME: service-lp
+      SERVICE_NAME: noz-front-app
       REGION: asia-northeast1
-      PROJECT: nozomi-s-recipes-v2
+      PROJECT: nozomi-recipe
 
     steps:
       - name: Set up QEMU
