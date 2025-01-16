@@ -72,6 +72,6 @@ jobs:
           gcloud run deploy $SERVICE_NAME \
           --image $IMAGE_NAME \
           --region $REGION \
-          --update-env-vars MICROCMS_SERVICE_DOMAIN=${{ vars.MICROCMS_SERVICE_DOMAIN }},MICROCMS_API_KEY=${{ secrets.MICROCMS_API_KEY }},,HASURA_BACKEND_URL=${{ vars.HASURA_BACKEND_URL }},
+          --update-env-vars MICROCMS_SERVICE_DOMAIN=${{ vars.MICROCMS_SERVICE_DOMAIN }},MICROCMS_API_KEY=${{ secrets.MICROCMS_API_KEY }},HASURA_BACKEND_URL=${{ vars.HASURA_BACKEND_URL }}
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCLOUD_SERVICE_ACCOUNT_JSON }}
