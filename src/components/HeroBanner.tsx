@@ -15,7 +15,8 @@ export const HeroBanner = () => {
             objectFit: 'cover',
           }}
         />
-        <h1 className='absolute text-3xl font-medium tracking-tight top-24 right-4 font-mincho'>
+
+        <h1 className='absolute pt-20 text-3xl font-medium tracking-tight -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 font-mincho min-w-80'>
           <div className='flex flex-col items-end'>
             <div className='flex items-baseline'>
               <Image

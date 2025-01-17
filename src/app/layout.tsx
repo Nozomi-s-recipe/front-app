@@ -1,7 +1,8 @@
+import { shipporiAntique, shipporiMincho } from '@/app/font';
+import '@/app/globals.css';
 import { Footer } from '@/components/footer/Footer';
+import { Header } from '@/components/header/Header';
 import type { Metadata } from 'next';
-import { shipporiAntique, shipporiMincho } from '../font';
-import '../globals.css';
 
 export const metadata: Metadata = {
   appleWebApp: {
@@ -17,15 +18,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en'>
+    <html lang='ja'>
       <body
-        className={`base ${shipporiMincho.variable} ${shipporiAntique.variable} antialiased`}
+        className={`base ${shipporiMincho.variable} ${shipporiAntique.variable} antialiased bg-white h-screen flex flex-col`}
       >
-        {/* <Header /> */}
-        <div className='bg-white '>
-          {/* <Header /> */}
-          {children}
-        </div>
+        <Header />
+        {children}
         <Footer />
       </body>
     </html>

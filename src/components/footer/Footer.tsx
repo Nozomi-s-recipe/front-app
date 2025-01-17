@@ -3,8 +3,8 @@ import Link from 'next/link';
 
 export const Footer = () => {
   return (
-    <footer className='flex justify-center w-full pt-12 pb-8 h-72 bg-base-white'>
-      <div className='flex justify-between w-full max-w-sm'>
+    <footer className='flex justify-center w-full pt-12 pb-8 bg-base-white'>
+      <div className='flex justify-between w-full h-64 max-w-xs'>
         <section className='flex flex-col justify-between'>
           <Link href='/'>
             <Image

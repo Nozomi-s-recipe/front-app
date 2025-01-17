@@ -19,13 +19,21 @@ export default async function RecipePage({
   const res = await getRecipeById(recipeId);
 
   return (
-    <div>
+    <>
       <RecipeOverviewContainer recipeId={recipeId} />
-      <IngredientSectionContainer recipeId={recipeId} />
-      <CookingStepSectionContainer recipeId={recipeId} />
-      <UserFeedback recipeId={recipeId} />
-      <RecommendedRecipesSection />
-      <Breadcrumbs recipeName={res.name} />
-    </div>
+      <div className='max-w-sm mx-auto flex flex-col px-4 pt-8'>
+        <div className='mb-8'>
+          <IngredientSectionContainer recipeId={recipeId} />
+        </div>
+        <div className='mb-12'>
+          <CookingStepSectionContainer recipeId={recipeId} />
+        </div>
+        <div className='mb-8'>
+          <UserFeedback recipeId={recipeId} />
+        </div>
+        <RecommendedRecipesSection />
+        <Breadcrumbs recipeName={res.name} />
+      </div>
+    </>
   );
 }

@@ -9,8 +9,8 @@ import { MenuController } from './MenuController';
 export const Header = () => {
   return (
     <MenuProvider>
-      <header className='flex items-center justify-center px-2 bg-base-white/70'>
-        <nav className='flex items-end justify-between w-full h-full max-w-sm pt-8 pb-2'>
+      <header className='flex items-center justify-center bg-transparent shadow-sm'>
+        <nav className='flex items-end justify-between w-full h-full max-w-sm pt-8 pb-4 px-2'>
           <Link href='/' aria-label='ホームへ戻る'>
             <figure className='m-0'>
               <Image

@@ -15,7 +15,9 @@ export const IngredientSectionContainer = async ({
 
   return (
     <ServingsProvider>
-      <RecipeStats cookingTime={cookingTime} calories={nutrient.calories} />
+      <div className='pb-4'>
+        <RecipeStats cookingTime={cookingTime} calories={nutrient.calories} />
+      </div>
       <IngredientList
         ingredients={ingredients.map((ingredient) => {
           return {

@@ -83,43 +83,45 @@ export const Breadcrumbs = ({ recipeName }: BreadcrumbsProps) => {
   };
 
   return (
-    <>
-      <script
-        type='application/ld+json'
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+    <div className='flex justify-center w-full'>
+      <div className='w-full max-w-sm pt-20 pb-4'>
+        <script
+          type='application/ld+json'
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
 
-      <nav aria-label='breadcrumb' className='max-w-sm pt-20 pb-2 mx-auto'>
-        <ol className='flex flex-wrap items-center gap-1 font-semibold font-mincho'>
-          {breadcrumbItems.map((item, index) => {
-            const isLast = index === breadcrumbItems.length - 1;
+        <nav aria-label='breadcrumb'>
+          <ol className='flex flex-wrap items-center gap-1 font-semibold font-mincho'>
+            {breadcrumbItems.map((item, index) => {
+              const isLast = index === breadcrumbItems.length - 1;
 
-            return (
-              <li
-                key={item.path}
-                className='flex items-center gap-1'
-                {...(isLast ? { 'aria-current': 'page' } : {})}
-              >
-                {index > 0 && (
-                  <span className='text-gray-400' aria-hidden='true'>
-                    /
-                  </span>
-                )}
-                {isLast ? (
-                  <span className='text-gray-500'>{item.label}</span>
-                ) : (
-                  <Link
-                    href={item.path}
-                    className='text-primary hover:underline'
-                  >
-                    {item.label}
-                  </Link>
-                )}
-              </li>
-            );
-          })}
-        </ol>
-      </nav>
-    </>
+              return (
+                <li
+                  key={item.path}
+                  className='flex items-center gap-1'
+                  {...(isLast ? { 'aria-current': 'page' } : {})}
+                >
+                  {index > 0 && (
+                    <span className='text-gray-400' aria-hidden='true'>
+                      /
+                    </span>
+                  )}
+                  {isLast ? (
+                    <span className='text-gray-500'>{item.label}</span>
+                  ) : (
+                    <Link
+                      href={item.path}
+                      className='text-primary hover:underline'
+                    >
+                      {item.label}
+                    </Link>
+                  )}
+                </li>
+              );
+            })}
+          </ol>
+        </nav>
+      </div>
+    </div>
   );
 };

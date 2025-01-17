@@ -10,11 +10,13 @@ export default async function SubCategoryPage({
   const { subCategoryId } = await params;
 
   return (
-    <div>
-      <RecipePreviewListContainer
-        subCategory={getSubCategoryById(subCategoryId)!}
-      />
+    <>
+      <div className='flex-1'>
+        <RecipePreviewListContainer
+          subCategory={getSubCategoryById(subCategoryId)!}
+        />
+      </div>
       <Breadcrumbs />
-    </div>
+    </>
   );
 }

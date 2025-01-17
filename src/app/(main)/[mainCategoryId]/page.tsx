@@ -12,9 +12,11 @@ export default async function MainCategoryPage({
   const mainCategory = getMainCategoryByMainId(mainCategoryId);
 
   return (
-    <div>
-      <RecipePreviewListContainer mainCategory={mainCategory!} />
+    <>
+      <div className='flex-1'>
+        <RecipePreviewListContainer mainCategory={mainCategory!} />
+      </div>
       <Breadcrumbs />
-    </div>
+    </>
   );
 }
