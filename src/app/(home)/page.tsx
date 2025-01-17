@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <>
       <HeroBanner />
-      <section className='max-w-sm mx-auto flex flex-col items-center'>
+      <section className='max-w-sm mx-auto flex flex-col items-center pt-8'>
         <MainCategoryRecipesList />
       </section>
       <div className='px-6'>
