@@ -4,11 +4,18 @@ export default function Home() {
   return (
     <>
       <h1 className='mb-8 text-3xl font-mincho'>レシピポリシー</h1>
-
-      <p className='mb-8 font-medium leading-relaxed font-mincho'>
-        本サイトでは健康のために、以下のポリシーに従ったレシピの開発・提供をしています
+      <p className='mb-6 font-medium leading-relaxed font-mincho'>
+        カラダによい食べ物ってなんでしょう？
       </p>
-
+      <p className='mb-6 font-medium leading-relaxed font-mincho'>
+        以前の私は疲れ体質で、少しでもカラダに良いものをと思い、根拠のない健康情報に振り回されていました
+      </p>
+      <p className='mb-6 font-medium leading-relaxed font-mincho'>
+        ところが、ある本に沿った食生活をすることで、カラダが疲れにくくなり仕事・プライベートが充実するようになりました
+      </p>
+      <p className='mb-8 font-medium leading-relaxed font-mincho'>
+        本レシピサイトでは、以下のポリシーによる、カラダに悪い食材を使わない、カラダに嬉しいレシピを考案・発信します
+      </p>
       <div className='mb-12 space-y-6'>
         <section>
           <h2 className='flex items-start mb-2 font-medium font-mincho'>
@@ -73,14 +80,15 @@ export default function Home() {
           </ol>
         </section>
       </div>
-
       <div className='flex items-start font-medium font-mincho'>
         <span>＊</span>
-        <div className='flex flex-col'>
+        <div className='flex flex-col space-y-2'>
           <span>
             本サイトでは、健康に良い、健康に悪いは「世界一シンプルで科学的に証明された究極の食事」という書籍を参考にしています。
           </span>
-          <span>興味のある方はぜひ書籍もご覧ください。</span>
+          <span>
+            本サイトを見ていただいている健康意識の高い方には面白い内容となっているので、興味のある方はぜひ書籍もご覧ください。
+          </span>
         </div>
       </div>
       <Breadcrumbs />
