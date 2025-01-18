@@ -11,7 +11,7 @@ export const Header = () => {
     <MenuProvider>
       <header className='flex items-center justify-center bg-transparent shadow-sm'>
         <nav className='flex items-end justify-between w-full h-full max-w-sm pt-8 pb-4 px-2'>
-          <Link href='/' aria-label='ホームへ戻る'>
+          <Link href='/' aria-label='ホームへ戻る' prefetch={true}>
             <figure className='m-0'>
               <Image
                 src='/service-logo.svg'

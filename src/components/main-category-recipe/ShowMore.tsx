@@ -13,7 +13,7 @@ export type ShowMoreProps = {
 
 export const ShowMore = ({ image, mainCategory, color }: ShowMoreProps) => {
   return (
-    <Link href={`/${mainCategory.id}`} className='block w-28'>
+    <Link href={`/${mainCategory.id}`} className='block w-28' prefetch={true}>
       <figure className='relative h-20'>
         <Image
           src={image.src}

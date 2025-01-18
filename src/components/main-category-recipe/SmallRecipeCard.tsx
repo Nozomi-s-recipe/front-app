@@ -20,6 +20,7 @@ export const SmallRecipeCard = ({
     <Link
       href={`/${mainCategory.id}/${subCategory.id}/${recipeId}`}
       className='block w-28'
+      prefetch={true}
     >
       <figure className='relative h-20'>
         <Image

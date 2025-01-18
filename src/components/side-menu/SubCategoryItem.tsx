@@ -22,6 +22,7 @@ export const SubCategoryItem = ({
     <Link
       href={`/${urlPath.mainCategory}/${urlPath.subCategory}`}
       onClick={closeMenu}
+      prefetch={true}
     >
       <div className='flex justify-between pl-2 text-base font-extrabold font-mincho text-base-white'>
         <div>{name}</div>

@@ -22,6 +22,7 @@ export const RecommendedRecipes = ({
         <Link
           href={`/${mainCategory.id}`}
           className='flex items-center text-sm font-mincho'
+          prefetch={true}
         >
           <span className='translate-x-1 -translate-y-px'>もっとみる</span>
           <Image

@@ -28,6 +28,7 @@ export const RecipePreview = ({
     <Link
       href={`/${mainCategory.id}/${subCategory.id}/${recipeId}`}
       className='block'
+      prefetch={true}
     >
       <article className='flex p-1 space-x-1 border border-primary'>
         <figure className='relative w-56 h-40'>

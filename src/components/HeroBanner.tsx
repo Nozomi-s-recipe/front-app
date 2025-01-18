@@ -43,7 +43,7 @@ export const HeroBanner = () => {
               <span>美味しさと。</span>
             </p>
 
-            <Link href={'/policy'} className='flex text-xs'>
+            <Link href={'/policy'} className='flex text-xs' prefetch={true}>
               レシピポリシー
               <Image
                 className='ml-1'

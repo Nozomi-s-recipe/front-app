@@ -112,6 +112,7 @@ export const Breadcrumbs = ({ recipeName }: BreadcrumbsProps) => {
                     <Link
                       href={item.path}
                       className='text-primary hover:underline'
+                      prefetch={true}
                     >
                       {item.label}
                     </Link>

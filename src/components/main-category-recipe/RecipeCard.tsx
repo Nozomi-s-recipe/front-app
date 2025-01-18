@@ -38,6 +38,7 @@ export const RecipeCard = ({
       href={`/${mainCategory.id}/${subCategory.id}/${recipeId}`}
       className='block'
       style={{ width: `${width}px` }}
+      prefetch={true}
     >
       <figure className='relative' style={{ height: `${height}px` }}>
         <Image
