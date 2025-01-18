@@ -8,10 +8,13 @@ export default function Home() {
 
       <figure className='flex justify-center w-full mb-6'>
         <Image
-          src={`/profile-icon.webp`}
+          src={`https://images.microcms-assets.io/assets/888d632d12c2409a941139ea8e9d5adc/4b554546c1f24889ad498f79e9fc9730/profile-icon.webp?w=156&h=156&q=70&fit=crop`}
           alt='profile icon'
           width={156}
           height={156}
+          quality={70}
+          priority
+          sizes='156px'
         />
       </figure>
 
