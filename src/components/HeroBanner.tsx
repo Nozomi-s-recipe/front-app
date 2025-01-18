@@ -10,6 +10,8 @@ export const HeroBanner = () => {
           alt='hero banner image'
           className='relative'
           fill
+          sizes='100vw'
+          quality={75}
           priority
           style={{
             objectFit: 'cover',
