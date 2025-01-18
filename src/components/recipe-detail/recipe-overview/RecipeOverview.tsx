@@ -16,15 +16,15 @@ export const RecipeOverview = ({
     <header className='relative w-full pb-32'>
       <figure className='relative h-[34rem] shadow-md'>
         <Image
-          src={`${image.src}?w=720&h=544&q=75&fit=crop&fm=webp`}
+          src={`${image.src}?w=720&h=544&q=60&fit=crop&fm=webp`}
           alt={recipeMetaInfo.recipeName}
           fill
           priority
-          quality={75}
+          quality={60}
           style={{
             objectFit: 'cover',
           }}
-          sizes='100vw'
+          sizes='(max-width: 480px) 480px, (max-width: 720px) 720px, (max-width: 1080px) 1080px, 1440px'
           placeholder='blur'
           blurDataURL={RECIPE_BLUR}
           decoding='sync'
