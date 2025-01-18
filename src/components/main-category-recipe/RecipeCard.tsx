@@ -1,3 +1,4 @@
+import { RECIPE_BLUR } from '@/lib/const';
 import { Menu, RecipeImage } from '@/types/types';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -47,6 +48,8 @@ export const RecipeCard = ({
           }}
           priority
           fill
+          placeholder='blur'
+          blurDataURL={RECIPE_BLUR}
           sizes={`${width}px`}
         />
         <figcaption

@@ -1,3 +1,4 @@
+import { RECIPE_BLUR } from '@/lib/const';
 import { Menu, RecipeImage } from '@/types/types';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -28,6 +29,8 @@ export const SmallRecipeCard = ({
             objectFit: 'cover',
           }}
           sizes='112px'
+          placeholder='blur'
+          blurDataURL={RECIPE_BLUR}
           fill
         />
       </figure>

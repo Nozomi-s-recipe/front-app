@@ -1,3 +1,4 @@
+import { RECIPE_BLUR } from '@/lib/const';
 import { Menu, RecipeImage } from '@/types/types';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -21,6 +22,8 @@ export const ShowMore = ({ image, mainCategory, color }: ShowMoreProps) => {
             objectFit: 'cover',
           }}
           fill
+          placeholder='blur'
+          blurDataURL={RECIPE_BLUR}
           sizes='112px'
         />
         <figcaption

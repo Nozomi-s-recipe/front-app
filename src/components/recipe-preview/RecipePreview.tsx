@@ -1,3 +1,4 @@
+import { RECIPE_BLUR } from '@/lib/const';
 import { Menu, RecipeImage } from '@/types/types';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -29,6 +30,8 @@ export const RecipePreview = ({
             src={image.src}
             alt={image.alt}
             fill
+            placeholder='blur'
+            blurDataURL={RECIPE_BLUR}
             style={{
               objectFit: 'cover',
             }}
