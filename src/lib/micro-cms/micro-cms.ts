@@ -18,6 +18,9 @@ export const client = createClient({
 
 export const getTags = async (queries?: MicroCMSQueries) => {
   const listData = await client.getList<Tag>({
+    customRequestInit: {
+      cache: 'force-cache',
+    },
     endpoint: 'tags',
     queries,
   });
@@ -26,6 +29,9 @@ export const getTags = async (queries?: MicroCMSQueries) => {
 
 export const getRecipes = async (queries?: MicroCMSQueries) => {
   const listData = await client.getList<Recipe>({
+    customRequestInit: {
+      cache: 'force-cache',
+    },
     endpoint: 'recipes',
     queries,
   });
@@ -37,6 +43,9 @@ export const getRecipeById = async (
   queries?: MicroCMSQueries
 ) => {
   const detailData = await client.getListDetail<Recipe>({
+    customRequestInit: {
+      cache: 'force-cache',
+    },
     endpoint: 'recipes',
     contentId,
     queries,

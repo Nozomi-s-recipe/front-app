@@ -6,6 +6,8 @@ import { RecommendedRecipesSection } from '@/components/recipe-detail/recipe-rec
 import { UserFeedback } from '@/components/recipe-detail/user-feedback/UserFeedback';
 import { getRecipeById } from '@/lib/micro-cms/micro-cms';
 
+export const dynamic = 'error';
+
 export default async function RecipePage({
   params,
 }: {

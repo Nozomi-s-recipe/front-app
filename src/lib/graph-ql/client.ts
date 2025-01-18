@@ -10,7 +10,7 @@ export async function fetchGraphQL<T = any>(
   operationsDoc: string,
   operationName: string,
   variables: Record<string, any>,
-  revalidateSeconds: number = 0 // 0にするとDynamic Renderingになる (Dynamic Renderingにする場合はSuspenseを検討する)
+  revalidateSeconds: number = 60 // 0にするとDynamic Renderingになる (Dynamic Renderingにする場合はSuspenseを検討する)
 ): Promise<T> {
   // 環境変数の存在チェック
   if (!process.env.HASURA_BACKEND_URL) {

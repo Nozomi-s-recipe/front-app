@@ -2,10 +2,11 @@ import { Breadcrumbs } from '@/components/BreadCrumbs';
 import { RecipePreviewListContainer } from '@/components/recipe-preview/RecipePreviewList.container';
 import { getMainCategoryByMainId } from '@/lib/const';
 
+export const dynamic = 'error';
+
 export default async function MainCategoryPage({
   params,
-}: // params,
-{
+}: {
   params: Promise<{ mainCategoryId: string }>;
 }) {
   const { mainCategoryId } = await params;

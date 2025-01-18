@@ -2,6 +2,8 @@ import { Breadcrumbs } from '@/components/BreadCrumbs';
 import { RecipePreviewListContainer } from '@/components/recipe-preview/RecipePreviewList.container';
 import { getSubCategoryById } from '@/lib/const';
 
+export const dynamic = 'error';
+
 export default async function SubCategoryPage({
   params,
 }: {
