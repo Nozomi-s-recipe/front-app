@@ -16,12 +16,13 @@ export const ShowMore = ({ image, mainCategory, color }: ShowMoreProps) => {
     <Link href={`/${mainCategory.id}`} className='block w-28' prefetch={true}>
       <figure className='relative h-20'>
         <Image
-          src={image.src}
+          src={`${image.src}?w=112&h=80&q=60&fit=crop`}
           alt={image.alt}
           style={{
             objectFit: 'cover',
           }}
           fill
+          quality={60}
           placeholder='blur'
           blurDataURL={RECIPE_BLUR}
           sizes='112px'

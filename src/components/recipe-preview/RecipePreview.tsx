@@ -31,7 +31,6 @@ export const RecipePreview = ({
       prefetch={true}
     >
       <article className='flex p-1 space-x-1 border border-primary'>
-        {/* これ画像のサイズこのサイズで固定してほしい */}
         <figure className='relative w-56 h-40'>
           <Image
             src={`${image.src}?w=224&h=160&q=60&fit=crop`}

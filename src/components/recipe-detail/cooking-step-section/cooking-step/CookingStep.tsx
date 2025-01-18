@@ -27,14 +27,16 @@ export const CookingStep = ({
       <figure className='flex flex-col space-y-2'>
         <div className='relative h-60'>
           <Image
-            src={image.src}
+            src={`${image.src}?w=352&h=240&q=70&fit=crop`}
             alt={image.alt}
             fill
+            quality={70}
             placeholder='blur'
             blurDataURL={RECIPE_BLUR}
             style={{
               objectFit: 'cover',
             }}
+            // sizes='(max-width: 768px) 100vw, 800px'
           />
         </div>
         <figcaption className='font-semibold leading-6 font-mincho'>

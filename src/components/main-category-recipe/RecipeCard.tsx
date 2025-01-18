@@ -12,6 +12,7 @@ export type RecipeCardProps = {
   width?: number;
   height?: number;
   captionSize?: 'xs' | 'sm' | 'base' | 'lg' | 'xl' | '2xl';
+  isPriority?: boolean;
 };
 
 export const RecipeCard = ({
@@ -23,6 +24,7 @@ export const RecipeCard = ({
   width = 224,
   height = 160,
   captionSize = 'lg',
+  isPriority = false,
 }: RecipeCardProps) => {
   const captionClasses = {
     xs: 'text-xs',
@@ -42,16 +44,20 @@ export const RecipeCard = ({
     >
       <figure className='relative' style={{ height: `${height}px` }}>
         <Image
-          src={image.src}
+          src={`${image.src}?w=${width}&h=${height}&q=60&fit=crop`}
           alt={image.alt}
           style={{
             objectFit: 'cover',
           }}
-          priority
+          priority={isPriority}
+          quality={60}
           fill
           placeholder='blur'
           blurDataURL={RECIPE_BLUR}
           sizes={`${width}px`}
+          decoding={isPriority ? 'sync' : 'async'}
+          fetchPriority={isPriority ? 'high' : 'auto'}
+          loading={isPriority ? 'eager' : 'lazy'}
         />
         <figcaption
           className={`absolute flex items-center w-full p-1 ${captionClasses[captionSize]} bottom-2 bg-base-white opacity-80 font-mincho`}

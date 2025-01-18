@@ -24,12 +24,13 @@ export const SmallRecipeCard = ({
     >
       <figure className='relative h-20'>
         <Image
-          src={image.src}
+          src={`${image.src}?w=112&h=80&q=60&fit=crop`}
           alt={image.alt}
           style={{
             objectFit: 'cover',
           }}
           sizes='112px'
+          quality={60}
           placeholder='blur'
           blurDataURL={RECIPE_BLUR}
           fill
