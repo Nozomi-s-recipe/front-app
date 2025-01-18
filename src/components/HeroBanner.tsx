@@ -4,21 +4,19 @@ import Link from 'next/link';
 export const HeroBanner = () => {
   return (
     <section className='w-full bg-primary/5'>
-      <div className='relative w-full h-80'>
+      {/* コンテナに固定の高さと中央寄せを追加 */}
+      <div className='relative h-80 flex justify-center items-center overflow-hidden'>
         <Image
-          src={'/hero-banner.webp'}
+          src='/hero-banner.webp'
           alt='hero banner image'
-          className='relative'
-          fill
-          sizes='100vw'
-          quality={75}
+          width={750}
+          height={400}
           priority
-          style={{
-            objectFit: 'cover',
-          }}
+          quality={75}
+          className='w-full h-full object-cover' // object-coverで画像比率を保持
         />
 
-        <h1 className='absolute pt-20 text-3xl font-medium tracking-tight -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 font-mincho min-w-80'>
+        <h1 className='absolute text-3xl font-medium tracking-tight text-center font-mincho min-w-80'>
           <div className='flex flex-col items-end'>
             <div className='flex items-baseline'>
               <Image
@@ -29,7 +27,7 @@ export const HeroBanner = () => {
                 priority
               />
               <span className='-ml-0.5'>ozomi</span>
-              <span className='-ml-0.5'>‘</span>
+              <span className='-ml-0.5'>'</span>
               <span className='-ml-1'>s</span>
             </div>
             <div className='mb-2 -mt-2'>Recipes</div>

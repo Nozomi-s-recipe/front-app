@@ -1,7 +1,6 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  /* config options here */
   output: 'standalone',
   images: {
     minimumCacheTTL: 360, // キャッシュ時間を設定
