@@ -19,7 +19,7 @@ export const RecipePreviewList = ({
         {recipePreviews.map((recipePreview, i) => {
           return (
             <li key={`RecipePreview-${i}`}>
-              <RecipePreview {...recipePreview} />
+              <RecipePreview {...recipePreview} isPriority={i < 1} />
             </li>
           );
         })}

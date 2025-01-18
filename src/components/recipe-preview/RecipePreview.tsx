@@ -11,6 +11,7 @@ export type RecipePreviewProps = {
   ingredientsCount: number;
   mainCategory: Menu;
   subCategory: Menu;
+  isPriority?: boolean;
 };
 
 export const RecipePreview = ({
@@ -21,15 +22,22 @@ export const RecipePreview = ({
   ingredientsCount,
   mainCategory,
   subCategory,
+  isPriority = false,
 }: RecipePreviewProps) => {
   return (
-    <Link href={`/${mainCategory.id}/${subCategory.id}/${recipeId}`}>
+    <Link
+      href={`/${mainCategory.id}/${subCategory.id}/${recipeId}`}
+      className='block'
+    >
       <article className='flex p-1 space-x-1 border border-primary'>
         <figure className='relative w-56 h-40'>
           <Image
             src={image.src}
             alt={image.alt}
             fill
+            sizes='(max-width: 768px) 100vw, 224px'
+            priority={isPriority}
+            quality={75}
             placeholder='blur'
             blurDataURL={RECIPE_BLUR}
             style={{
@@ -38,15 +46,18 @@ export const RecipePreview = ({
           />
         </figure>
         <div className='flex flex-col justify-between w-36'>
-          <h2 className='text-xl font-semibold font-mincho'>{recipeName}</h2>
+          <h2 className='text-xl font-semibold font-mincho line-clamp-2'>
+            {recipeName}
+          </h2>
           <ul>
             <li className='flex justify-between font-mincho'>
               <span className='flex'>
                 <Image
                   src='/time.svg'
-                  alt='time icon'
+                  alt=''
                   width={20}
                   height={20}
+                  aria-hidden='true'
                   unoptimized
                 />
                 <span className='-translate-y-px'>時間</span>
@@ -57,9 +68,10 @@ export const RecipePreview = ({
               <span className='flex'>
                 <Image
                   src='/carrot.svg'
-                  alt='carrot icon'
+                  alt=''
                   width={18}
                   height={18}
+                  aria-hidden='true'
                   unoptimized
                 />
                 <span className='-translate-y-px'>材料数</span>
