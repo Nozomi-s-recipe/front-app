@@ -43,9 +43,9 @@ export const RecipePreview = ({
             placeholder='blur'
             blurDataURL={RECIPE_BLUR}
             className='object-cover'
-            style={{
-              objectFit: 'cover',
-            }}
+            decoding={isPriority ? 'sync' : 'async'}
+            fetchPriority={isPriority ? 'high' : 'auto'}
+            loading={isPriority ? 'eager' : 'lazy'}
           />
         </figure>
         <div className='flex flex-col justify-between w-36'>
