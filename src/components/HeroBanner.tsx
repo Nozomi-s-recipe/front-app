@@ -6,7 +6,7 @@ export const HeroBanner = () => {
     <section className='w-full bg-primary/5'>
       <div className='relative w-full h-80'>
         <Image
-          src={'/hero-banner.svg'}
+          src={'/hero-banner.webp'}
           alt='hero banner image'
           className='relative'
           fill

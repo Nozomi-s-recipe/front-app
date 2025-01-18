@@ -8,7 +8,7 @@ export default function Home() {
 
       <figure className='flex justify-center w-full mb-6'>
         <Image
-          src={`/profile-icon.svg`}
+          src={`/profile-icon.webp`}
           alt='profile icon'
           width={156}
           height={156}
@@ -16,7 +16,9 @@ export default function Home() {
       </figure>
 
       <section className='font-mincho flex flex-col'>
-        <p className='pb-4'>カラダによい食べ物ってなんでしょう？</p>
+        <p className='pb-4'>
+          初めまして、ご覧いただきありがとうございます。栄養士の「のぞみ」と申します
+        </p>
         <p>
           以前の私は疲れ体質で、少しでもカラダに良いものをと思い、根拠のない健康情報に振り回されていました
         </p>
