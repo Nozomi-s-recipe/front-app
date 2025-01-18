@@ -31,16 +31,18 @@ export const RecipePreview = ({
       prefetch={true}
     >
       <article className='flex p-1 space-x-1 border border-primary'>
-        <figure className='relative w-56 h-40'>
+        <figure>
           <Image
             src={image.src}
             alt={image.alt}
-            fill
-            sizes='(max-width: 768px) 100vw, 224px'
+            width={224}
+            height={160}
+            sizes='224px'
             priority={isPriority}
-            quality={75}
+            quality={60}
             placeholder='blur'
             blurDataURL={RECIPE_BLUR}
+            className='object-cover'
             style={{
               objectFit: 'cover',
             }}
