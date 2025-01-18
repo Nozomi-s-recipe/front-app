@@ -6,3 +6,10 @@ scripts
 *Dockerfile*
 node_modules
 .env
+
+.storybook/
+stories/
+*.stories.tsx
+*.stories.ts
+*.stories.jsx
+*.stories.js
