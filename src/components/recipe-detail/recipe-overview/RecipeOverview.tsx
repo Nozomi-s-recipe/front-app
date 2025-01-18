@@ -16,7 +16,7 @@ export const RecipeOverview = ({
     <header className='relative w-full pb-32'>
       <figure className='relative h-[34rem] shadow-md'>
         <Image
-          src={`${image.src}?w=720&h=544&q=75&fit=crop`}
+          src={`${image.src}?w=720&h=544&q=75&fit=crop&fm=webp`}
           alt={recipeMetaInfo.recipeName}
           fill
           priority

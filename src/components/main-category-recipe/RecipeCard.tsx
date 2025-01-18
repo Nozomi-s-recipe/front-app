@@ -44,7 +44,7 @@ export const RecipeCard = ({
     >
       <figure className='relative' style={{ height: `${height}px` }}>
         <Image
-          src={`${image.src}?w=${width}&h=${height}&q=60&fit=crop`}
+          src={`${image.src}?w=${width}&h=${height}&q=60&fit=crop?fm=webp`}
           alt={image.alt}
           style={{
             objectFit: 'cover',

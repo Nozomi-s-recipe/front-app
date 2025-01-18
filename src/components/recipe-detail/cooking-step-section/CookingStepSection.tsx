@@ -40,7 +40,7 @@ export const CookingStepSection = ({
       </h2>
       <div
         className={`transition-all duration-200 overflow-hidden ${
-          isOpen ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'
+          isOpen ? 'max-h-none opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
         <CookingStart />
