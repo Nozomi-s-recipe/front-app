@@ -27,7 +27,7 @@ export const HeroBanner = () => {
                 priority
               />
               <span className='-ml-0.5'>ozomi</span>
-              <span className='-ml-0.5'>'</span>
+              <span className='-ml-0.5'>‘</span>
               <span className='-ml-1'>s</span>
             </div>
             <div className='mb-2 -mt-2'>Recipes</div>
