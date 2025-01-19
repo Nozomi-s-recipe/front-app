@@ -1,3 +1,4 @@
+import 'server-only';
 import { fetchGraphQL } from './client';
 
 type GetRecipeByIdArgs = {

@@ -1,5 +1,6 @@
 import type { MicroCMSQueries } from 'microcms-js-sdk';
 import { createClient } from 'microcms-js-sdk';
+import 'server-only';
 import type { Recipe, Tag } from './types';
 
 if (!process.env.MICROCMS_SERVICE_DOMAIN) {
