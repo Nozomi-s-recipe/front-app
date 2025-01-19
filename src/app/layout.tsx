@@ -5,6 +5,7 @@ import { Header } from '@/components/header/Header';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://n-recipes.com'),
   appleWebApp: {
     title: "N's Recipes",
   },
