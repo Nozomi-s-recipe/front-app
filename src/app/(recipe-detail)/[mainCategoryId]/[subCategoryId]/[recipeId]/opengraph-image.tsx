@@ -1,14 +1,9 @@
+// app/policy/opengraph-image.tsx
+import { generateOgpImage } from '@/components/open-graph/OgpImageGenerator';
 import { getRecipeById } from '@/lib/micro-cms/micro-cms';
-import { ImageResponse } from 'next/og';
 
 export const runtime = 'edge';
-
-export const alt = 'Recipe Image';
-export const size = {
-  width: 1200,
-  height: 630,
-};
-
+export const alt = 'Policy Image';
 export const contentType = 'image/png';
 
 export default async function Image({
@@ -16,116 +11,10 @@ export default async function Image({
 }: {
   params: { recipeId: string };
 }) {
-  try {
-    const recipe = await getRecipeById(params.recipeId);
-    // 画像URLに最適化パラメータを追加
-    const optimizedImageUrl = `${recipe.image.url}?w=${size.width}&h=${size.height}&fm=jpeg&q=80&fit=crop`;
+  const recipe = await getRecipeById(params.recipeId);
 
-    // Google Fontsから直接フォントを取得
-    const shipporiMincho = await fetch(
-      'https://cdn.jsdelivr.net/npm/@fontsource/shippori-mincho/files/shippori-mincho-japanese-700-normal.woff'
-    ).then((res) => res.arrayBuffer());
-
-    return new ImageResponse(
-      (
-        <div
-          style={{
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            background: 'white',
-          }}
-        >
-          {/* 画像をimg要素として表示 */}
-          <img
-            src={optimizedImageUrl}
-            alt={recipe.name}
-            style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-            }}
-          />
-
-          {/* オーバーレイ */}
-          <div
-            style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              backgroundColor: 'rgba(0, 0, 0, 0.4)',
-              zIndex: 1,
-            }}
-          />
-
-          {/* レシピタイトル */}
-          <div
-            style={{
-              position: 'relative',
-              color: 'white',
-              fontSize: 60,
-              fontWeight: 'bold',
-              textAlign: 'center',
-              padding: '0 40px',
-              textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
-              zIndex: 2,
-              maxWidth: '90%',
-              wordBreak: 'break-word',
-            }}
-          >
-            {recipe.name}
-          </div>
-        </div>
-      ),
-      {
-        ...size,
-        fonts: [
-          {
-            name: 'Shippori Mincho',
-            data: await shipporiMincho,
-            style: 'normal',
-            weight: 700,
-          },
-        ],
-      }
-    );
-  } catch (error) {
-    console.error('Error generating OGP image:', error);
-
-    return new ImageResponse(
-      (
-        <div
-          style={{
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            background: 'white',
-          }}
-        >
-          <div
-            style={{
-              color: '#666',
-              fontSize: 32,
-              textAlign: 'center',
-            }}
-          >
-            Recipe Image Unavailable
-          </div>
-        </div>
-      ),
-      {
-        ...size,
-      }
-    );
-  }
+  return generateOgpImage({
+    title: recipe.name,
+    imageUrl: recipe.image.url,
+  });
 }

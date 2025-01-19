@@ -1,19 +1,12 @@
 // app/policy/opengraph-image.tsx
 import { generateOgpImage } from '@/components/open-graph/OgpImageGenerator';
-import { getSubCategoryById } from '@/lib/const';
 
 export const runtime = 'edge';
 export const alt = 'Policy Image';
 export const contentType = 'image/png';
 
-export default async function Image({
-  params,
-}: {
-  params: { subCategoryId: string };
-}) {
-  const menu = getSubCategoryById(params.subCategoryId)!;
-
+export default async function Image() {
   return generateOgpImage({
-    title: `${menu.name}のレシピリスト`,
+    title: '運営者プロフィール',
   });
 }
