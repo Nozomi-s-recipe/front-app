@@ -22,14 +22,16 @@ export async function generateStaticParams() {
   }));
 }
 
+export type RecipePageProps = {
+  mainCategoryId: string;
+  subCategoryId: string;
+  recipeId: string;
+};
+
 export default async function RecipePage({
   params,
 }: {
-  params: Promise<{
-    mainCategoryId: string;
-    subCategoryId: string;
-    recipeId: string;
-  }>;
+  params: Promise<RecipePageProps>;
 }) {
   const { recipeId } = await params;
   // const res = await getRecipeById(recipeId);
