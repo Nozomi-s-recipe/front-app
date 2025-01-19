@@ -39,6 +39,13 @@ export const getRecipes = async (queries?: MicroCMSQueries) => {
   return listData;
 };
 
+export const preloadGetRecipeById = (
+  contentId: string,
+  queries?: MicroCMSQueries
+) => {
+  void getRecipeById(contentId, queries);
+};
+
 export const getRecipeById = async (
   contentId: string,
   queries?: MicroCMSQueries
