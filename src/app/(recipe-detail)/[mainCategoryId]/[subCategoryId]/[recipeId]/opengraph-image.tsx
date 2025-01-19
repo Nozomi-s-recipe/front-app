@@ -18,6 +18,13 @@ export default async function Image({
 }) {
   try {
     const recipe = await getRecipeById(params.recipeId);
+    // 画像URLに最適化パラメータを追加
+    const optimizedImageUrl = `${recipe.image.url}?w=${size.width}&h=${size.height}&fm=jpeg&q=80&fit=crop`;
+
+    // Google Fontsから直接フォントを取得
+    const shipporiMincho = await fetch(
+      'https://cdn.jsdelivr.net/npm/@fontsource/shippori-mincho/files/shippori-mincho-japanese-700-normal.woff'
+    ).then((res) => res.arrayBuffer());
 
     return new ImageResponse(
       (
@@ -32,21 +39,21 @@ export default async function Image({
             background: 'white',
           }}
         >
-          {/* 画像を背景として使用 */}
-          <div
+          {/* 画像をimg要素として表示 */}
+          <img
+            src={optimizedImageUrl}
+            alt={recipe.name}
             style={{
               position: 'absolute',
               top: 0,
               left: 0,
-              right: 0,
-              bottom: 0,
-              backgroundImage: `url(${recipe.image.url})?w=${size.width}&h=${size.height}&fm=webp&q=60&fit=crop`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
             }}
           />
 
-          {/* オーバーレイ（画像を暗くする） */}
+          {/* オーバーレイ */}
           <div
             style={{
               position: 'absolute',
@@ -55,6 +62,7 @@ export default async function Image({
               right: 0,
               bottom: 0,
               backgroundColor: 'rgba(0, 0, 0, 0.4)',
+              zIndex: 1,
             }}
           />
 
@@ -68,6 +76,9 @@ export default async function Image({
               textAlign: 'center',
               padding: '0 40px',
               textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
+              zIndex: 2,
+              maxWidth: '90%',
+              wordBreak: 'break-word',
             }}
           >
             {recipe.name}
@@ -76,15 +87,19 @@ export default async function Image({
       ),
       {
         ...size,
-        headers: {
-          'Cache-Control': 'public, max-age=31536000, immutable',
-        },
+        fonts: [
+          {
+            name: 'Shippori Mincho',
+            data: await shipporiMincho,
+            style: 'normal',
+            weight: 700,
+          },
+        ],
       }
     );
   } catch (error) {
     console.error('Error generating OGP image:', error);
 
-    // エラー時のフォールバック画像を返す
     return new ImageResponse(
       (
         <div
