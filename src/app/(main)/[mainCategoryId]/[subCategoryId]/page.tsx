@@ -9,7 +9,6 @@ export async function generateStaticParams() {
   return res.contents.map((recipe) => ({
     mainCategoryId: recipe.mainCategory[0],
     subCategoryId: recipe.subCategory[0],
-    // recipeId: recipe.id,
   }));
 }
 

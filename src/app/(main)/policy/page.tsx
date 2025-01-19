@@ -5,13 +5,13 @@ export default function Home() {
     <>
       <h1 className='mb-8 text-3xl font-mincho'>レシピポリシー</h1>
       <p className='mb-6 font-medium leading-relaxed font-mincho'>
-        カラダによい食べ物ってなんでしょう？
+        カラダによい食べ物ってなんだろう？
       </p>
       <p className='mb-6 font-medium leading-relaxed font-mincho'>
         以前の私は疲れ体質で、少しでもカラダに良いものをと思い、根拠のない健康情報に振り回されていました
       </p>
       <p className='mb-6 font-medium leading-relaxed font-mincho'>
-        ところが、ある本に沿った食生活をすることで、カラダが疲れにくくなり仕事・プライベートが充実するようになりました
+        ところが、ある本に沿った食生活をすることで、カラダが疲れにくくなり仕事・プライベートを楽しめるようになりました
       </p>
       <p className='mb-8 font-medium leading-relaxed font-mincho'>
         本レシピサイトでは、以下のポリシーによる、カラダに悪い食材を使わない、カラダに嬉しいレシピを考案・発信します
@@ -86,9 +86,7 @@ export default function Home() {
           <span>
             本サイトでは、健康に良い、健康に悪いは「世界一シンプルで科学的に証明された究極の食事」という書籍を参考にしています。
           </span>
-          <span>
-            本サイトを見ていただいている健康意識の高い方には面白い内容となっているので、興味のある方はぜひ書籍もご覧ください。
-          </span>
+          <span>興味のある方はぜひ書籍もご覧ください。</span>
         </div>
       </div>
       <Breadcrumbs />
