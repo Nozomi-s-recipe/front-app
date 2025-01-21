@@ -1,6 +1,6 @@
 // app/policy/opengraph-image.tsx
 import { generateOgpImage } from '@/components/open-graph/OgpImageGenerator';
-import { getRecipeById } from '@/lib/micro-cms/micro-cms';
+import { getRecipeById } from '@/utils/micro-cms/micro-cms';
 
 export const runtime = 'edge';
 export const alt = 'Policy Image';

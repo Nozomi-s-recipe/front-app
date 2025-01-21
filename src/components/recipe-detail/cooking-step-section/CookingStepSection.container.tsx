@@ -1,4 +1,4 @@
-import { getRecipeById } from '@/lib/micro-cms/micro-cms';
+import { getRecipeById } from '@/utils/micro-cms/micro-cms';
 import { CookingStepSection } from './CookingStepSection';
 
 type CookingStepSectionContainerProps = {

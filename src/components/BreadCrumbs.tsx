@@ -1,5 +1,5 @@
 'use client';
-import { getMainCategoryByMainId, getSubCategoryById } from '@/lib/const';
+import { getMainCategoryByMainId, getSubCategoryById } from '@/utils/const';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 

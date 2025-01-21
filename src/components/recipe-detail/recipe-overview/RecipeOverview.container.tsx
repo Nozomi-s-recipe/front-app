@@ -1,5 +1,5 @@
-import { getRecipeById as HasuraGetRecipeById } from '@/lib/graph-ql/GetRecipeById';
-import { getRecipeById } from '@/lib/micro-cms/micro-cms';
+import { getRecipeById as HasuraGetRecipeById } from '@/utils/graph-ql/GetRecipeById';
+import { getRecipeById } from '@/utils/micro-cms/micro-cms';
 import { RecipeOverview } from './RecipeOverview';
 
 type RecipeOverviewContainerProps = {

@@ -1,6 +1,6 @@
 // SideMenuWrapper.tsx
 'use client';
-import { SIDE_MENUS } from '@/lib/const';
+import { SIDE_MENUS } from '@/utils/const';
 import { CategoryListContainer } from './CategoryList.container';
 
 export const SideMenuContent = () => {

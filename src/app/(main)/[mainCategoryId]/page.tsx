@@ -1,7 +1,7 @@
 import { Breadcrumbs } from '@/components/BreadCrumbs';
 import { RecipePreviewListContainer } from '@/components/recipe-preview/RecipePreviewList.container';
-import { getMainCategoryByMainId } from '@/lib/const';
-import { getRecipes } from '@/lib/micro-cms/micro-cms';
+import { getMainCategoryByMainId } from '@/utils/const';
+import { getRecipes } from '@/utils/micro-cms/micro-cms';
 
 export async function generateStaticParams() {
   const res = await getRecipes();

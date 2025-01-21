@@ -1,5 +1,5 @@
-import { RECIPE_BLUR } from '@/lib/const';
 import { RecipeImage } from '@/types/types';
+import { RECIPE_BLUR } from '@/utils/const';
 import Image from 'next/image';
 
 export type CookingStepProps = {

@@ -1,6 +1,6 @@
 // app/policy/opengraph-image.tsx
 import { generateOgpImage } from '@/components/open-graph/OgpImageGenerator';
-import { getMainCategoryByMainId } from '@/lib/const';
+import { getMainCategoryByMainId } from '@/utils/const';
 
 export const runtime = 'edge';
 export const alt = 'Policy Image';

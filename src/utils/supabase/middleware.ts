@@ -1,0 +1,89 @@
+import { createServerClient } from '@supabase/ssr';
+import { NextResponse, type NextRequest } from 'next/server';
+
+export async function updateSession(request: NextRequest) {
+  let supabaseResponse = NextResponse.next({
+    request,
+  });
+
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll() {
+          // クッキーから認証情報を取得
+          // 例: sb-access-token, sb-refresh-token
+          return request.cookies.getAll();
+        },
+        setAll(cookiesToSet) {
+          // 新しい認証情報をクッキーに設定
+          // - トークンの更新時
+          // - 新規ログイン時
+          // - リフレッシュトークンの更新時
+
+          // 1. リクエストオブジェクトへの設定
+          // 現在のリクエストコンテキスト内で認証情報を即座に利用可能にするため
+          // 同じミドルウェア内の後続の処理（例：supabase.auth.getUser()）で新しいクッキー値を参照できるようにするため
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          cookiesToSet.forEach(({ name, value, options }) =>
+            request.cookies.set(name, value)
+          );
+
+          // 新しいレスポンスオブジェクトの作成
+          supabaseResponse = NextResponse.next({
+            request,
+          });
+          // 2. レスポンスオブジェクトへの設定
+          // ブラウザに送り返すために必要
+          // 次回のリクエストで使用されるクッキーを設定
+          cookiesToSet.forEach(({ name, value, options }) =>
+            supabaseResponse.cookies.set(name, value, options)
+          );
+        },
+      },
+    }
+  );
+
+  // Do not run code between createServerClient and
+  // supabase.auth.getUser(). A simple mistake could make it very hard to debug
+  // issues with users being randomly logged out.
+
+  // IMPORTANT: DO NOT REMOVE auth.getUser()
+
+  // 1. ユーザー認証状態の確認
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  // このとき裏では：
+  // - アクセストークンの検証
+  // - 必要に応じてリフレッシュトークンを使用した新規トークンの発行
+  // - 新しいトークンのクッキーへの保存
+
+  if (
+    !user &&
+    !request.nextUrl.pathname.startsWith('/login') &&
+    !request.nextUrl.pathname.startsWith('/auth')
+  ) {
+    // no user, potentially respond by redirecting the user to the login page
+    const url = request.nextUrl.clone();
+    url.pathname = '/login';
+    return NextResponse.redirect(url);
+  }
+
+  // IMPORTANT: You *must* return the supabaseResponse object as it is.
+  // If you're creating a new response object with NextResponse.next() make sure to:
+  // 1. Pass the request in it, like so:
+  //    const myNewResponse = NextResponse.next({ request })
+  // 2. Copy over the cookies, like so:
+  //    myNewResponse.cookies.setAll(supabaseResponse.cookies.getAll())
+  // 3. Change the myNewResponse object to fit your needs, but avoid changing
+  //    the cookies!
+  // 4. Finally:
+  //    return myNewResponse
+  // If this is not done, you may be causing the browser and server to go out
+  // of sync and terminate the user's session prematurely!
+
+  return supabaseResponse;
+}

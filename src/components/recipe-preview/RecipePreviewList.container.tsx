@@ -1,6 +1,6 @@
-import { getMainCategoryByMainId, getSubCategoryById } from '@/lib/const';
-import { getRecipes } from '@/lib/micro-cms/micro-cms';
 import { Menu } from '@/types/types';
+import { getMainCategoryByMainId, getSubCategoryById } from '@/utils/const';
+import { getRecipes } from '@/utils/micro-cms/micro-cms';
 import { RecipePreviewProps } from './RecipePreview';
 import { RecipePreviewList } from './RecipePreviewList';
 

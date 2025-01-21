@@ -1,5 +1,5 @@
-import { RECIPE_BLUR } from '@/lib/const';
 import { Menu, RecipeImage } from '@/types/types';
+import { RECIPE_BLUR } from '@/utils/const';
 import Image from 'next/image';
 import Link from 'next/link';
 

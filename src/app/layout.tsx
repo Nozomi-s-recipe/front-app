@@ -24,6 +24,7 @@ export default function RootLayout({
         className={`base ${shipporiMincho.variable} ${shipporiAntique.variable} antialiased bg-white h-screen flex flex-col`}
       >
         <Header />
+        {/* <GoogleSignIn /> */}
         {children}
         <Footer />
       </body>

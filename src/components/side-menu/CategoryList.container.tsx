@@ -1,5 +1,5 @@
-import { getRecipes } from '@/lib/micro-cms/micro-cms';
 import { Menu } from '@/types/types';
+import { getRecipes } from '@/utils/micro-cms/micro-cms';
 import CategoryList from './CategoryList';
 
 type CategoryListContainerProps = {

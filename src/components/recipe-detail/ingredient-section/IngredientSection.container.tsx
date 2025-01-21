@@ -1,4 +1,4 @@
-import { getRecipeById } from '@/lib/micro-cms/micro-cms';
+import { getRecipeById } from '@/utils/micro-cms/micro-cms';
 import { IngredientList } from './ingredient-list/IngredientList';
 import { RecipeStats } from './recipe-stats/RecipeStats';
 import { ServingsProvider } from './recipe-stats/servings.context';

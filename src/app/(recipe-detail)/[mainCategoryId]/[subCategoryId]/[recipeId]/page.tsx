@@ -5,7 +5,7 @@ import { IngredientSectionContainer } from '@/components/recipe-detail/ingredien
 import { RecipeOverviewContainer } from '@/components/recipe-detail/recipe-overview/RecipeOverview.container';
 import { RecommendedRecipesSection } from '@/components/recipe-detail/recipe-recommend/RecomendedRecipesSection';
 import { UserFeedback } from '@/components/recipe-detail/user-feedback/UserFeedback';
-import { getRecipes } from '@/lib/micro-cms/micro-cms';
+import { getRecipes } from '@/utils/micro-cms/micro-cms';
 // import { getRecipeById } from '@/lib/micro-cms/micro-cms';
 
 // https://zenn.dev/akfm/books/nextjs-basic-principle/viewer/part_3_static_rendering_full_route_cache#%E6%99%82%E9%96%93%E3%83%99%E3%83%BC%E3%82%B9revalidate

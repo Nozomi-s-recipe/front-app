@@ -1,4 +1,4 @@
-import { SIDE_MENUS } from '@/lib/const';
+import { SIDE_MENUS } from '@/utils/const';
 import { RecommendedRecipesContainer } from './RecommendedRecipes.container';
 
 export const RecommendedRecipesSection = () => {

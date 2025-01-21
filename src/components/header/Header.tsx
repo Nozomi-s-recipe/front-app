@@ -1,5 +1,5 @@
 import { MenuProvider } from '@/components/header/menu.context';
-import { SIDE_MENUS } from '@/lib/const';
+import { SIDE_MENUS } from '@/utils/const';
 import Image from 'next/image';
 import Link from 'next/link';
 import { CategoryListContainer } from '../side-menu/CategoryList.container';

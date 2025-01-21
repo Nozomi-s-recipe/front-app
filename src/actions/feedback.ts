@@ -1,8 +1,8 @@
 'use server';
 
-import { getRecipeById as HasuraGetRecipeById } from '@/lib/graph-ql/GetRecipeById';
-import { updateDeliciousCount } from '@/lib/graph-ql/UpdateDeliciousCount';
-import { updateEnhancementRequestCount } from '@/lib/graph-ql/UpdateEnhancementRequestCount';
+import { getRecipeById as HasuraGetRecipeById } from '@/utils/graph-ql/GetRecipeById';
+import { updateDeliciousCount } from '@/utils/graph-ql/UpdateDeliciousCount';
+import { updateEnhancementRequestCount } from '@/utils/graph-ql/UpdateEnhancementRequestCount';
 
 export async function incrementDeliciousCount(recipeId: string) {
   try {
