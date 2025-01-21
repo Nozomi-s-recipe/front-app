@@ -48,10 +48,10 @@ export const IngredientList = ({
       </h2>
       <div
         className={`transition-all duration-200 overflow-hidden ${
-          isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+          isOpen ? 'max-h-[calc(100vh-16rem)] opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
-        <table className='w-full mt-1 font-semibold font-mincho'>
+        <table className='w-full mt-1 mb-3 font-semibold font-mincho'>
           <thead>
             <tr>
               <th className='text-left'>食材</th>
