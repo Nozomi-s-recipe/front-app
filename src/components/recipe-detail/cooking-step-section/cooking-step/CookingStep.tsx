@@ -5,7 +5,7 @@ import Image from 'next/image';
 export type CookingStepProps = {
   index: number;
   title: string;
-  image: RecipeImage;
+  image?: RecipeImage;
   description: string;
   point?: string;
 };
@@ -25,19 +25,21 @@ export const CookingStep = ({
         </h2>
       </header>
       <figure className='flex flex-col space-y-2'>
-        <div className='relative h-60'>
-          <Image
-            src={`${image.src}?w=352&h=240&q=70&fit=crop&fm=webp`}
-            alt={image.alt}
-            fill
-            quality={70}
-            placeholder='blur'
-            blurDataURL={RECIPE_BLUR}
-            style={{
-              objectFit: 'cover',
-            }}
-          />
-        </div>
+        {image && (
+          <div className='relative h-60'>
+            <Image
+              src={`${image.src}?w=352&h=240&q=70&fit=crop&fm=webp`}
+              alt={image.alt}
+              fill
+              quality={70}
+              placeholder='blur'
+              blurDataURL={RECIPE_BLUR}
+              style={{
+                objectFit: 'cover',
+              }}
+            />
+          </div>
+        )}
         <figcaption className='font-semibold leading-6 font-mincho'>
           {description}
         </figcaption>

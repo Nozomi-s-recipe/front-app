@@ -17,7 +17,7 @@ export const CookingStepSectionContainer = async ({
           return {
             title: cookingStep.name,
             description: cookingStep.description,
-            image: {
+            image: cookingStep.image && {
               src: cookingStep.image.url,
               alt: cookingStep.name,
             },
