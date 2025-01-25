@@ -12,8 +12,14 @@ export const metadata: Metadata = {
   title: 'Nozomi‘s Recipes',
   description: 'カラダに良い究極の食材を使用したレシピを提供しています◎',
   openGraph: {
+    url: 'https://n-recipes.com',
+    siteName: 'Nozomi‘s Recipes',
     images: [
-      'https://images.microcms-assets.io/assets/888d632d12c2409a941139ea8e9d5adc/7cb8d9e456b44391b07aa662dca5f499/opengraph-image.jpg',
+      {
+        url: 'https://images.microcms-assets.io/assets/888d632d12c2409a941139ea8e9d5adc/7cb8d9e456b44391b07aa662dca5f499/opengraph-image.jpg',
+        width: 1200,
+        height: 630,
+      },
     ],
     title: 'Nozomi‘s Recipes',
     description: 'カラダに良い究極の食材を使用したレシピを提供しています◎',
