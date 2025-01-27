@@ -13,10 +13,10 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      IMAGE_NAME: asia-northeast1-docker.pkg.dev/nozomi-recipe/nozomi-recipe/noz-front-app:latest
-      IMAGE_REPO_REGION: asia-northeast1-docker.pkg.dev
+      IMAGE_NAME: asia-northeast2-docker.pkg.dev/nozomi-recipe/nozomi-recipe/noz-front-app:latest
+      IMAGE_REPO_REGION: asia-northeast2-docker.pkg.dev
       SERVICE_NAME: noz-front-app
-      REGION: asia-northeast1
+      REGION: asia-northeast2
       PROJECT: nozomi-recipe
 
     steps:
