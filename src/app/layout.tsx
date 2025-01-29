@@ -2,6 +2,7 @@ import { shipporiAntique, shipporiMincho } from '@/app/font';
 import '@/app/globals.css';
 import { Footer } from '@/components/footer/Footer';
 import { Header } from '@/components/header/Header';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -49,6 +50,7 @@ export default function RootLayout({
         {children}
         <Footer />
       </body>
+      <GoogleAnalytics gaId='G-8XQ426S2XN' />
     </html>
   );
 }
