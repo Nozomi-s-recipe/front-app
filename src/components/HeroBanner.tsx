@@ -8,7 +8,7 @@ export const HeroBanner = () => {
         {/* ヒーローバナーイメージ */}
         <Image
           src={
-            'https://images.microcms-assets.io/assets/888d632d12c2409a941139ea8e9d5adc/26a98d028d2e43c78304c72e358bd18b/hero-banner-compressed.jpg'
+            'https://images.microcms-assets.io/assets/888d632d12c2409a941139ea8e9d5adc/26a98d028d2e43c78304c72e358bd18b/hero-banner-compressed.jpg?fm=webp&q=80'
           }
           alt='hero banner image'
           width={750}
