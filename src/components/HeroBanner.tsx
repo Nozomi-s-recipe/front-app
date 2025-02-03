@@ -2,31 +2,23 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 export const HeroBanner = () => {
-  // メイン画像のベースURL
-  const heroImageUrl =
-    'https://images.microcms-assets.io/assets/888d632d12c2409a941139ea8e9d5adc/661a4e1812ef412a9735ceb4550245fa/hero-banner.webp';
-
-  // 画像最適化パラメータを追加
-  // w=1280: デスクトップ向けの最大幅
-  // fm=webp: WebP形式で配信
-  // q=75: 品質75%（元の設定を維持）
-  // fit=crop: アスペクト比を維持しながらクロップ
-  const optimizedHeroImageUrl = `${heroImageUrl}?w=750&h=600&fm=webp&q=75&fit=crop`;
-
   return (
     <section className='w-full bg-primary/5'>
       <div className='relative h-80 flex justify-center items-center overflow-hidden'>
+        {/* ヒーローバナーイメージ */}
         <Image
-          src={optimizedHeroImageUrl}
+          src={
+            'https://images.microcms-assets.io/assets/888d632d12c2409a941139ea8e9d5adc/2d2fd25dd17a4ccda673b990f48c4794/hero-banner.jpg'
+          }
           alt='hero banner image'
           width={750}
           height={600}
           priority
           blurDataURL='data:image/jpeg;base64,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'
           className='object-cover'
-          loading='eager'
         />
 
+        {/* タイトル等 */}
         <h1 className='absolute text-3xl font-medium tracking-tight text-center font-mincho min-w-80'>
           <div className='flex flex-col items-end'>
             <div className='flex items-baseline'>
