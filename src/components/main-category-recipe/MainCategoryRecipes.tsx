@@ -22,7 +22,7 @@ export const MainCategoryRecipes = ({
 }: MainCategoryRecipesProps) => {
   return (
     <div>
-      <div className='pb-2 text-xl font-mincho'>{mainCategory.name}</div>
+      <div className='pb-2 text-xl font-serif'>{mainCategory.name}</div>
 
       {mainSide === 'left' ? (
         <div className='flex space-x-2'>

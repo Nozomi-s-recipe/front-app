@@ -1,4 +1,3 @@
-import { shipporiAntique, shipporiMincho } from '@/app/font';
 import '@/app/globals.css';
 import { Footer } from '@/components/footer/Footer';
 import { Header } from '@/components/header/Header';
@@ -43,7 +42,8 @@ export default function RootLayout({
   return (
     <html lang='ja'>
       <body
-        className={`base ${shipporiMincho.variable} ${shipporiAntique.variable} antialiased bg-white h-screen flex flex-col`}
+        // className={`base ${shipporiMincho.variable} ${shipporiAntique.variable} antialiased bg-white h-screen flex flex-col`}
+        className={`base antialiased bg-white h-screen flex flex-col`}
       >
         <Header />
         {/* <GoogleSignIn /> */}

@@ -24,10 +24,10 @@ export const RecipeMetaInfo = ({
   return (
     <section className='w-80 bg-primary'>
       <div className='flex flex-col p-2 space-y-2'>
-        <h1 className='text-2xl font-bold font-mincho text-base-white'>
+        <h1 className='text-2xl font-bold font-serif text-base-white'>
           {recipeName}
         </h1>
-        <table className='font-antique text-base-white'>
+        <table className='font-serif text-base-white'>
           <tbody className='flex space-x-1'>
             <tr className='flex items-center space-x-0.5'>
               <td>
@@ -55,7 +55,7 @@ export const RecipeMetaInfo = ({
             </tr>
           </tbody>
         </table>
-        <p className='pb-4 font-mincho text-base-white min-h-24'>
+        <p className='pb-4 font-serif text-base-white min-h-24'>
           {recipeDescription}
         </p>
         <ul className='flex flex-wrap pb-1 gap-x-2 gap-y-4'>

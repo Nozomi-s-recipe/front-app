@@ -18,10 +18,10 @@ export const RecommendedRecipes = ({
   return (
     <div className='w-full'>
       <div className='flex items-center justify-between'>
-        <h2 className='text-lg font-mincho'>{mainCategory.name}</h2>
+        <h2 className='text-lg font-serif'>{mainCategory.name}</h2>
         <Link
           href={`/${mainCategory.id}`}
-          className='flex items-center text-sm font-mincho'
+          className='flex items-center text-sm font-serif'
           prefetch={true}
         >
           <span className='translate-x-1 -translate-y-px'>もっとみる</span>

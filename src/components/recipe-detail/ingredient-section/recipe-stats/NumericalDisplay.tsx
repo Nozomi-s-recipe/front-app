@@ -13,18 +13,18 @@ export const NumericalDisplay = ({
 }: NumericalDisplayProps) => {
   return (
     <div className='flex flex-col items-center space-y-2'>
-      <label id={`${title}-label`} className='font-mincho'>
+      <label id={`${title}-label`} className='font-serif'>
         {title}
       </label>
       <output aria-labelledby={`${title}-label`} className='flex items-center'>
         <span
-          className='text-xl font-medium font-mincho'
+          className='text-xl font-medium font-serif'
           style={{ minWidth }} // 動的な最小幅
         >
           {value.toLocaleString()}
         </span>
         {unit && (
-          <span className='font-mincho' aria-hidden='true'>
+          <span className='font-serif' aria-hidden='true'>
             {unit}
           </span>
         )}
