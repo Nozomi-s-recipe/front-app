@@ -20,7 +20,7 @@ export const CookingStep = ({
   return (
     <article className='flex flex-col space-y-2 cooking-step'>
       <header>
-        <h2 className='text-xl font-semibold font-serif'>
+        <h2 className='text-xl font-semibold font-mincho'>
           {index}.{title}
         </h2>
       </header>
@@ -40,13 +40,13 @@ export const CookingStep = ({
             />
           </div>
         )}
-        <figcaption className='font-semibold leading-6 font-serif'>
+        <figcaption className='font-semibold leading-6 font-mincho'>
           {description}
         </figcaption>
       </figure>
       {point && (
         <aside className='flex flex-col space-y-1'>
-          <h3 className='font-semibold font-serif'>
+          <h3 className='font-semibold font-mincho'>
             <span className='flex border-b-2 border-secondary-A w-fit'>
               <Image
                 src='/lightbulb.svg'
@@ -58,7 +58,7 @@ export const CookingStep = ({
               <span>ポイント</span>
             </span>
           </h3>
-          <p className='font-semibold font-serif'>{point}</p>
+          <p className='font-semibold font-mincho'>{point}</p>
         </aside>
       )}
     </article>

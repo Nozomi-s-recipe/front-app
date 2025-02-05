@@ -7,7 +7,7 @@ export const Servings = () => {
 
   return (
     <div className='flex flex-col items-center space-y-2'>
-      <label id='servings-label' className='font-serif'>
+      <label id='servings-label' className='font-mincho'>
         人数
       </label>
       <div
@@ -25,7 +25,7 @@ export const Servings = () => {
           />
         </button>
         <output
-          className='text-xl font-medium font-serif min-w-[2ch] text-center'
+          className='text-xl font-medium font-mincho min-w-[2ch] text-center'
           aria-labelledby='servings-label'
         >
           {servings}

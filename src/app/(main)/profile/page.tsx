@@ -4,7 +4,7 @@ import Image from 'next/image';
 export default function Home() {
   return (
     <>
-      <h1 className='mb-6 text-3xl font-serif'>運営者プロフィール</h1>
+      <h1 className='mb-6 text-3xl font-mincho'>運営者プロフィール</h1>
 
       <figure className='flex justify-center w-full mb-6'>
         <Image
@@ -18,7 +18,7 @@ export default function Home() {
         />
       </figure>
 
-      <section className='font-serif flex flex-col'>
+      <section className='font-mincho flex flex-col'>
         <p className='pb-4'>
           初めまして、ご覧いただきありがとうございます。栄養士の「のぞみ」と申します
         </p>

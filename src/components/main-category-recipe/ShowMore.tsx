@@ -28,7 +28,7 @@ export const ShowMore = ({ image, mainCategory, color }: ShowMoreProps) => {
           sizes='112px'
         />
         <figcaption
-          className={`absolute inset-0 flex items-center justify-center text-lg font-extrabold opacity-90 font-serif text-base-white ${
+          className={`absolute inset-0 flex items-center justify-center text-lg font-extrabold opacity-90 font-mincho text-base-white ${
             color === 'secondary-A' ? 'bg-secondary-A' : 'bg-secondary-B'
           }`}
         >

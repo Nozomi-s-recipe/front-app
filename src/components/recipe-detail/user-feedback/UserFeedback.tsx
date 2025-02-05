@@ -62,7 +62,7 @@ export const UserFeedback = ({ recipeId }: UserFeedbackProps) => {
       className='flex flex-col items-center p-1 space-y-4 border-2 border-accent'
       aria-label='フィードバック'
     >
-      <h2 className='tracking-tighter font-serif'>
+      <h2 className='tracking-tighter font-mincho'>
         いかがでしたか？ぜひ感想をお聞かせください。
       </h2>
       <div
@@ -80,7 +80,7 @@ export const UserFeedback = ({ recipeId }: UserFeedbackProps) => {
           disabled={isSubmitting || hasSubmitted}
         >
           <DeliciousFace width={32} height={32} aria-hidden='true' />
-          <span className='font-serif'>よかった</span>
+          <span className='font-mincho'>よかった</span>
         </button>
         <button
           type='button'
@@ -92,7 +92,7 @@ export const UserFeedback = ({ recipeId }: UserFeedbackProps) => {
           disabled={isSubmitting || hasSubmitted}
         >
           <ConfusedFace width={32} height={32} aria-hidden='true' />
-          <span className='font-serif'>うーん</span>
+          <span className='font-mincho'>うーん</span>
         </button>
       </div>
       {feedbackMessage && (

@@ -12,7 +12,7 @@ export const RecipePreviewList = ({
 }: RecipePreviewListProps) => {
   return (
     <section>
-      <h1 className='pl-1 mb-6 text-2xl border-l-4 font-serif border-primary'>
+      <h1 className='pl-1 mb-6 text-2xl border-l-4 font-mincho border-primary'>
         <span className='block -translate-y-0.5'>{category.name}</span>
       </h1>
       <ul className='flex flex-col space-y-2'>

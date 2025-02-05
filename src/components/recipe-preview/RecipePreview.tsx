@@ -48,11 +48,11 @@ export const RecipePreview = ({
           />
         </figure>{' '}
         <div className='flex flex-col justify-between w-36'>
-          <h2 className='text-xl font-semibold font-serif line-clamp-2'>
+          <h2 className='text-xl font-semibold font-mincho line-clamp-2'>
             {recipeName}
           </h2>
           <ul>
-            <li className='flex justify-between font-serif'>
+            <li className='flex justify-between font-mincho'>
               <span className='flex items-center'>
                 <svg
                   width='17'
@@ -79,7 +79,7 @@ export const RecipePreview = ({
               </span>
               <span>{cookingTime}分</span>
             </li>
-            <li className='flex justify-between font-serif'>
+            <li className='flex justify-between font-mincho'>
               <span className='flex items-center'>
                 <svg
                   width='16'

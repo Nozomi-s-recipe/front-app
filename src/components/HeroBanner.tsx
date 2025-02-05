@@ -6,10 +6,11 @@ export const HeroBanner = () => {
     <section className='w-full bg-primary/5'>
       <div className='relative h-80 flex justify-center items-center'>
         {/* ヒーローバナーイメージ */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
         {/* micro cmsのcdnの方が早いのでimgタグを使用 */}
-        <img
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <Image
           src={
+            // 'https://images.microcms-assets.io/assets/888d632d12c2409a941139ea8e9d5adc/26a98d028d2e43c78304c72e358bd18b/hero-banner-compressed.jpg?fm=webp&q=80&w=390&h=320'
             'https://images.microcms-assets.io/assets/888d632d12c2409a941139ea8e9d5adc/26a98d028d2e43c78304c72e358bd18b/hero-banner-compressed.jpg?fm=webp&q=80&w=390&h=320'
           }
           alt='hero banner image'
@@ -19,7 +20,7 @@ export const HeroBanner = () => {
         />
 
         {/* タイトル等 */}
-        <h1 className='absolute text-3xl font-medium tracking-tight text-center font-serif min-w-80'>
+        <h1 className='absolute text-3xl font-medium tracking-tight text-center font-mincho min-w-80'>
           <div className='flex flex-col items-end'>
             <div className='flex items-baseline'>
               <Image

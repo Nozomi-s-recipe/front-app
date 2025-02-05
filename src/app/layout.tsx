@@ -3,6 +3,7 @@ import { Footer } from '@/components/footer/Footer';
 import { Header } from '@/components/header/Header';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata } from 'next';
+import { shipporiAntique, shipporiMincho } from './font';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://n-recipes.com'),
@@ -42,8 +43,8 @@ export default function RootLayout({
   return (
     <html lang='ja'>
       <body
-        // className={`base ${shipporiMincho.variable} ${shipporiAntique.variable} antialiased bg-white h-screen flex flex-col`}
-        className={`base antialiased bg-white h-screen flex flex-col`}
+        className={`base ${shipporiMincho.variable} ${shipporiAntique.variable} antialiased bg-white h-screen flex flex-col`}
+        // className={`base antialiased bg-white h-screen flex flex-col`}
       >
         <Header />
         {/* <GoogleSignIn /> */}
