@@ -28,7 +28,7 @@ export const IngredientList = ({
   return (
     <div className='min-w-80'>
       <h2
-        className='flex items-center justify-between w-full pb-1 text-xl font-semibold border-b-4 cursor-pointer font-mincho border-secondary-B'
+        className='flex items-center justify-between w-full pb-1 text-xl font-semibold border-b-4 cursor-pointer font-serif border-secondary-B'
         onClick={() => setIsOpen(!isOpen)}
       >
         材料
@@ -51,7 +51,7 @@ export const IngredientList = ({
           isOpen ? 'max-h-[calc(100vh-16rem)] opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
-        <table className='w-full mt-1 mb-3 font-semibold font-mincho'>
+        <table className='w-full mt-1 mb-3 font-semibold font-serif'>
           <thead>
             <tr>
               <th className='text-left'>食材</th>
@@ -63,7 +63,7 @@ export const IngredientList = ({
             ))}
           </tbody>
         </table>
-        <table className='w-full font-semibold font-mincho'>
+        <table className='w-full font-semibold font-serif'>
           <thead>
             <tr>
               <th className='text-left'>調味料</th>

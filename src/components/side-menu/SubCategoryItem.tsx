@@ -24,7 +24,7 @@ export const SubCategoryItem = ({
       onClick={closeMenu}
       prefetch={true}
     >
-      <div className='flex justify-between pl-2 text-base font-extrabold font-mincho text-base-white'>
+      <div className='flex justify-between pl-2 text-base font-extrabold font-serif text-base-white'>
         <div>{name}</div>
         <div>
           <span className='pr-1'>{totalCount}</span>

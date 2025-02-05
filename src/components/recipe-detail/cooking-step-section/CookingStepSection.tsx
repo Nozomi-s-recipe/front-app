@@ -20,7 +20,7 @@ export const CookingStepSection = ({
   return (
     <section className='min-w-80'>
       <h2
-        className='flex items-center justify-between pb-1 mb-2 text-xl font-semibold border-b-4 cursor-pointer font-mincho border-secondary-B'
+        className='flex items-center justify-between pb-1 mb-2 text-xl font-semibold border-b-4 cursor-pointer font-serif border-secondary-B'
         onClick={() => setIsOpen(!isOpen)}
       >
         作り方

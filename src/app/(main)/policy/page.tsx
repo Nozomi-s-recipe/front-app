@@ -3,22 +3,22 @@ import { Breadcrumbs } from '@/components/BreadCrumbs';
 export default function Home() {
   return (
     <>
-      <h1 className='mb-8 text-3xl font-mincho'>レシピポリシー</h1>
-      <p className='mb-6 font-medium leading-relaxed font-mincho'>
+      <h1 className='mb-8 text-3xl font-serif'>レシピポリシー</h1>
+      <p className='mb-6 font-medium leading-relaxed font-serif'>
         カラダによい食べ物ってなんだろう？
       </p>
-      <p className='mb-6 font-medium leading-relaxed font-mincho'>
+      <p className='mb-6 font-medium leading-relaxed font-serif'>
         以前の私は疲れ体質で、少しでもカラダに良いものをと思い、根拠のない健康情報に振り回されていました
       </p>
-      <p className='mb-6 font-medium leading-relaxed font-mincho'>
+      <p className='mb-6 font-medium leading-relaxed font-serif'>
         ところが、ある本に沿った食生活をすることで、カラダが疲れにくくなり仕事・プライベートを楽しめるようになりました
       </p>
-      <p className='mb-8 font-medium leading-relaxed font-mincho'>
+      <p className='mb-8 font-medium leading-relaxed font-serif'>
         本レシピサイトでは、以下のポリシーによる、カラダに悪い食材を使わない、カラダに嬉しいレシピを考案・発信します
       </p>
       <div className='mb-12 space-y-6'>
         <section>
-          <h2 className='flex items-start mb-2 font-medium font-mincho'>
+          <h2 className='flex items-start mb-2 font-medium font-serif'>
             <span className='mr-2'>1.</span>
             <div className='flex flex-col'>
               <span className='border-b-2 border-secondary-A'>
@@ -29,7 +29,7 @@ export default function Home() {
               </span>
             </div>
           </h2>
-          <ol className='pl-4 space-y-1 font-medium list-none font-mincho'>
+          <ol className='pl-4 space-y-1 font-medium list-none font-serif'>
             <li className='flex items-start'>
               <span className='mr-1'>①</span>魚
             </li>
@@ -50,7 +50,7 @@ export default function Home() {
         </section>
 
         <section>
-          <h2 className='flex items-start mb-2 font-medium font-mincho'>
+          <h2 className='flex items-start mb-2 font-medium font-serif'>
             <span className='mr-2'>2.</span>
             <div className='flex flex-col'>
               <span className='border-b-2 border-secondary-B'>
@@ -61,7 +61,7 @@ export default function Home() {
               </span>
             </div>
           </h2>
-          <ol className='pl-4 space-y-1 font-medium list-none font-mincho'>
+          <ol className='pl-4 space-y-1 font-medium list-none font-serif'>
             <li className='flex items-start'>
               <span className='mr-1'>①</span>
               赤い肉（豚肉、牛肉、羊肉等。鶏肉は含まない）
@@ -80,7 +80,7 @@ export default function Home() {
           </ol>
         </section>
       </div>
-      <div className='flex items-start font-medium font-mincho'>
+      <div className='flex items-start font-medium font-serif'>
         <span>＊</span>
         <div className='flex flex-col space-y-2'>
           <span>

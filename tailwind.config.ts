@@ -83,8 +83,8 @@ export default {
         accent: '#FF9615',
       },
       fontFamily: {
-        mincho: ['var(--font-shippori-mincho)'],
-        antique: ['var(--font-shippori-antique)'],
+        // mincho: ['var(--font-shippori-mincho)'],
+        // antique: ['var(--font-shippori-antique)'],
       },
       keyframes: {
         slideIn: {

@@ -91,7 +91,7 @@ export const Breadcrumbs = ({ recipeName }: BreadcrumbsProps) => {
         />
 
         <nav aria-label='breadcrumb'>
-          <ol className='flex flex-wrap items-center gap-1 font-semibold font-mincho'>
+          <ol className='flex flex-wrap items-center gap-1 font-semibold font-serif'>
             {breadcrumbItems.map((item, index) => {
               const isLast = index === breadcrumbItems.length - 1;
 

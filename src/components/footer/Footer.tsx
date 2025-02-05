@@ -33,7 +33,7 @@ export const Footer = () => {
             />
           </nav>
         </section>
-        <section className='flex flex-col items-end justify-end font-medium text-right font-mincho'>
+        <section className='flex flex-col items-end justify-end font-medium text-right font-serif'>
           <nav>
             <Link className='block' href='/policy' prefetch={true}>
               レシピポリシー
