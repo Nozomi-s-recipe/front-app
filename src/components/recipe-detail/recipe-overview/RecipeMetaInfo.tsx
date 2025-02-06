@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { RecipeTag } from './RecipeTag';
 
 type Tag = {
@@ -16,8 +15,8 @@ export type RecipeMetaInfo = {
 
 export const RecipeMetaInfo = ({
   recipeName,
-  deliciousCount,
-  totalView,
+  // deliciousCount,
+  // totalView,
   recipeDescription,
   recipeTags,
 }: RecipeMetaInfo) => {
@@ -27,7 +26,7 @@ export const RecipeMetaInfo = ({
         <h1 className='text-2xl font-bold font-serif text-base-white'>
           {recipeName}
         </h1>
-        <table className='font-antique text-base-white'>
+        {/* <table className='font-antique text-base-white'>
           <tbody className='flex space-x-1'>
             <tr className='flex items-center space-x-0.5'>
               <td>
@@ -54,7 +53,7 @@ export const RecipeMetaInfo = ({
               <td className='-translate-y-px'>{totalView}</td>
             </tr>
           </tbody>
-        </table>
+        </table> */}
         <p className='pb-4 font-serif text-base-white min-h-24'>
           {recipeDescription}
         </p>

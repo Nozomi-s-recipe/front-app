@@ -1,6 +1,4 @@
 import { RecipeImage } from '@/types/types';
-import { RECIPE_BLUR } from '@/utils/const';
-import Image from 'next/image';
 import { RecipeMetaInfo } from './RecipeMetaInfo';
 
 type RecipeOverviewProps = {
@@ -14,22 +12,14 @@ export const RecipeOverview = ({
 }: RecipeOverviewProps) => {
   return (
     <header className='relative w-full pb-32'>
-      <figure className='relative h-[34rem] shadow-md'>
-        <Image
-          src={`${image.src}?w=720&h=544&q=60&fit=crop&fm=webp`}
+      <figure className='shadow-md flex items-center justify-center bg-primary/5'>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={`${image.src}?w=490&h=544&q=80&fit=crop&fm=webp`}
           alt={recipeMetaInfo.recipeName}
-          fill
-          priority
-          quality={60}
-          style={{
-            objectFit: 'cover',
-          }}
-          sizes='(max-width: 480px) 480px, (max-width: 720px) 720px, (max-width: 1080px) 1080px, 1440px'
-          placeholder='blur'
-          blurDataURL={RECIPE_BLUR}
-          decoding='sync'
+          width={490}
+          height={544}
           fetchPriority='high'
-          loading='eager'
         />
       </figure>
       <div className='absolute bottom-0 -translate-x-1/2 shadow-md left-1/2'>

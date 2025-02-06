@@ -8,9 +8,8 @@ export const HeroBanner = () => {
         {/* ヒーローバナーイメージ */}
         {/* micro cmsのcdnの方が早いのでimgタグを使用 */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <Image
+        <img
           src={
-            // 'https://images.microcms-assets.io/assets/888d632d12c2409a941139ea8e9d5adc/26a98d028d2e43c78304c72e358bd18b/hero-banner-compressed.jpg?fm=webp&q=80&w=390&h=320'
             'https://images.microcms-assets.io/assets/888d632d12c2409a941139ea8e9d5adc/26a98d028d2e43c78304c72e358bd18b/hero-banner-compressed.jpg?fm=webp&q=80&w=390&h=320'
           }
           alt='hero banner image'
@@ -31,9 +30,8 @@ export const HeroBanner = () => {
                 priority
                 loading='eager'
               />
-              <span className='-ml-0.5'>ozomi</span>
-              <span className='-ml-0.5'>‘</span>
-              <span className='-ml-1'>s</span>
+              <span className='-ml-0.5'>ozomi‘</span>
+              <span className='-ml-0.5'>s</span>
             </div>
             <div className='mb-2 -mt-2'>Recipes</div>
 

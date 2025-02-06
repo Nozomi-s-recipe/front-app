@@ -1,5 +1,4 @@
 import { RecipeImage } from '@/types/types';
-import { RECIPE_BLUR } from '@/utils/const';
 import Image from 'next/image';
 
 export type CookingStepProps = {
@@ -26,19 +25,16 @@ export const CookingStep = ({
       </header>
       <figure className='flex flex-col space-y-2'>
         {image && (
-          <div className='relative h-60'>
-            <Image
+          <>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src={`${image.src}?w=352&h=240&q=70&fit=crop&fm=webp`}
+              width={352}
+              height={240}
               alt={image.alt}
-              fill
-              quality={70}
-              placeholder='blur'
-              blurDataURL={RECIPE_BLUR}
-              style={{
-                objectFit: 'cover',
-              }}
+              loading='lazy'
             />
-          </div>
+          </>
         )}
         <figcaption className='font-semibold leading-6 font-serif'>
           {description}
