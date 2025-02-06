@@ -51,10 +51,10 @@ export const IngredientList = ({
           isOpen ? 'max-h-[calc(100vh-16rem)] opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
-        <table className='w-full mt-1 mb-3 font-semibold font-serif'>
+        <table className='w-full mt-1 mb-3 font-semibold '>
           <thead>
             <tr>
-              <th className='text-left'>食材</th>
+              <th className='text-left font-serif'>食材</th>
             </tr>
           </thead>
           <tbody>
@@ -63,10 +63,10 @@ export const IngredientList = ({
             ))}
           </tbody>
         </table>
-        <table className='w-full font-semibold font-serif'>
+        <table className='w-full font-semibold font-sanserif'>
           <thead>
             <tr>
-              <th className='text-left'>調味料</th>
+              <th className='text-left font-serif'>調味料</th>
             </tr>
           </thead>
           <tbody>

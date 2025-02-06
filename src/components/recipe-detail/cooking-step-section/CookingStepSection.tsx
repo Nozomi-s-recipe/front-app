@@ -43,7 +43,9 @@ export const CookingStepSection = ({
           isOpen ? 'max-h-none opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
-        <CookingStart />
+        <div className='mb-4'>
+          <CookingStart />
+        </div>
         <CookingStepList cookingSteps={cookingSteps.cookingSteps} />
       </div>
     </section>

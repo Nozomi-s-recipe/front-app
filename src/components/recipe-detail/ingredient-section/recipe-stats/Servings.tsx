@@ -25,7 +25,7 @@ export const Servings = () => {
           />
         </button>
         <output
-          className='text-xl font-medium font-serif min-w-[2ch] text-center'
+          className='text-xl font-light font-sans min-w-[2ch] text-center'
           aria-labelledby='servings-label'
         >
           {servings}

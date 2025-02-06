@@ -19,8 +19,9 @@ export const CookingStep = ({
   return (
     <article className='flex flex-col space-y-2 cooking-step'>
       <header>
-        <h2 className='text-xl font-semibold font-serif'>
-          {index}.{title}
+        <h2 className='text-xl'>
+          <span className='font-sans mr-2'>{index}</span>
+          <span className='font-serif font-semibold'>{title}</span>
         </h2>
       </header>
       <figure className='flex flex-col space-y-2'>

@@ -7,14 +7,16 @@ export const IngredientRow = ({ ingredient }: { ingredient: Ingredient }) => {
 
   return (
     <tr className='flex justify-between pl-2'>
-      <td>{ingredient.name}</td>
+      <td className='font-serif'>{ingredient.name}</td>
       <td className='flex space-x-1'>
         {ingredient.unit.position === 'prefix' && (
-          <span>{ingredient.unit.name}</span>
+          <span className='font-serif font-light'>{ingredient.unit.name}</span>
         )}
-        <span>{ingredient.quantity * servings}</span>
+        <span className='font-sans font-light'>
+          {ingredient.quantity * servings}
+        </span>
         {ingredient.unit.position === 'suffix' && (
-          <span>{ingredient.unit.name}</span>
+          <span className='font-serif font-light'>{ingredient.unit.name}</span>
         )}
       </td>
     </tr>
