@@ -5,11 +5,32 @@ import { IngredientSectionContainer } from '@/components/recipe-detail/ingredien
 import { RecipeOverviewContainer } from '@/components/recipe-detail/recipe-overview/RecipeOverview.container';
 import { RecommendedRecipesSection } from '@/components/recipe-detail/recipe-recommend/RecomendedRecipesSection';
 import { UserFeedback } from '@/components/recipe-detail/user-feedback/UserFeedback';
-import { getRecipes } from '@/utils/micro-cms/micro-cms';
+import { getRecipeById, getRecipes } from '@/utils/micro-cms/micro-cms';
+import { Metadata } from 'next';
 // import { getRecipeById } from '@/lib/micro-cms/micro-cms';
 
 // https://zenn.dev/akfm/books/nextjs-basic-principle/viewer/part_3_static_rendering_full_route_cache#%E6%99%82%E9%96%93%E3%83%99%E3%83%BC%E3%82%B9revalidate
-// export const revalidate = 360 * 6; // 1H * 6
+export const revalidate = 60;
+
+type Props = {
+  params: Promise<RecipePageProps>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
+
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const params = await props.params;
+  const res = await getRecipeById(params.recipeId);
+
+  return {
+    title: res.name,
+    description: res.description,
+    openGraph: {
+      title: res.name,
+      description: res.description,
+      images: [res?.image?.url || ''],
+    },
+  };
+}
 
 // Return a list of `params` to populate the [slug] dynamic segment
 export async function generateStaticParams() {
@@ -34,9 +55,6 @@ export default async function RecipePage({
   params: Promise<RecipePageProps>;
 }) {
   const { recipeId } = await params;
-  // const res = await getRecipeById(recipeId);
-  // https://zenn.dev/akfm/books/nextjs-basic-principle/viewer/part_1_concurrent_fetch#preload%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3
-  // preloadGetRecipeById(recipeId);
 
   return (
     <>
@@ -52,7 +70,6 @@ export default async function RecipePage({
           <UserFeedback recipeId={recipeId} />
         </div>
         <RecommendedRecipesSection />
-        {/* <Breadcrumbs recipeName={res.name} /> */}
         <BreadcrumbsContainer recipeId={recipeId} />
       </div>
     </>

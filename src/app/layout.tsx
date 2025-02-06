@@ -4,16 +4,18 @@ import { Header } from '@/components/header/Header';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata } from 'next';
 
+const description =
+  '赤身肉、加工肉、バターを使わない健康レシピを発信してます。栄養士がじっくり考えたレシピを投稿しています。◎';
+const serviceName = 'Nozomi‘s Recipes';
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://n-recipes.com'),
   appleWebApp: {
     title: "N's Recipes",
   },
-  title: 'Nozomi‘s Recipes',
-  description: 'カラダに良い究極の食材を使用したレシピを提供しています◎',
+  title: serviceName,
+  description: description,
   openGraph: {
-    url: 'https://n-recipes.com',
-    siteName: 'Nozomi‘s Recipes',
     images: [
       {
         url: 'https://images.microcms-assets.io/assets/888d632d12c2409a941139ea8e9d5adc/7cb8d9e456b44391b07aa662dca5f499/opengraph-image.jpg',
@@ -21,16 +23,8 @@ export const metadata: Metadata = {
         height: 630,
       },
     ],
-    title: 'Nozomi‘s Recipes',
-    description: 'カラダに良い究極の食材を使用したレシピを提供しています◎',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    images: [
-      'https://images.microcms-assets.io/assets/888d632d12c2409a941139ea8e9d5adc/7cb8d9e456b44391b07aa662dca5f499/opengraph-image.jpg',
-    ],
-    title: 'Nozomi‘s Recipes',
-    description: 'カラダに良い究極の食材を使用したレシピを提供しています◎',
+    title: serviceName,
+    description: description,
   },
 };
 
