@@ -44,17 +44,16 @@ export const RecipeCard = ({
     >
       <figure className='relative' style={{ height: `${height}px` }}>
         <Image
-          src={`${image.src}?w=${width}&h=${height}&q=60&fit=crop?fm=webp`}
+          src={`${image.src}?w=${width}&h=${height}&q=80&fit=crop?fm=webp`}
           alt={image.alt}
           style={{
             objectFit: 'cover',
           }}
           priority={isPriority}
-          quality={60}
+          quality={80}
           fill
           placeholder='blur'
           blurDataURL={RECIPE_BLUR}
-          sizes={`${width}px`}
           decoding={isPriority ? 'sync' : 'async'}
           fetchPriority={isPriority ? 'high' : 'auto'}
           loading={isPriority ? 'eager' : 'lazy'}
