@@ -20,7 +20,7 @@ export default function Home() {
 
       <section className='font-serif flex flex-col'>
         <p className='pb-4'>
-          初めまして、ご覧いただきありがとうございます。栄養士の「のぞみ」と申します
+          初めまして、ご覧いただきありがとうございます。栄養士をしている、のぞみと申します
         </p>
         <p>
           以前の私は疲れ体質で、少しでもカラダに良いものをと思い、根拠のない健康情報に振り回されていました
@@ -34,7 +34,7 @@ export default function Home() {
         <p className='pb-6'>
           まだまだレシピ数は少ないですが、納得のいくこだわりレシピを開発していきます
         </p>
-        <p>本サイトが、健康に生きたい方の毎日の食事の一助となれば幸いです</p>
+        <p>本サイトが、毎日の健康の助けになれば、嬉しい限りです</p>
       </section>
       <Breadcrumbs />
     </>
