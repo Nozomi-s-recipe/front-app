@@ -19,7 +19,7 @@ export const HeroBanner = () => {
         />
 
         {/* タイトル等 */}
-        <h1 className='absolute text-3xl font-medium tracking-tight text-center font-serif min-w-80'>
+        <h1 className='absolute text-3xl font-medium tracking-tight text-center  min-w-80'>
           <div className='flex flex-col items-end'>
             <div className='flex items-baseline'>
               <Image

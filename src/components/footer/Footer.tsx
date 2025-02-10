@@ -1,3 +1,6 @@
+'use client';
+
+import { Instagram } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -15,30 +18,43 @@ export const Footer = () => {
               unoptimized
             />
           </Link>
-          <nav className='flex space-x-1'>
-            {/* TODO: youtubeとxへのリンクを作成する */}
-            <Image
-              src='/youtube.svg'
-              alt='youtube logo'
-              width={36}
-              height={36}
-              unoptimized
-            />
-            <Image
-              src='/twitter.svg'
-              alt='x logo'
-              width={24}
-              height={24}
-              unoptimized
-            />
+          <nav className='flex space-x-4'>
+            <Link
+              href='https://x.com/nozomis_recipes'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              <Image
+                src='/twitter.svg'
+                alt='x logo'
+                width={24}
+                height={24}
+                unoptimized
+              />
+            </Link>
+            <Link
+              href='https://www.instagram.com/nozomisrecipes/'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              <Instagram className='w-6 h-6 transition-colors hover:text-pink-500' />
+            </Link>
           </nav>
         </section>
-        <section className='flex flex-col items-end justify-end font-medium text-right font-serif'>
-          <nav>
-            <Link className='block' href='/policy' prefetch={true}>
+        <section className='flex flex-col items-end justify-end'>
+          <nav className='space-y-2'>
+            <Link
+              className='block font-medium text-right hover:underline'
+              href='/policy'
+              prefetch={true}
+            >
               レシピポリシー
             </Link>
-            <Link className='block' href='/profile' prefetch={true}>
+            <Link
+              className='block font-medium text-right hover:underline'
+              href='/profile'
+              prefetch={true}
+            >
               運営者プロフィール
             </Link>
           </nav>

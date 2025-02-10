@@ -1,5 +1,18 @@
 'use client';
-import Image from 'next/image';
+
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from '@/components/ui/collapsible';
+import {
+  Table,
+  TableBody,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
+import { ChevronUp } from 'lucide-react';
 import { useState } from 'react';
 import { IngredientRow } from './IngredientRow';
 
@@ -27,55 +40,48 @@ export const IngredientList = ({
 
   return (
     <div className='min-w-80'>
-      <h2
-        className='flex items-center justify-between w-full pb-1 text-xl font-semibold border-b-4 cursor-pointer font-serif border-secondary-B'
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        材料
-        <div
-          className={`transform transition-transform duration-200 ${
-            isOpen ? '' : '-rotate-180'
-          }`}
-        >
-          <Image
-            src='/chevron-up-black.svg'
-            alt='chevron up icon'
-            width={24}
-            height={24}
-            unoptimized
+      <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+        <CollapsibleTrigger className='flex items-center justify-between w-full pb-1 border-b-2 border-primary'>
+          <h2 className='text-xl font-medium'>材料</h2>
+          <ChevronUp
+            className={`transform transition-duration-200 ${
+              isOpen ? '' : 'rotate-180'
+            }`}
           />
-        </div>
-      </h2>
-      <div
-        className={`transition-all duration-200 overflow-hidden ${
-          isOpen ? 'max-h-[calc(100vh-16rem)] opacity-100' : 'max-h-0 opacity-0'
-        }`}
-      >
-        <table className='w-full mt-1 mb-3 font-semibold '>
-          <thead>
-            <tr>
-              <th className='text-left font-serif'>食材</th>
-            </tr>
-          </thead>
-          <tbody>
-            {ingredients.map((ingredient, i) => (
-              <IngredientRow key={`ingredient-${i}`} ingredient={ingredient} />
-            ))}
-          </tbody>
-        </table>
-        <table className='w-full font-semibold font-sanserif'>
-          <thead>
-            <tr>
-              <th className='text-left font-serif'>調味料</th>
-            </tr>
-          </thead>
-          <tbody>
-            {seasonings.map((seasoning, i) => (
-              <IngredientRow key={`seasoning-${i}`} ingredient={seasoning} />
-            ))}
-          </tbody>
-        </table>
-      </div>
+        </CollapsibleTrigger>
+        <CollapsibleContent className='space-y-4'>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className='px-0 text-lg font-medium'>食材</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {ingredients.map((ingredient, i) => (
+                <IngredientRow
+                  key={`ingredient-${i}`}
+                  ingredient={ingredient}
+                />
+              ))}
+            </TableBody>
+          </Table>
+
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className='px-0 text-lg font-medium'>
+                  調味料
+                </TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {seasonings.map((seasoning, i) => (
+                <IngredientRow key={`seasoning-${i}`} ingredient={seasoning} />
+              ))}
+            </TableBody>
+          </Table>
+        </CollapsibleContent>
+      </Collapsible>
     </div>
   );
 };

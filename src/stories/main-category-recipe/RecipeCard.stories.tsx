@@ -1,5 +1,6 @@
 import { RecipeCard } from '@/components/main-category-recipe/RecipeCard';
 import type { Meta, StoryObj } from '@storybook/react';
+import { IMAGES } from '../const';
 
 const meta = {
   component: RecipeCard,
@@ -17,7 +18,7 @@ type Story = StoryObj<typeof meta>;
 export const ShortText: Story = {
   args: {
     image: {
-      src: 'https://images.microcms-assets.io/assets/888d632d12c2409a941139ea8e9d5adc/3a56446bc7714cb2ad416b8935820478/chinese-dunpling.jpg',
+      src: IMAGES[0],
       alt: 'recipe',
     },
     recipeName: '炊き込みご飯',
@@ -36,7 +37,7 @@ export const ShortText: Story = {
 export const LongText: Story = {
   args: {
     image: {
-      src: 'https://images.microcms-assets.io/assets/888d632d12c2409a941139ea8e9d5adc/3a56446bc7714cb2ad416b8935820478/chinese-dunpling.jpg',
+      src: IMAGES[0],
       alt: 'recipe',
     },
     recipeName:
@@ -56,7 +57,7 @@ export const LongText: Story = {
 export const SmallImage: Story = {
   args: {
     image: {
-      src: 'https://images.microcms-assets.io/assets/888d632d12c2409a941139ea8e9d5adc/3a56446bc7714cb2ad416b8935820478/chinese-dunpling.jpg',
+      src: IMAGES[0],
       alt: 'recipe',
     },
     recipeName:

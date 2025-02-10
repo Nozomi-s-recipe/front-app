@@ -8,7 +8,7 @@ type RecipeStats = {
 
 export const RecipeStats = ({ calories, cookingTime }: RecipeStats) => {
   return (
-    <div className='flex space-x-8'>
+    <div className='flex space-x-6'>
       <Servings />
       <NumericalDisplay
         title='カロリー'

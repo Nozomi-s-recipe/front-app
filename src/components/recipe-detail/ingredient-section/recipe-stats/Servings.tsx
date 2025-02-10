@@ -1,5 +1,8 @@
 'use client';
-import Image from 'next/image';
+
+import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
+import { Minus, Plus } from 'lucide-react';
 import { useServings } from './servings.context';
 
 export const Servings = () => {
@@ -7,39 +10,43 @@ export const Servings = () => {
 
   return (
     <div className='flex flex-col items-center space-y-2'>
-      <label id='servings-label' className='font-serif'>
+      <Label htmlFor='servings-output' className='text-base'>
         人数
-      </label>
+      </Label>
       <div
         className='flex items-center space-x-4'
         role='group'
         aria-labelledby='servings-label'
       >
-        <button onClick={decrementServings} aria-label='人数を減らす'>
-          <Image
-            src={'/minus.svg'}
-            alt='' // ボタンに aria-label があるので、装飾的な画像として扱う
-            width={32}
-            height={32}
-            unoptimized
-          />
-        </button>
+        <Button
+          variant='outline'
+          size='icon'
+          onClick={decrementServings}
+          aria-label='人数を減らす'
+          className='w-12 h-12 rounded-full'
+        >
+          <Minus className='w-6 h-6' />
+        </Button>
+
         <output
-          className='text-xl font-light font-sans min-w-[2ch] text-center'
-          aria-labelledby='servings-label'
+          id='servings-output'
+          className='text-xl font-light min-w-[2ch] text-center'
         >
           {servings}
         </output>
-        <button onClick={incrementServings} aria-label='人数を増やす'>
-          <Image
-            src={'/plus.svg'}
-            alt='' // ボタンに aria-label があるので、装飾的な画像として扱う
-            width={32}
-            height={32}
-            unoptimized
-          />
-        </button>
+
+        <Button
+          variant='outline'
+          size='icon'
+          onClick={incrementServings}
+          aria-label='人数を増やす'
+          className='w-12 h-12 rounded-full'
+        >
+          <Plus className='w-6 h-6' />
+        </Button>
       </div>
     </div>
   );
 };
+
+export default Servings;

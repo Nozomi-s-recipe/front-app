@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { RecipeOverview } from '@/components/recipe-detail/recipe-overview/RecipeOverview';
+import { IMAGES } from '@/stories/const';
 
 const meta = {
   component: RecipeOverview,
@@ -22,6 +23,9 @@ export const Primary: Story = {
       alt: 'recipe',
     },
     recipeMetaInfo: {
+      image: {
+        src: IMAGES[0],
+      },
       recipeName: '炊き込みご飯',
       deliciousCount: 10,
       totalView: 1234,

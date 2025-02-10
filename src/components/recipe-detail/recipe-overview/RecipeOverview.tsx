@@ -11,20 +11,20 @@ export const RecipeOverview = ({
   recipeMetaInfo,
 }: RecipeOverviewProps) => {
   return (
-    <header className='relative w-full pb-32'>
-      <figure className='shadow-md flex items-center justify-center bg-primary/5'>
+    <section className='flex flex-col items-center -mb-24'>
+      <figure className='flex items-center justify-center'>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={`${image.src}?w=490&h=544&q=80&fit=crop&fm=webp`}
+          src={`${image.src}?w=490&h=640&q=80&fit=crop&fm=webp`}
           alt={recipeMetaInfo.recipeName}
           width={490}
-          height={544}
+          height={640}
           fetchPriority='high'
         />
       </figure>
-      <div className='absolute bottom-0 -translate-x-1/2 shadow-md left-1/2'>
+      <div className='-translate-y-24 shadow-md'>
         <RecipeMetaInfo {...recipeMetaInfo} />
       </div>
-    </header>
+    </section>
   );
 };

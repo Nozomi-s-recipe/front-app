@@ -26,7 +26,7 @@ export const CategoryList = ({
         aria-expanded={isExpanded}
         aria-controls='category-content'
       >
-        <h2 className='text-2xl font-extrabold font-serif text-base-white'>
+        <h2 className='text-2xl font-extrabold  text-base-white'>
           {mainCategoryName}
         </h2>
         <figure className='flex items-center justify-center'>

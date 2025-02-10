@@ -1,106 +1,124 @@
 import type { Config } from 'tailwindcss';
 
 export default {
-  // 未使用の機能を無効化
-  // 最新のfuture設定
+  darkMode: ['class'],
   future: {
-    hoverOnlyWhenSupported: true, // hover機能のサポート有無に応じた最適化
+    hoverOnlyWhenSupported: true,
   },
-
-  // 必要に応じてcore pluginsの設定
-  corePlugins: {
-    // レイアウト関連
-    float: false, // floatはモダンなレイアウトではあまり使用しない
-    clear: false, // clearもfloatと同様
-    isolation: false, // mix-blend-modeの分離用でほとんど使わない
-
-    // テーブル関連（テーブルを使用しない場合）
-    tableLayout: false,
-    borderCollapse: false,
-
-    // 特殊なケース用
-    backdropBlur: false, // backdrop-filterはあまり使用されない
-    backdropBrightness: false,
-    backdropContrast: false,
-    backdropGrayscale: false,
-    backdropHueRotate: false,
-    backdropInvert: false,
-    backdropOpacity: false,
-    backdropSaturate: false,
-    backdropSepia: false,
-
-    // 画像処理関連（画像加工をあまりしない場合）
-    blur: false,
-    brightness: false,
-    contrast: false,
-    grayscale: false,
-    hueRotate: false,
-    invert: false,
-    saturate: false,
-    sepia: false,
-
-    // その他特殊なケース
-    boxDecorationBreak: false, // 改行時の装飾
-    mixBlendMode: false, // ブレンドモード
-    backgroundBlendMode: false,
-    objectFit: false, // 画像のフィットを制御しない場合
-    objectPosition: false,
-    overscrollBehavior: false, // スクロールの挙動制御
-    placeSelf: false, // グリッドレイアウトの特殊な配置
-    placeItems: false,
-    placeContent: false,
-
-    // フォント関連（特殊なフォント制御をしない場合）
-    fontVariantNumeric: false,
-
-    // SVG関連（SVGを使用しない場合）
-    fill: false,
-    stroke: false,
-    strokeWidth: false,
-
-    // その他
-    resize: false, // テキストエリアのリサイズ
-    userSelect: false, // テキスト選択の制御
-    appearance: false, // フォーム要素のネイティブスタイル
-  },
-
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
     './src/stories/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
       colors: {
-        background: 'var(--background)',
-        foreground: 'var(--foreground)',
+        md: {
+          primary: 'var(--md-sys-color-primary)',
+          'on-primary': 'var(--md-sys-color-on-primary)',
+          'primary-container': 'var(--md-sys-color-primary-container)',
+          'on-primary-container': 'var(--md-sys-color-on-primary-container)',
+          secondary: 'var(--md-sys-color-secondary)',
+          'on-secondary': 'var(--md-sys-color-on-secondary)',
+          'secondary-container': 'var(--md-sys-color-secondary-container)',
+          'on-secondary-container':
+            'var(--md-sys-color-on-secondary-container)',
+          tertiary: 'var(--md-sys-color-tertiary)',
+          'on-tertiary': 'var(--md-sys-color-on-tertiary)',
+          'tertiary-container': 'var(--md-sys-color-tertiary-container)',
+          'on-tertiary-container': 'var(--md-sys-color-on-tertiary-container)',
+          error: 'var(--md-sys-color-error)',
+          'on-error': 'var(--md-sys-color-on-error)',
+          'error-container': 'var(--md-sys-color-error-container)',
+          'on-error-container': 'var(--md-sys-color-on-error-container)',
+          surface: 'var(--md-sys-color-surface)',
+          'on-surface': 'var(--md-sys-color-on-surface)',
+          'surface-variant': 'var(--md-sys-color-surface-variant)',
+          'on-surface-variant': 'var(--md-sys-color-on-surface-variant)',
+          'surface-container': {
+            lowest: 'var(--md-sys-color-surface-container-lowest)',
+            low: 'var(--md-sys-color-surface-container-low)',
+            DEFAULT: 'var(--md-sys-color-surface-container)',
+            high: 'var(--md-sys-color-surface-container-high)',
+            highest: 'var(--md-sys-color-surface-container-highest)',
+          },
+          outline: 'var(--md-sys-color-outline)',
+          'outline-variant': 'var(--md-sys-color-outline-variant)',
+        },
         'base-white': '#F6F6F5',
-        primary: '#1ABACC',
+        primary: {
+          DEFAULT: 'hsl(var(--primary))',
+          foreground: 'hsl(var(--primary-foreground))',
+        },
         'secondary-A': '#1ACCCC',
         'secondary-B': '#FFC616',
-        accent: '#FF9615',
-      },
-      fontFamily: {
-        // mincho: ['var(--font-shippori-mincho)'],
-        // antique: ['var(--font-shippori-antique)'],
+        accent: {
+          DEFAULT: 'hsl(var(--accent))',
+          foreground: 'hsl(var(--accent-foreground))',
+        },
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
+        card: {
+          DEFAULT: 'hsl(var(--card))',
+          foreground: 'hsl(var(--card-foreground))',
+        },
+        popover: {
+          DEFAULT: 'hsl(var(--popover))',
+          foreground: 'hsl(var(--popover-foreground))',
+        },
+        secondary: {
+          DEFAULT: 'hsl(var(--secondary))',
+          foreground: 'hsl(var(--secondary-foreground))',
+        },
+        muted: {
+          DEFAULT: 'hsl(var(--muted))',
+          foreground: 'hsl(var(--muted-foreground))',
+        },
+        destructive: {
+          DEFAULT: 'hsl(var(--destructive))',
+          foreground: 'hsl(var(--destructive-foreground))',
+        },
+        border: 'hsl(var(--border))',
+        input: 'hsl(var(--input))',
+        ring: 'hsl(var(--ring))',
+        chart: {
+          '1': 'hsl(var(--chart-1))',
+          '2': 'hsl(var(--chart-2))',
+          '3': 'hsl(var(--chart-3))',
+          '4': 'hsl(var(--chart-4))',
+          '5': 'hsl(var(--chart-5))',
+        },
       },
       keyframes: {
         slideIn: {
-          '0%': { transform: 'translateX(100%)' },
-          '100%': { transform: 'translateX(0)' },
+          '0%': {
+            transform: 'translateX(100%)',
+          },
+          '100%': {
+            transform: 'translateX(0)',
+          },
         },
         fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
+          '0%': {
+            opacity: '0',
+          },
+          '100%': {
+            opacity: '1',
+          },
         },
       },
       animation: {
         slideIn: 'slideIn 0.3s ease-out',
         fadeIn: 'fadeIn 0.3s ease-out',
       },
+      borderRadius: {
+        lg: 'var(--radius)',
+        md: 'calc(var(--radius) - 2px)',
+        sm: 'calc(var(--radius) - 4px)',
+      },
     },
   },
-  plugins: [],
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  plugins: [require('tailwindcss-animate')],
 } satisfies Config;

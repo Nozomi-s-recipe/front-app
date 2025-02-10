@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { CookingStep } from '@/components/recipe-detail/cooking-step-section/cooking-step/CookingStep';
+import { IMAGES } from '@/stories/const';
 
 const meta = {
   component: CookingStep,
@@ -19,7 +20,7 @@ export const Primary: Story = {
   args: {
     index: 1,
     image: {
-      src: 'https://images.microcms-assets.io/assets/888d632d12c2409a941139ea8e9d5adc/3a56446bc7714cb2ad416b8935820478/chinese-dunpling.jpg',
+      src: IMAGES[0],
       alt: 'recipe',
     },
     title: '下ごしらえ',
