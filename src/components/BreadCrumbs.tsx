@@ -1,6 +1,14 @@
 'use client';
+
+import {
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from '@/components/ui/breadcrumb';
 import { getMainCategoryByMainId, getSubCategoryById } from '@/utils/const';
-import Link from 'next/link';
+import { Slash } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 
 type BreadcrumbsProps = {
@@ -11,30 +19,22 @@ export const Breadcrumbs = ({ recipeName }: BreadcrumbsProps) => {
   const pathname = usePathname();
   const segments = pathname.split('/').filter(Boolean);
 
-  // パンくずリストのアイテムを生成する関数
   const getBreadcrumbItems = () => {
     const items = [{ path: '/', label: 'トップページ' }];
 
-    // プロフィールとポリシーページの特別なルート処理
     if (segments[0] === 'profile') {
-      items.push({
-        path: '/profile',
-        label: 'プロフィール',
-      });
+      items.push({ path: '/profile', label: 'プロフィール' });
       return items;
     }
 
     if (segments[0] === 'policy') {
-      items.push({
-        path: '/policy',
-        label: 'プライバシーポリシー',
-      });
+      items.push({ path: '/policy', label: 'プライバシーポリシー' });
       return items;
     }
 
     segments.forEach((segment, index) => {
       switch (index) {
-        case 0: // mainCategory
+        case 0:
           const mainCategory = getMainCategoryByMainId(segment);
           if (mainCategory) {
             items.push({
@@ -44,7 +44,7 @@ export const Breadcrumbs = ({ recipeName }: BreadcrumbsProps) => {
           }
           break;
 
-        case 1: // subCategory
+        case 1:
           const subCategory = getSubCategoryById(segment);
           if (subCategory) {
             items.push({
@@ -54,7 +54,7 @@ export const Breadcrumbs = ({ recipeName }: BreadcrumbsProps) => {
           }
           break;
 
-        case 2: // recipeId
+        case 2:
           items.push({
             path: `/${segments[0]}/${segments[1]}/${segment}`,
             label: recipeName || '',
@@ -68,7 +68,6 @@ export const Breadcrumbs = ({ recipeName }: BreadcrumbsProps) => {
 
   const breadcrumbItems = getBreadcrumbItems();
 
-  // JSON-LDデータの生成
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -90,37 +89,34 @@ export const Breadcrumbs = ({ recipeName }: BreadcrumbsProps) => {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
 
-        <nav aria-label='breadcrumb'>
-          <ol className='flex flex-wrap items-center gap-1 font-semibold font-serif'>
+        <nav aria-label='breadcrumb' className='flex'>
+          <BreadcrumbList className='flex flex-wrap items-center gap-1 font-semibold'>
             {breadcrumbItems.map((item, index) => {
               const isLast = index === breadcrumbItems.length - 1;
 
               return (
-                <li
-                  key={item.path}
-                  className='flex items-center gap-1'
-                  {...(isLast ? { 'aria-current': 'page' } : {})}
-                >
-                  {index > 0 && (
-                    <span className='text-gray-400' aria-hidden='true'>
-                      /
-                    </span>
+                <div key={item.path} className='flex items-center'>
+                  <BreadcrumbItem>
+                    {isLast ? (
+                      <BreadcrumbPage>{item.label}</BreadcrumbPage>
+                    ) : (
+                      <BreadcrumbLink
+                        href={item.path}
+                        // className='text-primary hover:underline'
+                      >
+                        {item.label}
+                      </BreadcrumbLink>
+                    )}
+                  </BreadcrumbItem>
+                  {!isLast && (
+                    <BreadcrumbSeparator>
+                      <Slash />
+                    </BreadcrumbSeparator>
                   )}
-                  {isLast ? (
-                    <span className='text-gray-500'>{item.label}</span>
-                  ) : (
-                    <Link
-                      href={item.path}
-                      className='text-primary hover:underline'
-                      prefetch={true}
-                    >
-                      {item.label}
-                    </Link>
-                  )}
-                </li>
+                </div>
               );
             })}
-          </ol>
+          </BreadcrumbList>
         </nav>
       </div>
     </div>

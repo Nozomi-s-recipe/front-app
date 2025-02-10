@@ -12,19 +12,19 @@ export const NumericalDisplay = ({
   minWidth = '4ch', // デフォルト値を設定
 }: NumericalDisplayProps) => {
   return (
-    <div className='flex flex-col items-center space-y-2'>
-      <label id={`${title}-label`} className='font-serif'>
+    <div className='flex flex-col items-center space-y-4'>
+      <label id={`${title}-label`} className=''>
         {title}
       </label>
       <output aria-labelledby={`${title}-label`} className='flex items-center'>
         <span
-          className='text-xl font-sans font-light'
+          className='font-sans text-xl font-light'
           style={{ minWidth }} // 動的な最小幅
         >
           {value.toLocaleString()}
         </span>
         {unit && (
-          <span className='font-serif' aria-hidden='true'>
+          <span className='' aria-hidden='true'>
             {unit}
           </span>
         )}

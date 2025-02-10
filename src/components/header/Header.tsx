@@ -1,16 +1,12 @@
 import { MenuProvider } from '@/components/header/menu.context';
-import { SIDE_MENUS } from '@/utils/const';
 import Image from 'next/image';
 import Link from 'next/link';
-import { CategoryListContainer } from '../side-menu/CategoryList.container';
-import { SideMenu } from '../side-menu/SideMenu';
-import { MenuController } from './MenuController';
 
 export const Header = () => {
   return (
     <MenuProvider>
       <header className='flex items-center justify-center bg-transparent shadow-sm'>
-        <nav className='flex items-end justify-between w-full h-full max-w-sm pt-8 pb-4 px-2'>
+        <nav className='flex items-end justify-between w-full h-full max-w-sm px-2 pt-8 pb-4'>
           <Link href='/' aria-label='ホームへ戻る' prefetch={true}>
             <figure className='m-0'>
               <Image
@@ -22,7 +18,7 @@ export const Header = () => {
               />
             </figure>
           </Link>
-          <MenuController>
+          {/* <MenuController>
             <SideMenu>
               {SIDE_MENUS.map((menu, i) => (
                 <CategoryListContainer
@@ -32,7 +28,7 @@ export const Header = () => {
                 />
               ))}
             </SideMenu>
-          </MenuController>
+          </MenuController> */}
         </nav>
       </header>
     </MenuProvider>

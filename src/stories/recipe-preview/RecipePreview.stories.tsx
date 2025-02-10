@@ -1,5 +1,6 @@
 import { RecipePreview } from '@/components/recipe-preview/RecipePreview';
 import type { Meta, StoryObj } from '@storybook/react';
+import { IMAGES } from '../const';
 
 const meta = {
   component: RecipePreview,
@@ -17,10 +18,10 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     image: {
-      src: 'https://images.microcms-assets.io/assets/888d632d12c2409a941139ea8e9d5adc/3a56446bc7714cb2ad416b8935820478/chinese-dunpling.jpg',
+      src: IMAGES[0],
       alt: 'recipe',
     },
-    recipeName: '炊き込みご飯',
+    recipeName: '【バター不使用】鱈のムニエル - 彩りラタトゥイユソース添え -',
     cookingTime: 30,
     ingredientsCount: 10,
     recipeId: 'idxxx',

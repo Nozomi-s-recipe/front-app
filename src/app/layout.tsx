@@ -1,3 +1,4 @@
+import '@/app/css/light.css';
 import '@/app/globals.css';
 import { Footer } from '@/components/footer/Footer';
 import { Header } from '@/components/header/Header';
@@ -37,7 +38,7 @@ export default function RootLayout({
     <html lang='ja'>
       <body
         // className={`base ${shipporiMincho.variable} ${shipporiAntique.variable} antialiased bg-white h-screen flex flex-col`}
-        className={`base antialiased bg-white h-screen flex flex-col`}
+        className={`base antialiased h-screen flex flex-col`}
       >
         <Header />
         {/* <GoogleSignIn /> */}

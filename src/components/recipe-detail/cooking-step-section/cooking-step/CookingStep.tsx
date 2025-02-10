@@ -1,5 +1,7 @@
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { RecipeImage } from '@/types/types';
-import Image from 'next/image';
+import { LightbulbIcon } from 'lucide-react';
 
 export type CookingStepProps = {
   index: number;
@@ -17,47 +19,38 @@ export const CookingStep = ({
   point,
 }: CookingStepProps) => {
   return (
-    <article className='flex flex-col space-y-2 cooking-step'>
-      <header>
-        <h2 className='text-xl'>
-          <span className='font-sans mr-2'>{index}</span>
-          <span className='font-serif font-semibold'>{title}</span>
+    <Card className='border-none shadow-none'>
+      <CardHeader className='p-0 pb-1'>
+        <h2 className='text-lg'>
+          <span className='mr-2'>{index}</span>
+          <span>{title}</span>
         </h2>
-      </header>
-      <figure className='flex flex-col space-y-2'>
-        {image && (
-          <>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
+      </CardHeader>
+      <CardContent className='p-0 space-y-4'>
+        <figure className='space-y-2'>
+          {image && (
             <img
-              src={`${image.src}?w=352&h=240&q=70&fit=crop&fm=webp`}
-              width={352}
+              src={`${image.src}?w=380&h=280&q=70&fit=crop&fm=webp`}
+              width={380}
               height={240}
               alt={image.alt}
               loading='lazy'
+              className='rounded-md'
             />
-          </>
+          )}
+          <figcaption>{description}</figcaption>
+        </figure>
+
+        {point && (
+          <Alert variant='default' className='border-primary'>
+            <LightbulbIcon className='w-6 h-6' />
+            <AlertTitle>ポイント</AlertTitle>
+            <AlertDescription className='font-semibold'>
+              {point}
+            </AlertDescription>
+          </Alert>
         )}
-        <figcaption className='font-semibold leading-6 font-serif'>
-          {description}
-        </figcaption>
-      </figure>
-      {point && (
-        <aside className='flex flex-col space-y-1'>
-          <h3 className='font-semibold font-serif'>
-            <span className='flex border-b-2 border-secondary-A w-fit'>
-              <Image
-                src='/lightbulb.svg'
-                alt='light bulb icon'
-                width={24}
-                height={24}
-                unoptimized
-              />
-              <span>ポイント</span>
-            </span>
-          </h3>
-          <p className='font-semibold font-serif'>{point}</p>
-        </aside>
-      )}
-    </article>
+      </CardContent>
+    </Card>
   );
 };

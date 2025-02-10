@@ -59,7 +59,7 @@ export const RecipeCard = ({
           loading={isPriority ? 'eager' : 'lazy'}
         />
         <figcaption
-          className={`absolute flex items-center w-full p-1 ${captionClasses[captionSize]} bottom-2 bg-base-white opacity-80 font-serif`}
+          className={`absolute flex items-center w-full p-1 ${captionClasses[captionSize]} bottom-2 bg-base-white opacity-80 `}
         >
           <div className='truncate'>{recipeName}</div>
         </figcaption>

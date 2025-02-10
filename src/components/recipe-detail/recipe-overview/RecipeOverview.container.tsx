@@ -21,6 +21,9 @@ export const RecipeOverviewContainer = async ({
         alt: microCmsResponse.name,
       }}
       recipeMetaInfo={{
+        image: {
+          src: microCmsResponse.image.url,
+        },
         recipeName: microCmsResponse.name,
         deliciousCount:
           hasuraResponse.data.nozomis_recipes_schema_recipes[0].delicious_count,
