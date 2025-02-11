@@ -11,7 +11,7 @@ export const RecipeOverview = ({
   recipeMetaInfo,
 }: RecipeOverviewProps) => {
   return (
-    <section className='flex flex-col items-center -mb-24'>
+    <section className='relative flex flex-col items-center -mb-24'>
       <figure className='flex items-center justify-center'>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -22,6 +22,12 @@ export const RecipeOverview = ({
           fetchPriority='high'
         />
       </figure>
+      {/* <div className='absolute flex justify-end w-full right-2 top-2'>
+        <div className='p-1 rounded-lg backdrop-blur-sm bg-white/30'>
+          <ShareButton />
+        </div>
+      </div> */}
+
       <div className='-translate-y-24 shadow-md'>
         <RecipeMetaInfo {...recipeMetaInfo} />
       </div>

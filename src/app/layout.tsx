@@ -1,6 +1,7 @@
 import '@/app/globals.css';
 import { Footer } from '@/components/footer/Footer';
 import { Header } from '@/components/header/Header';
+import { Toaster } from '@/components/ui/toaster';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata } from 'next';
 
@@ -43,6 +44,7 @@ export default function RootLayout({
         {/* <GoogleSignIn /> */}
         {children}
         <Footer />
+        <Toaster />
       </body>
       <GoogleAnalytics gaId='G-8XQ426S2XN' />
     </html>
