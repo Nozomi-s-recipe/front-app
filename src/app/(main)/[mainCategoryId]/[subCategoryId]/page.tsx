@@ -18,9 +18,13 @@ export default async function SubCategoryPage({
   params: Promise<{ mainCategoryId: string; subCategoryId: string }>;
 }) {
   const { subCategoryId } = await params;
+  const subCategory = getSubCategoryById(subCategoryId);
 
   return (
     <>
+      <h1 className='max-w-sm py-8 mx-auto text-2xl font-bold'>
+        {subCategory?.name}
+      </h1>
       <div className='flex-1'>
         <RecipePreviewListContainer
           subCategory={getSubCategoryById(subCategoryId)!}

@@ -25,16 +25,14 @@ export const Servings = () => {
           aria-label='人数を減らす'
           className='w-12 h-12 rounded-full'
         >
-          <Minus className='w-6 h-6' />
+          <Minus />
         </Button>
-
         <output
           id='servings-output'
           className='text-xl font-light min-w-[2ch] text-center'
         >
           {servings}
         </output>
-
         <Button
           variant='outline'
           size='icon'
@@ -42,7 +40,7 @@ export const Servings = () => {
           aria-label='人数を増やす'
           className='w-12 h-12 rounded-full'
         >
-          <Plus className='w-6 h-6' />
+          <Plus />
         </Button>
       </div>
     </div>

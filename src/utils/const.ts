@@ -95,7 +95,7 @@ export const SIDE_MENUS: SideMenu[] = [
   {
     mainCategory: {
       id: 'chinese',
-      name: '中華',
+      name: '中華・アジア・エスニック料理',
     },
     subCategories: [
       {

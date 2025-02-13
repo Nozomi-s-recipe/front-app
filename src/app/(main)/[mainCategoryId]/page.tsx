@@ -21,6 +21,9 @@ export default async function MainCategoryPage({
 
   return (
     <>
+      <h1 className='max-w-sm py-8 mx-auto text-2xl font-bold'>
+        {mainCategory?.name}
+      </h1>
       <div className='flex-1'>
         <RecipePreviewListContainer mainCategory={mainCategory!} />
       </div>
