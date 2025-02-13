@@ -17,7 +17,14 @@ export function HeroCarousel() {
                   <span className='pb-3 text-4xl font-semibold'>
                     Nozomi‘s Recipes
                   </span>
-                  <span>赤身肉・加工肉・バターを使わないレシピ</span>
+                  <div className='flex items-start w-full space-x-1'>
+                    <div className='flex flex-col'>
+                      <span>赤身肉</span>
+                      <span>加工肉</span>
+                      <span>バター</span>
+                    </div>
+                    <span className='justify-items-end'>を使わないレシピ</span>
+                  </div>
                 </CardContent>
               </Card>
             </div>
