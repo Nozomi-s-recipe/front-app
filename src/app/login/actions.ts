@@ -21,6 +21,7 @@ export async function login(formData: FormData) {
     redirect('/error');
   }
 
+  // 古いキャッシュを更新している
   revalidatePath('/', 'layout');
   redirect('/');
 }

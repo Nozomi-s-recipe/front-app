@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { Link } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import {
   LineIcon,
   LineShareButton,
@@ -10,14 +11,19 @@ import {
   XIcon,
 } from 'react-share';
 
-const ShareButtons = ({
-  url = typeof window !== 'undefined' ? window.location.href : '',
-  title = typeof window !== 'undefined' ? document.title : '',
-}) => {
+const ShareButtons = () => {
   const { toast } = useToast();
+  const [pageUrl, setPageUrl] = useState('');
+  const [pageTitle, setPageTitle] = useState('');
+
+  useEffect(() => {
+    // クライアントサイドでURLとタイトルを取得
+    setPageUrl(window.location.href);
+    setPageTitle(document.title);
+  }, []);
 
   const handleCopyLink = () => {
-    navigator.clipboard.writeText(url).then(() => {
+    navigator.clipboard.writeText(pageUrl).then(() => {
       toast({
         description: 'リンクをコピーしました',
         duration: 2000,
@@ -25,13 +31,16 @@ const ShareButtons = ({
     });
   };
 
+  // URLが取得できるまでは表示しない
+  if (!pageUrl) return null;
+
   return (
     <div className='flex items-center gap-2'>
-      <TwitterShareButton url={url} title={title}>
+      <TwitterShareButton url={pageUrl} title={pageTitle}>
         <XIcon size={32} round />
       </TwitterShareButton>
 
-      <LineShareButton url={url} title={title}>
+      <LineShareButton url={pageUrl} title={pageTitle}>
         <LineIcon size={32} round />
       </LineShareButton>
 

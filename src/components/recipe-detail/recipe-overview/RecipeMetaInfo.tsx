@@ -5,8 +5,8 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import ShareButtons from '../ShareButton';
 import { RecipeTag } from './RecipeTag';
+import ShareButtons from './ShareButton';
 
 type Tag = {
   id: string;
