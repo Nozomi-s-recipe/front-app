@@ -15,8 +15,8 @@ type Tag = {
 
 export type RecipeMetaInfo = {
   recipeName: string;
-  deliciousCount: number;
-  totalView: number;
+  // deliciousCount: number;
+  // totalView: number;
   recipeDescription: string;
   recipeTags: Tag[];
   image: {

@@ -22,8 +22,8 @@ export const Primary: Story = {
       src: IMAGES[0],
     },
     recipeName: '炊き込みご飯',
-    deliciousCount: 10,
-    totalView: 1234,
+    // deliciousCount: 10,
+    // totalView: 1234,
     recipeDescription:
       'レシピの説明文ですああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ',
     recipeTags: [
