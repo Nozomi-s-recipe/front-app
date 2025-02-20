@@ -2,8 +2,9 @@ import '@/app/globals.css';
 import { Footer } from '@/components/footer/Footer';
 import { Header } from '@/components/header/Header';
 import { Toaster } from '@/components/ui/toaster';
-import { GoogleAnalytics } from '@next/third-parties/google';
+import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 import type { Metadata } from 'next';
+import Script from 'next/script';
 
 const description =
   '赤身肉、加工肉、バターを使わない健康レシピを発信してます。栄養士がじっくり考えたレシピを投稿しています。◎';
@@ -36,6 +37,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='ja'>
+      <GoogleTagManager gtmId='GTM-TZFSFDLH' />
       <body
         // className={`base ${shipporiMincho.variable} ${shipporiAntique.variable} antialiased bg-white h-screen flex flex-col`}
         className={`base antialiased h-screen flex flex-col`}
@@ -45,6 +47,10 @@ export default function RootLayout({
         {children}
         <Footer />
         <Toaster />
+        <Script
+          src='https://accounts.google.com/gsi/client'
+          strategy='afterInteractive'
+        />
       </body>
       <GoogleAnalytics gaId='G-8XQ426S2XN' />
     </html>
