@@ -4,7 +4,9 @@ import { RecipePreviewProps } from './RecipePreview';
 import { RecipePreviewList } from './RecipePreviewList';
 
 export const AllRecipePreviewListContainer = async () => {
-  const { contents } = await getRecipes({});
+  const { contents } = await getRecipes({
+    limit: 50,
+  });
   const recipePreviewList: RecipePreviewProps[] = contents.map((content) => {
     const {
       image,
