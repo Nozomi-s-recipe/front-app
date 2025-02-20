@@ -2,7 +2,7 @@ import '@/app/globals.css';
 import { Footer } from '@/components/footer/Footer';
 import { Header } from '@/components/header/Header';
 import { Toaster } from '@/components/ui/toaster';
-import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
+import { GoogleTagManager } from '@next/third-parties/google';
 import type { Metadata } from 'next';
 import Script from 'next/script';
 
@@ -52,7 +52,7 @@ export default function RootLayout({
           strategy='afterInteractive'
         />
       </body>
-      <GoogleAnalytics gaId='G-8XQ426S2XN' />
+      {/* <GoogleAnalytics gaId='G-8XQ426S2XN' /> */}
     </html>
   );
 }
