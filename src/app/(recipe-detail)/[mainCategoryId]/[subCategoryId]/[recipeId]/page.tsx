@@ -5,7 +5,7 @@ import { IngredientSectionContainer } from '@/components/recipe-detail/ingredien
 import { RecipeOverviewContainer } from '@/components/recipe-detail/recipe-overview/RecipeOverview.container';
 import { RecommendedRecipesSection } from '@/components/recipe-detail/recipe-recommend/RecomendedRecipesSection';
 import { UserFeedback } from '@/components/recipe-detail/user-feedback/UserFeedback';
-import { getRecipeById, getRecipes } from '@/utils/micro-cms/micro-cms';
+import { getRecipeById } from '@/utils/micro-cms/micro-cms';
 import { Metadata } from 'next';
 // import { getRecipeById } from '@/lib/micro-cms/micro-cms';
 
@@ -33,15 +33,15 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 }
 
 // Return a list of `params` to populate the [slug] dynamic segment
-export async function generateStaticParams() {
-  const res = await getRecipes();
+// export async function generateStaticParams() {
+//   const res = await getRecipes();
 
-  return res.contents.map((recipe) => ({
-    mainCategoryId: recipe.mainCategory[0],
-    subCategoryId: recipe.subCategory[0],
-    recipeId: recipe.id,
-  }));
-}
+//   return res.contents.map((recipe) => ({
+//     mainCategoryId: recipe.mainCategory[0],
+//     subCategoryId: recipe.subCategory[0],
+//     recipeId: recipe.id,
+//   }));
+// }
 
 export type RecipePageProps = {
   mainCategoryId: string;

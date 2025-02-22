@@ -1,16 +1,15 @@
 import { Breadcrumbs } from '@/components/BreadCrumbs';
 import { RecipePreviewListContainer } from '@/components/recipe-preview/RecipePreviewList.container';
 import { getSubCategoryById } from '@/utils/const';
-import { getRecipes } from '@/utils/micro-cms/micro-cms';
 
-export async function generateStaticParams() {
-  const res = await getRecipes();
+// export async function generateStaticParams() {
+//   const res = await getRecipes();
 
-  return res.contents.map((recipe) => ({
-    mainCategoryId: recipe.mainCategory[0],
-    subCategoryId: recipe.subCategory[0],
-  }));
-}
+//   return res.contents.map((recipe) => ({
+//     mainCategoryId: recipe.mainCategory[0],
+//     subCategoryId: recipe.subCategory[0],
+//   }));
+// }
 
 export default async function SubCategoryPage({
   params,
