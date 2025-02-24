@@ -21,7 +21,7 @@ export const NumericalDisplay = ({
           className='font-sans text-xl font-light'
           style={{ minWidth }} // 動的な最小幅
         >
-          {value.toLocaleString()}
+          {value}
         </span>
         {unit && (
           <span className='' aria-hidden='true'>
