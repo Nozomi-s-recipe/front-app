@@ -6,7 +6,9 @@ import { redirect } from 'next/navigation';
 import { createClient } from '@/utils/supabase/server';
 
 export async function login(formData: FormData) {
+  console.log('called 1');
   const supabase = await createClient();
+  console.log('called 2');
 
   // type-casting here for convenience
   // in practice, you should validate your inputs
