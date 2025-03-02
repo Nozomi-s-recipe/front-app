@@ -24,7 +24,7 @@ const GoogleSignIn = () => {
 
         console.log('Logged in:', data);
         router.refresh();
-        router.push('/private'); // ログイン後のリダイレクト先
+        router.push('/account'); // ログイン後のリダイレクト先
       } catch (error) {
         console.error('Error:', error);
       }
@@ -54,10 +54,12 @@ const GoogleSignIn = () => {
             document.getElementById('signInDiv')!,
             { theme: 'outline', size: 'large' }
           );
+          // @ts-ignore
+          google.accounts.id.prompt(); // also display the One Tap dialog
         }}
       />
       {/* Google Sign-Inボタンのコンテナ */}
-      <div id='signInDiv'></div>
+      <div id='signInDiv' className='w-48'></div>
     </>
   );
 };
