@@ -21,7 +21,7 @@ interface ServingsProviderProps {
 
 // Context Provider コンポーネント
 export const ServingsProvider = ({ children }: ServingsProviderProps) => {
-  const [servings, setServings] = useState<number>(3); // デフォルト1人分
+  const [servings, setServings] = useState<number>(1); // デフォルト1人分
 
   const incrementServings = () => setServings((prev) => prev + 1);
   const decrementServings = () =>
