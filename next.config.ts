@@ -3,7 +3,7 @@ import type { NextConfig } from 'next';
 const nextConfig: NextConfig = {
   output: 'standalone',
   images: {
-    domains: ['images.microcms-assets.io', 'lh3.googleusercontent.com'],
+    domains: ['images.microcms-assets.io'],
     remotePatterns: [
       {
         protocol: 'https',

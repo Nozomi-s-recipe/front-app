@@ -2,7 +2,8 @@
 import { createClient } from '@/utils/supabase/client';
 import { type User } from '@supabase/supabase-js';
 import { useCallback, useEffect, useState } from 'react';
-import Avatar from './avatar';
+
+// ...
 
 export default function AccountForm({ user }: { user: User | null }) {
   const supabase = createClient();
@@ -19,7 +20,7 @@ export default function AccountForm({ user }: { user: User | null }) {
       const { data, error, status } = await supabase
         .from('profiles')
         .select(`full_name, username, website, avatar_url`)
-        .eq('id', user!.id)
+        .eq('id', user?.id)
         .single();
 
       if (error && status !== 406) {
@@ -28,7 +29,6 @@ export default function AccountForm({ user }: { user: User | null }) {
       }
 
       if (data) {
-        console.log(data);
         setFullname(data.full_name);
         setUsername(data.username);
         setWebsite(data.website);
@@ -79,15 +79,7 @@ export default function AccountForm({ user }: { user: User | null }) {
 
   return (
     <div className='form-widget'>
-      <Avatar
-        uid={user?.id ?? null}
-        url={avatar_url}
-        size={150}
-        onUpload={(url) => {
-          setAvatarUrl(url);
-          updateProfile({ fullname, username, website, avatar_url: url });
-        }}
-      />
+      {/* ... */}
 
       <div>
         <label htmlFor='email'>Email</label>

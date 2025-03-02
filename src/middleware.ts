@@ -7,5 +7,5 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   // middlewareを実行するパスを指定
-  matcher: ['/account', '/', '/login'],
+  matcher: ['/account'],
 };
