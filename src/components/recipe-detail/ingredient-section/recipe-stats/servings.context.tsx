@@ -1,4 +1,5 @@
 'use client';
+import { DEFAULT_SERVINGS } from '@/utils/const';
 import { createContext, ReactNode, useContext, useState } from 'react';
 
 // Context の型定義
@@ -21,7 +22,7 @@ interface ServingsProviderProps {
 
 // Context Provider コンポーネント
 export const ServingsProvider = ({ children }: ServingsProviderProps) => {
-  const [servings, setServings] = useState<number>(1); // デフォルト1人分
+  const [servings, setServings] = useState<number>(DEFAULT_SERVINGS);
 
   const incrementServings = () => setServings((prev) => prev + 1);
   const decrementServings = () =>

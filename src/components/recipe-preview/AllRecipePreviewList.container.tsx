@@ -1,11 +1,15 @@
-import { getMainCategoryByMainId, getSubCategoryById } from '@/utils/const';
+import {
+  DEFAULT_TOP_PAGE_RECIPES,
+  getMainCategoryByMainId,
+  getSubCategoryById,
+} from '@/utils/const';
 import { getRecipes } from '@/utils/micro-cms/micro-cms';
 import { RecipePreviewProps } from './RecipePreview';
 import { RecipePreviewList } from './RecipePreviewList';
 
 export const AllRecipePreviewListContainer = async () => {
   const { contents } = await getRecipes({
-    limit: 50,
+    limit: DEFAULT_TOP_PAGE_RECIPES,
   });
   const recipePreviewList: RecipePreviewProps[] = contents.map((content) => {
     const {

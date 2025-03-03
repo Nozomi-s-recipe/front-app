@@ -173,6 +173,11 @@ export const SIDE_MENUS: SideMenu[] = [
     ],
   },
 ];
+
+export const DEFAULT_SERVINGS = 3;
+
+export const DEFAULT_TOP_PAGE_RECIPES = 50;
+
 type SideMenu = {
   mainCategory: Menu;
   subCategories: Menu[];
