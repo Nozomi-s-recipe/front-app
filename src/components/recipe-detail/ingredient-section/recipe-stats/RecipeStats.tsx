@@ -13,7 +13,7 @@ export const RecipeStats = ({ calories, cookingTime }: RecipeStats) => {
       <NumericalDisplay
         title='カロリー'
         unit='kcal'
-        minWidth='5ch'
+        minWidth='4ch'
         value={calories}
       />
       <NumericalDisplay

@@ -1,6 +1,6 @@
 import '@/app/globals.css';
 import { Footer } from '@/components/footer/Footer';
-import { Header } from '@/components/header/Header';
+import { MenuHeader } from '@/components/header/MenuHeader';
 import { Toaster } from '@/components/ui/toaster';
 import { GoogleTagManager } from '@next/third-parties/google';
 import type { Metadata } from 'next';
@@ -42,7 +42,8 @@ export default function RootLayout({
         // className={`base ${shipporiMincho.variable} ${shipporiAntique.variable} antialiased bg-white h-screen flex flex-col`}
         className={`base antialiased h-screen flex flex-col`}
       >
-        <Header />
+        {/* <Header /> */}
+        <MenuHeader />
         {/* <GoogleSignIn /> */}
         {children}
         <Footer />

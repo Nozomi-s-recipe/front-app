@@ -50,6 +50,7 @@ export type Recipe = {
   cookingTime: number;
   nutrient: Nutrient;
   tags: Tag[];
+  note?: string;
   ingredients: Ingredient[];
   seasonings: Ingredient[];
   cookingSteps: CookingStep[];
