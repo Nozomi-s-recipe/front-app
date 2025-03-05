@@ -5,7 +5,7 @@ import { IngredientSectionContainer } from '@/components/recipe-detail/ingredien
 import { RecipeOverviewContainer } from '@/components/recipe-detail/recipe-overview/RecipeOverview.container';
 import { RecommendedRecipesSection } from '@/components/recipe-detail/recipe-recommend/RecomendedRecipesSection';
 import { UserFeedback } from '@/components/recipe-detail/user-feedback/UserFeedback';
-import { DEFAULT_TOP_PAGE_RECIPES } from '@/utils/const';
+import { LIMIT } from '@/utils/const';
 import { getRecipeById, getRecipes } from '@/utils/micro-cms/micro-cms';
 import { Metadata } from 'next';
 // import { getRecipeById } from '@/lib/micro-cms/micro-cms';
@@ -42,7 +42,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 // Return a list of `params` to populate the [slug] dynamic segment
 export async function generateStaticParams() {
   const res = await getRecipes({
-    limit: DEFAULT_TOP_PAGE_RECIPES,
+    limit: LIMIT,
   });
 
   return res.contents.map((recipe) => ({

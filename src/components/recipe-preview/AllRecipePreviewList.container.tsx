@@ -1,5 +1,5 @@
 import {
-  DEFAULT_TOP_PAGE_RECIPES,
+  LIMIT,
   getMainCategoryByMainId,
   getSubCategoryById,
 } from '@/utils/const';
@@ -8,12 +8,14 @@ import { RecipePreviewProps } from './RecipePreview';
 import { RecipePreviewList } from './RecipePreviewList';
 type Props = {
   q?: string;
+  offset?: number;
 };
 
-export const AllRecipePreviewListContainer = async ({ q }: Props) => {
+export const AllRecipePreviewListContainer = async ({ q, offset }: Props) => {
   const { contents } = await getRecipes({
-    limit: DEFAULT_TOP_PAGE_RECIPES,
+    limit: LIMIT,
     q,
+    offset,
   });
   const recipePreviewList: RecipePreviewProps[] = contents.map((content) => {
     const {

@@ -10,17 +10,25 @@ import { Suspense } from 'react';
 export const dynamic = 'force-dynamic';
 
 type Props = {
+  params: Promise<{
+    current: string;
+  }>;
   searchParams: Promise<{
     q?: string;
   }>;
 };
 
-export default async function SearchPage({ searchParams }: Props) {
-  const q = (await searchParams).q;
+export default async function SearchPage(props: Props) {
+  const params = await props.params;
+  const current = parseInt(params.current as string, 10);
+  const q = (await props.searchParams).q;
+
   const { totalCount } = await getRecipes({
     limit: LIMIT,
+    offset: LIMIT * (current - 1),
     q,
   });
+
   return (
     <>
       <div className='flex flex-col items-center'>
@@ -29,13 +37,17 @@ export default async function SearchPage({ searchParams }: Props) {
       <div className='flex flex-col items-center px-8'>
         <SearchField />
       </div>
-
       <section className='flex flex-col items-center max-w-sm pt-7 mx-auto'>
         <Suspense fallback={<div>loading...</div>}>
-          <AllRecipePreviewListContainer q={q} />
+          <AllRecipePreviewListContainer q={q} offset={LIMIT * (current - 1)} />
         </Suspense>
       </section>
-      <Pagination totalCount={totalCount} basePath='/search' q={q} />
+      <Pagination
+        totalCount={totalCount}
+        current={current}
+        basePath='/search'
+        q={q}
+      />
       <div className='px-6'>
         <Breadcrumbs />
       </div>

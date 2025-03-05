@@ -1,14 +1,21 @@
 import { Breadcrumbs } from '@/components/BreadCrumbs';
 import { HeroCarousel } from '@/components/header/HeroCarousel';
+import Pagination from '@/components/pagenation/Pagenation';
 import { AllRecipePreviewListContainer } from '@/components/recipe-preview/AllRecipePreviewList.container';
 import SearchField from '@/components/search/SearchField';
+import { LIMIT } from '@/utils/const';
+import { getRecipes } from '@/utils/micro-cms/micro-cms';
 import { Suspense } from 'react';
 
 // Next.js will invalidate the cache when a
 // request comes in, at most once every 60 seconds.
 export const revalidate = 60;
 
-export default function Home() {
+export default async function Home() {
+  const { totalCount } = await getRecipes({
+    limit: LIMIT,
+  });
+
   return (
     <>
       {/* <Header /> */}
@@ -25,6 +32,7 @@ export default function Home() {
           <AllRecipePreviewListContainer />
         </Suspense>
       </section>
+      <Pagination totalCount={totalCount} />
       <div className='px-6'>
         <Breadcrumbs />
       </div>
