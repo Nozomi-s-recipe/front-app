@@ -1,22 +1,29 @@
 import { Breadcrumbs } from '@/components/BreadCrumbs';
 import { HeroCarousel } from '@/components/header/HeroCarousel';
 import { AllRecipePreviewListContainer } from '@/components/recipe-preview/AllRecipePreviewList.container';
+import SearchField from '@/components/search/SearchField';
 import { Suspense } from 'react';
 
-// Next.js will invalidate the cache when a
-// request comes in, at most once every 60 seconds.
-export const revalidate = 60;
+type Props = {
+  searchParams: Promise<{
+    q?: string;
+  }>;
+};
 
-export default function Home() {
+export default async function SearchPage({ searchParams }: Props) {
+  const q = (await searchParams).q;
   return (
     <>
       <div className='flex flex-col items-center'>
         <HeroCarousel />
       </div>
-      <h1 className='max-w-sm pt-8 mx-auto text-2xl font-bold'>レシピ一覧</h1>
-      <section className='flex flex-col items-center max-w-sm pt-8 mx-auto'>
+      <div className='flex flex-col items-center px-8'>
+        <SearchField />
+      </div>
+
+      <section className='flex flex-col items-center max-w-sm pt-7 mx-auto'>
         <Suspense fallback={<div>loading...</div>}>
-          <AllRecipePreviewListContainer />
+          <AllRecipePreviewListContainer q={q} />
         </Suspense>
       </section>
       <div className='px-6'>

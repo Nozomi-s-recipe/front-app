@@ -6,10 +6,14 @@ import {
 import { getRecipes } from '@/utils/micro-cms/micro-cms';
 import { RecipePreviewProps } from './RecipePreview';
 import { RecipePreviewList } from './RecipePreviewList';
+type Props = {
+  q?: string;
+};
 
-export const AllRecipePreviewListContainer = async () => {
+export const AllRecipePreviewListContainer = async ({ q }: Props) => {
   const { contents } = await getRecipes({
     limit: DEFAULT_TOP_PAGE_RECIPES,
+    q,
   });
   const recipePreviewList: RecipePreviewProps[] = contents.map((content) => {
     const {
