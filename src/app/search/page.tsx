@@ -4,6 +4,8 @@ import { AllRecipePreviewListContainer } from '@/components/recipe-preview/AllRe
 import SearchField from '@/components/search/SearchField';
 import { Suspense } from 'react';
 
+export const dynamic = 'force-dynamic';
+
 type Props = {
   searchParams: Promise<{
     q?: string;

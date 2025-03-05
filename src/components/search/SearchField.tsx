@@ -2,9 +2,9 @@
 
 import { Input } from '@/components/ui/input';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useCallback, useRef, useState } from 'react';
+import { Suspense, useCallback, useRef, useState } from 'react';
 
-export default function SearchField() {
+function SearchFieldContent() {
   const router = useRouter();
   const [composing, setComposition] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -41,5 +41,17 @@ export default function SearchField() {
       onCompositionEnd={endComposition}
       defaultValue={defaultQuery}
     />
+  );
+}
+
+export default function SearchField() {
+  return (
+    <Suspense
+      fallback={
+        <Input type='search' className={'w-full sm:w-64 md:w-80 lg:w-96'} />
+      }
+    >
+      <SearchFieldContent />
+    </Suspense>
   );
 }
