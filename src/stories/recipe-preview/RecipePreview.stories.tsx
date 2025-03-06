@@ -34,5 +34,6 @@ export const Primary: Story = {
       name: '和食',
     },
     isPopular: true,
+    createdAt: '2025-03-05',
   },
 };
