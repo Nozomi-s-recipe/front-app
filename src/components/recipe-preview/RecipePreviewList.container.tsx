@@ -27,6 +27,7 @@ export const RecipePreviewListContainer = async ({
   const { contents } = await getRecipes({
     filters: filter,
   });
+  console.log('contents', contents);
   const recipePreviewList: RecipePreviewProps[] = contents.map((content) => {
     const {
       image,
@@ -37,6 +38,7 @@ export const RecipePreviewListContainer = async ({
       subCategory,
       mainCategory,
       createdAt,
+      isPopular,
     } = content;
     return {
       image: {
@@ -50,8 +52,10 @@ export const RecipePreviewListContainer = async ({
       mainCategory: getMainCategoryByMainId(mainCategory[0])!,
       subCategory: getSubCategoryById(subCategory[0])!,
       createdAt,
+      isPopular,
     };
   });
+  console.log('recipePreviewList', recipePreviewList);
 
   return <RecipePreviewList recipePreviews={recipePreviewList} />;
 };

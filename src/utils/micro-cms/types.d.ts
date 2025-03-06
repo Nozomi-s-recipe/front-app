@@ -42,6 +42,7 @@ export type Tag = {
 // メインの料理データの型定義
 export type Recipe = {
   id: string;
+  isPopular: boolean;
   name: string;
   description: string;
   image: MicroCMSImage;

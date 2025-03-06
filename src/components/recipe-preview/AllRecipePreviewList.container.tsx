@@ -27,6 +27,7 @@ export const AllRecipePreviewListContainer = async ({ q, offset }: Props) => {
       subCategory,
       mainCategory,
       createdAt,
+      isPopular,
     } = content;
     return {
       image: {
@@ -40,6 +41,7 @@ export const AllRecipePreviewListContainer = async ({ q, offset }: Props) => {
       mainCategory: getMainCategoryByMainId(mainCategory[0])!,
       subCategory: getSubCategoryById(subCategory[0])!,
       createdAt,
+      isPopular,
     };
   });
 
