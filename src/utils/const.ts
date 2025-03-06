@@ -178,6 +178,8 @@ export const DEFAULT_SERVINGS = 3;
 
 export const LIMIT = 6;
 
+export const NEW_RECIPE_DAYS = 7;
+
 type SideMenu = {
   mainCategory: Menu;
   subCategories: Menu[];

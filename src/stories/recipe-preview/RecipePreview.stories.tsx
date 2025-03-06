@@ -33,5 +33,6 @@ export const Primary: Story = {
       id: 'japanese',
       name: '和食',
     },
+    isPopular: true,
   },
 };

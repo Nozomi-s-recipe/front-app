@@ -26,6 +26,7 @@ export const AllRecipePreviewListContainer = async ({ q, offset }: Props) => {
       id,
       subCategory,
       mainCategory,
+      createdAt,
     } = content;
     return {
       image: {
@@ -38,6 +39,7 @@ export const AllRecipePreviewListContainer = async ({ q, offset }: Props) => {
       ingredientsCount: ingredients.length,
       mainCategory: getMainCategoryByMainId(mainCategory[0])!,
       subCategory: getSubCategoryById(subCategory[0])!,
+      createdAt,
     };
   });
 
