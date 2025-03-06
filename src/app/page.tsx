@@ -2,6 +2,8 @@ import { Breadcrumbs } from '@/components/BreadCrumbs';
 import { HeroCarousel } from '@/components/header/HeroCarousel';
 import Pagination from '@/components/pagenation/Pagenation';
 import { AllRecipePreviewListContainer } from '@/components/recipe-preview/AllRecipePreviewList.container';
+import { NewRecipePreviewCarouselContainer } from '@/components/recipe-preview/NewRecipePreviewCarousel.container';
+import { PopularRecipePreviewCarouselContainer } from '@/components/recipe-preview/PopularRecipePreviewCarousel.container';
 import SearchField from '@/components/search/SearchField';
 import { LIMIT } from '@/utils/const';
 import { getRecipes } from '@/utils/micro-cms/micro-cms';
@@ -21,6 +23,12 @@ export default async function Home() {
       {/* <Header /> */}
       <div className='flex flex-col items-center'>
         <HeroCarousel />
+      </div>
+      <div className='flex flex-col items-center px-8 pb-8'>
+        <NewRecipePreviewCarouselContainer />
+      </div>
+      <div className='flex flex-col items-center px-8 pb-16'>
+        <PopularRecipePreviewCarouselContainer />
       </div>
       <div className='flex flex-col items-center px-8'>
         <SearchField />

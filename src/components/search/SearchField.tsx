@@ -35,7 +35,7 @@ function SearchFieldContent() {
       className={'w-full sm:w-64 md:w-80 lg:w-96'}
       name='q'
       ref={inputRef}
-      placeholder='Search...'
+      placeholder='レシピを検索...'
       onKeyDown={_onEnter}
       onCompositionStart={startComposition}
       onCompositionEnd={endComposition}

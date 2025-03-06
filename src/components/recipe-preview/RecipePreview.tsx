@@ -1,11 +1,12 @@
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Menu, RecipeImage } from '@/types/types';
-import { NEW_RECIPE_DAYS, RECIPE_BLUR } from '@/utils/const';
+import { RECIPE_BLUR } from '@/utils/const';
+import { isNewRecipe } from '@/utils/recipe/isNewRecipe';
 import { Clock, Flame, Sparkles, UtensilsCrossed } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export type RecipePreviewProps = {
+export interface RecipePreviewProps {
   image: RecipeImage;
   recipeName: string;
   recipeId: string;
@@ -16,15 +17,7 @@ export type RecipePreviewProps = {
   isPriority?: boolean;
   createdAt: string;
   isPopular?: boolean;
-};
-
-const isWithinDays = (date: string, days: number): boolean => {
-  const targetDate = new Date(date);
-  const now = new Date();
-  const diffTime = now.getTime() - targetDate.getTime();
-  const diffDays = diffTime / (1000 * 60 * 60 * 24);
-  return diffDays <= days;
-};
+}
 
 export const RecipePreview = ({
   image,
@@ -38,12 +31,12 @@ export const RecipePreview = ({
   createdAt,
   isPopular = false,
 }: RecipePreviewProps) => {
-  const isNew = isWithinDays(createdAt, NEW_RECIPE_DAYS);
+  const isNew = isNewRecipe(new Date(createdAt));
 
   return (
     <Link
       href={`/${mainCategory.id}/${subCategory.id}/${recipeId}`}
-      className='block transition-opacity hover:opacity-80'
+      className='w-fit block transition-opacity hover:opacity-80'
       prefetch={true}
     >
       <Card className='overflow-hidden'>

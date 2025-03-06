@@ -1,11 +1,8 @@
-import {
-  LIMIT,
-  getMainCategoryByMainId,
-  getSubCategoryById,
-} from '@/utils/const';
+import { LIMIT } from '@/utils/const';
 import { getRecipes } from '@/utils/micro-cms/micro-cms';
-import { RecipePreviewProps } from './RecipePreview';
+import { formatRecipePreview } from '@/utils/recipe/formatRecipePreview';
 import { RecipePreviewList } from './RecipePreviewList';
+
 type Props = {
   q?: string;
   offset?: number;
@@ -17,33 +14,7 @@ export const AllRecipePreviewListContainer = async ({ q, offset }: Props) => {
     q,
     offset,
   });
-  const recipePreviewList: RecipePreviewProps[] = contents.map((content) => {
-    const {
-      image,
-      name,
-      cookingTime,
-      ingredients,
-      id,
-      subCategory,
-      mainCategory,
-      createdAt,
-      isPopular,
-    } = content;
-    return {
-      image: {
-        src: image.url,
-        alt: name,
-      },
-      recipeName: name,
-      recipeId: id,
-      cookingTime: cookingTime,
-      ingredientsCount: ingredients.length,
-      mainCategory: getMainCategoryByMainId(mainCategory[0])!,
-      subCategory: getSubCategoryById(subCategory[0])!,
-      createdAt,
-      isPopular,
-    };
-  });
+  const recipePreviewList = contents.map(formatRecipePreview);
 
   return <RecipePreviewList recipePreviews={recipePreviewList} />;
 };
