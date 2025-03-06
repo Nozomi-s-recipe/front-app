@@ -36,6 +36,7 @@ export const Primary: Story = {
           id: 'japanese',
           name: '和食',
         },
+        createdAt: '2025-03-05',
       },
       {
         image: {
@@ -54,6 +55,7 @@ export const Primary: Story = {
           id: 'japanese',
           name: '和食',
         },
+        createdAt: '2025-03-05',
       },
       {
         image: {
@@ -72,6 +74,7 @@ export const Primary: Story = {
           id: 'japanese',
           name: '和食',
         },
+        createdAt: '2025-03-05',
       },
     ],
   },

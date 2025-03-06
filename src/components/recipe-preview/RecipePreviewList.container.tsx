@@ -36,6 +36,7 @@ export const RecipePreviewListContainer = async ({
       id,
       subCategory,
       mainCategory,
+      createdAt,
     } = content;
     return {
       image: {
@@ -48,6 +49,7 @@ export const RecipePreviewListContainer = async ({
       ingredientsCount: ingredients.length,
       mainCategory: getMainCategoryByMainId(mainCategory[0])!,
       subCategory: getSubCategoryById(subCategory[0])!,
+      createdAt,
     };
   });
 
