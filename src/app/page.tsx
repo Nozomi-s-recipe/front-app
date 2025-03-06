@@ -30,16 +30,18 @@ export default async function Home() {
       <div className='flex flex-col items-center px-8 pb-16'>
         <PopularRecipePreviewCarouselContainer />
       </div>
-      <div className='flex flex-col items-center px-8'>
-        <SearchField />
-      </div>
 
-      <h1 className='max-w-sm pt-8 mx-auto text-2xl font-bold'>レシピ一覧</h1>
-      <section className='flex flex-col items-center max-w-sm pt-7 mx-auto'>
+      <div className='flex flex-col items-center px-8'>
+        <h2 className='w-full max-w-7xl text-2xl font-bold pb-8'>レシピ一覧</h2>
+        <div className='flex flex-col items-center px-8 pb-8'>
+          <SearchField />
+        </div>
+
         <Suspense fallback={<div>loading...</div>}>
           <AllRecipePreviewListContainer />
         </Suspense>
-      </section>
+      </div>
+      {/* </section> */}
       <Pagination totalCount={totalCount} />
       <div className='px-6'>
         <Breadcrumbs />

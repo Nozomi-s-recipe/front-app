@@ -32,7 +32,7 @@ function SearchFieldContent() {
   return (
     <Input
       type='search'
-      className={'w-full sm:w-64 md:w-80 lg:w-96'}
+      className={'w-64 md:w-80 lg:w-96'}
       name='q'
       ref={inputRef}
       placeholder='レシピを検索...'
@@ -47,9 +47,7 @@ function SearchFieldContent() {
 export default function SearchField() {
   return (
     <Suspense
-      fallback={
-        <Input type='search' className={'w-full sm:w-64 md:w-80 lg:w-96'} />
-      }
+      fallback={<Input type='search' className={'w-full md:w-80 lg:w-96'} />}
     >
       <SearchFieldContent />
     </Suspense>

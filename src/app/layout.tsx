@@ -32,28 +32,26 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang='ja'>
       <GoogleTagManager gtmId='GTM-TZFSFDLH' />
-      <body
-        // className={`base ${shipporiMincho.variable} ${shipporiAntique.variable} antialiased bg-white h-screen flex flex-col`}
-        className={`base antialiased h-screen flex flex-col`}
-      >
-        <MenuHeader />
-
-        {/* <GoogleSignIn /> */}
-        {children}
-        <Footer />
+      <body>
+        <div className='min-h-screen bg-background'>
+          <MenuHeader />
+          <main className='container mx-auto px-6 md:px-16 lg:px-24'>
+            {children}
+          </main>
+          <Footer />
+        </div>
         <Toaster />
         <Script
           src='https://accounts.google.com/gsi/client'
           strategy='afterInteractive'
         />
       </body>
-      {/* <GoogleAnalytics gaId='G-8XQ426S2XN' /> */}
     </html>
   );
 }
