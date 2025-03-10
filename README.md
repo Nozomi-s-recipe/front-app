@@ -9,3 +9,7 @@ docker compose --env-file .env.local up --build
 ## Supabase setup
 
 https://supabase.com/docs/guides/auth/server-side/nextjs
+
+## environment
+
+Supabase は、ishiibusiness58@gmail.comアカウントで作成したプロジェクトを使用しています。
