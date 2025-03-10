@@ -18,11 +18,13 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
+    recipeId: '1',
     image: {
       src: 'https://images.microcms-assets.io/assets/888d632d12c2409a941139ea8e9d5adc/3a56446bc7714cb2ad416b8935820478/chinese-dunpling.jpg',
       alt: 'recipe',
     },
     recipeMetaInfo: {
+      recipeId: '1',
       image: {
         src: IMAGES[0],
       },

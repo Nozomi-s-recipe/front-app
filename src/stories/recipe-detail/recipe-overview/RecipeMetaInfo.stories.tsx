@@ -21,24 +21,16 @@ export const Primary: Story = {
     image: {
       src: IMAGES[0],
     },
-    recipeName: '炊き込みご飯',
+    recipeName: 'おいしいレシピ',
+    recipeId: 'recipe-1',
     // deliciousCount: 10,
     // totalView: 1234,
     recipeDescription:
-      'レシピの説明文ですああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ',
+      'とてもおいしい料理です。簡単に作れて、栄養もたっぷり。家族みんなで楽しめます。',
     recipeTags: [
-      {
-        id: '1',
-        name: 'たけのこ',
-      },
-      {
-        id: '2',
-        name: '鍋1つ',
-      },
-      {
-        id: '3',
-        name: 'ヘルシー',
-      },
+      { id: '1', name: '和食' },
+      { id: '2', name: '魚料理' },
+      { id: '3', name: '簡単' },
     ],
   },
 };
