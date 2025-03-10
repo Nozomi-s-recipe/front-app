@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button';
 import {
   NavigationMenu,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
@@ -48,15 +47,10 @@ export const MenuHeader = () => {
                     <div className='relative'>
                       <Link
                         href='#'
+                        className={`${navigationMenuTriggerStyle()} opacity-70 cursor-not-allowed`}
                         onClick={(e) => e.preventDefault()}
-                        legacyBehavior
-                        passHref
                       >
-                        <NavigationMenuLink
-                          className={`${navigationMenuTriggerStyle()} opacity-70 cursor-not-allowed`}
-                        >
-                          ブログ
-                        </NavigationMenuLink>
+                        ブログ
                       </Link>
                       <Badge className='absolute -top-2 -right-2 text-xs bg-gray-300'>
                         <Lock className='h-4 w-4' />
@@ -74,21 +68,18 @@ export const MenuHeader = () => {
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Link href='#' onClick={(e) => e.preventDefault()} passHref>
+                    <Link href='/mypage'>
                       <Button
                         variant='ghost'
-                        className='opacity-70 cursor-not-allowed'
+                        className='opacity-100'
                         size='icon'
                       >
                         <UserCircle className='h-6 w-6' />
-                        <Badge className='absolute -top-2 -right-2 bg-gray-300'>
-                          <Lock className='h-4 w-4' />
-                        </Badge>
                       </Button>
                     </Link>
                   </TooltipTrigger>
                   <TooltipContent>
-                    <p>ログイン機能は近日公開予定です</p>
+                    <p>マイページへ</p>
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>

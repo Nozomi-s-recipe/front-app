@@ -51,9 +51,6 @@ export const getRecipeById = async (
   queries?: MicroCMSQueries
 ) => {
   const detailData = await client.getListDetail<Recipe>({
-    customRequestInit: {
-      cache: 'force-cache',
-    },
     endpoint: 'recipes',
     contentId,
     queries,
