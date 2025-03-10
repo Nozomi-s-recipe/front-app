@@ -4,11 +4,13 @@ import { RecipeMetaInfo } from './RecipeMetaInfo';
 type RecipeOverviewProps = {
   image: RecipeImage;
   recipeMetaInfo: RecipeMetaInfo;
+  recipeId: string;
 };
 
 export const RecipeOverview = ({
   image,
   recipeMetaInfo,
+  recipeId,
 }: RecipeOverviewProps) => {
   return (
     <section className='relative flex flex-col items-center -mb-24'>
@@ -29,7 +31,7 @@ export const RecipeOverview = ({
       </div> */}
 
       <div className='-translate-y-24 shadow-md'>
-        <RecipeMetaInfo {...recipeMetaInfo} />
+        <RecipeMetaInfo {...recipeMetaInfo} recipeId={recipeId} />
       </div>
     </section>
   );

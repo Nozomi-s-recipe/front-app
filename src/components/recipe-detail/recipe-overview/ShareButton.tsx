@@ -35,23 +35,26 @@ const ShareButtons = () => {
   if (!pageUrl) return null;
 
   return (
-    <div className='flex items-center gap-2'>
-      <TwitterShareButton url={pageUrl} title={pageTitle}>
-        <XIcon size={32} round />
-      </TwitterShareButton>
+    <div className='flex flex-col items-center gap-1'>
+      <p className='text-xs text-gray-500 pb-2'>\ レシピをシェア /</p>
+      <div className='flex items-center gap-2'>
+        <TwitterShareButton url={pageUrl} title={pageTitle}>
+          <XIcon size={32} round />
+        </TwitterShareButton>
 
-      <LineShareButton url={pageUrl} title={pageTitle}>
-        <LineIcon size={32} round />
-      </LineShareButton>
+        <LineShareButton url={pageUrl} title={pageTitle}>
+          <LineIcon size={32} round />
+        </LineShareButton>
 
-      <Button
-        variant='outline'
-        size='icon'
-        className='w-8 h-8 rounded-full'
-        onClick={handleCopyLink}
-      >
-        <Link className='w-4 h-4' />
-      </Button>
+        <Button
+          variant='outline'
+          size='icon'
+          className='w-8 h-8 rounded-full'
+          onClick={handleCopyLink}
+        >
+          <Link className='w-4 h-4' />
+        </Button>
+      </div>
     </div>
   );
 };

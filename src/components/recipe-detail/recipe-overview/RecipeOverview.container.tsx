@@ -5,6 +5,22 @@ type RecipeOverviewContainerProps = {
   recipeId: string;
 };
 
+// 型定義をより明確に
+type RecipeMetaInfo = {
+  recipeId: string;
+  image: {
+    src: string;
+  };
+  recipeName: string;
+  recipeDescription: string;
+  recipeTags: Array<{
+    id: string;
+    name: string;
+  }>;
+  // deliciousCount?: number;
+  // totalView?: number;
+};
+
 export const RecipeOverviewContainer = async ({
   recipeId,
 }: RecipeOverviewContainerProps) => {
@@ -13,29 +29,27 @@ export const RecipeOverviewContainer = async ({
     // HasuraGetRecipeById({ recipeId }),
   ]);
 
+  const recipeMetaInfo: RecipeMetaInfo = {
+    image: {
+      src: microCmsResponse.image.url,
+    },
+    recipeName: microCmsResponse.name,
+    recipeDescription: microCmsResponse.description,
+    recipeTags: microCmsResponse.tags.map((tag) => ({
+      id: tag.id,
+      name: tag.name,
+    })),
+    recipeId: microCmsResponse.id,
+  };
+
   return (
     <RecipeOverview
       image={{
         src: microCmsResponse.image.url,
         alt: microCmsResponse.name,
       }}
-      recipeMetaInfo={{
-        image: {
-          src: microCmsResponse.image.url,
-        },
-        recipeName: microCmsResponse.name,
-        // deliciousCount:
-        //   hasuraResponse.data.nozomis_recipes_schema_recipes[0].delicious_count,
-        // totalView:
-        //   hasuraResponse.data.nozomis_recipes_schema_recipes[0].total_view,
-        recipeDescription: microCmsResponse.description,
-        recipeTags: microCmsResponse.tags.map((tag) => {
-          return {
-            id: tag.id,
-            name: tag.name,
-          };
-        }),
-      }}
+      recipeMetaInfo={recipeMetaInfo}
+      recipeId={recipeId}
     />
   );
 };
