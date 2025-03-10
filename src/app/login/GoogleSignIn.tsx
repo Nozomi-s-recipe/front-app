@@ -15,16 +15,15 @@ const GoogleSignIn = () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     async (response: any) => {
       try {
-        const { data, error } = await supabase.auth.signInWithIdToken({
+        const { error } = await supabase.auth.signInWithIdToken({
           provider: 'google',
           token: response.credential,
         });
 
         if (error) throw error;
 
-        console.log('Logged in:', data);
         router.refresh();
-        router.push('/private'); // ログイン後のリダイレクト先
+        router.push('/mypage'); // ログイン後のリダイレクト先
       } catch (error) {
         console.error('Error:', error);
       }

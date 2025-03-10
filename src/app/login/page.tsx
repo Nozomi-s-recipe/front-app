@@ -10,7 +10,6 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { login, signup } from './actions';
 import GoogleSignIn from './GoogleSignIn';
-import { signOut } from './signout';
 
 export default function LoginPage() {
   return (
@@ -59,11 +58,6 @@ export default function LoginPage() {
                 新規登録
               </Button>
             </div>
-          </form>
-          <form action={signOut} className='mt-4'>
-            <Button variant='outline' className='w-full'>
-              サインアウト
-            </Button>
           </form>
         </CardContent>
       </Card>

@@ -4,7 +4,6 @@ import { MenuHeader } from '@/components/header/MenuHeader';
 import { Toaster } from '@/components/ui/toaster';
 import { GoogleTagManager } from '@next/third-parties/google';
 import type { Metadata } from 'next';
-import Script from 'next/script';
 
 const description =
   '赤身肉、加工肉、バターを使わない健康レシピを発信してます。栄養士がじっくり考えたレシピを投稿しています。◎';
@@ -47,10 +46,6 @@ export default function RootLayout({
           <Footer />
         </div>
         <Toaster />
-        <Script
-          src='https://accounts.google.com/gsi/client'
-          strategy='afterInteractive'
-        />
       </body>
     </html>
   );
