@@ -11,8 +11,6 @@ import { Label } from '@/components/ui/label';
 import { login, signup } from './actions';
 import GoogleSignIn from './GoogleSignIn';
 
-export const dynamic = 'force-dynamic';
-
 export default function LoginPage() {
   return (
     <div className='flex flex-col items-center justify-center min-h-[calc(100vh-200px)]'>
