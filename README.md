@@ -13,3 +13,7 @@ https://supabase.com/docs/guides/auth/server-side/nextjs
 ## environment
 
 Supabase は、ishiibusiness58@gmail.comアカウントで作成したプロジェクトを使用しています。
+
+```sh
+supabase gen types typescript --project-id zlzxjtlexevwqipjrhqd > database.types.ts
+```

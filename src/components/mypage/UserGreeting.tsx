@@ -21,6 +21,8 @@ export function UserGreeting({ user }: UserGreetingProps) {
           {user ? `${user.user_metadata.name || user.email}さん` : 'ゲストさん'}
         </p>
         {user ? (
+          // server actionを使うとcookieが更新されないため失敗するので、
+          // ここではformを使ってログアウトする
           <form action='/auth/signout' method='post'>
             <Button variant='default' type='submit'>
               ログアウト
