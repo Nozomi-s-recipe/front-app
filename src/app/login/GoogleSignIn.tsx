@@ -4,11 +4,12 @@
 import { createClient } from '@/utils/supabase/client';
 import { useRouter } from 'next/navigation';
 import Script from 'next/script';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 const GoogleSignIn = () => {
   const router = useRouter();
   const supabase = createClient();
+  const [isLoading, setIsLoading] = useState(true);
 
   // handleCallbackをuseCallbackで定義
   const handleCredentialResponse = useCallback(
@@ -53,10 +54,20 @@ const GoogleSignIn = () => {
             document.getElementById('signInDiv')!,
             { theme: 'outline', size: 'large' }
           );
+          setIsLoading(false);
         }}
       />
-      {/* Google Sign-Inボタンのコンテナ */}
-      <div id='signInDiv'></div>
+      <div>
+        {/* Google ボタンと同じサイズのコンテナ */}
+        {isLoading ? (
+          <div
+            id='signInDiv'
+            className='h-full w-full rounded border border-input bg-muted/10 animate-pulse'
+          />
+        ) : (
+          <div id='signInDiv' />
+        )}
+      </div>
     </>
   );
 };

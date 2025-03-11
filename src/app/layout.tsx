@@ -1,7 +1,7 @@
 import '@/app/globals.css';
 import { Footer } from '@/components/footer/Footer';
 import { MenuHeader } from '@/components/header/MenuHeader';
-import { Toaster } from '@/components/ui/toaster';
+import { Toaster } from '@/components/ui/sonner';
 import { GoogleTagManager } from '@next/third-parties/google';
 import type { Metadata } from 'next';
 
