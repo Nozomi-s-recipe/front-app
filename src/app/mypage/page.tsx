@@ -13,7 +13,7 @@ export default async function MyPage() {
   return (
     <div className='max-w-4xl mx-auto p-6'>
       <UserGreeting user={user} />
-      <FavoriteRecipes />
+      <FavoriteRecipes user={user} />
     </div>
   );
 }

@@ -4,15 +4,53 @@ import { RecipePreview } from '@/components/recipe-preview/RecipePreview';
 import { FavoriteRecipe, useLocalStorage } from '@/hooks/useLocalStorage';
 import { Recipe } from '@/utils/micro-cms/types';
 import { formatRecipePreview } from '@/utils/recipe/formatRecipePreview';
-import { useEffect, useState } from 'react';
+import { createClient } from '@/utils/supabase/client';
+import { User } from '@supabase/supabase-js';
+import { useEffect, useMemo, useState } from 'react';
 
-export function FavoriteRecipes() {
-  const [favoriteRecipes] = useLocalStorage<FavoriteRecipe[]>(
-    'favoriteRecipes',
-    []
-  );
+type FavoriteRecipesProps = {
+  user: User | null;
+};
+
+export function FavoriteRecipes({ user }: FavoriteRecipesProps) {
+  const [favoriteRecipes, setFavoriteRecipes] = useLocalStorage<
+    FavoriteRecipe[]
+  >('favoriteRecipes', []);
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const supabase = useMemo(() => createClient(), []);
+
+  // Supabaseのお気に入りをローカルストレージと同期する
+  useEffect(() => {
+    const syncFavorites = async () => {
+      try {
+        if (user) {
+          // Supabaseからお気に入りを取得
+          const { data: supabaseFavorites } = await supabase
+            .from('favorites')
+            .select('recipe_id, created_at')
+            .eq('user_id', user.id);
+
+          if (supabaseFavorites) {
+            // Supabaseのデータをローカルストレージの形式に変換
+            const formattedFavorites: FavoriteRecipe[] = supabaseFavorites.map(
+              (fav) => ({
+                recipeId: fav.recipe_id,
+                savedAt: fav.created_at,
+              })
+            );
+
+            // ローカルストレージを更新
+            setFavoriteRecipes(formattedFavorites);
+          }
+        }
+      } catch (error) {
+        console.error('お気に入りの同期に失敗しました:', error);
+      }
+    };
+
+    syncFavorites();
+  }, [user, supabase, setFavoriteRecipes]);
 
   useEffect(() => {
     const fetchFavoriteRecipes = async () => {
