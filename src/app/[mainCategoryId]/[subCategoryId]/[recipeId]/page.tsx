@@ -3,7 +3,8 @@ import { BreadcrumbsContainer } from '@/components/BreadCrumbs.container';
 import { CookingStepSectionContainer } from '@/components/recipe-detail/cooking-step-section/CookingStepSection.container';
 import { IngredientSectionContainer } from '@/components/recipe-detail/ingredient-section/IngredientSection.container';
 import { RecipeOverviewContainer } from '@/components/recipe-detail/recipe-overview/RecipeOverview.container';
-import { RecommendedRecipesSection } from '@/components/recipe-detail/recipe-recommend/RecomendedRecipesSection';
+import { RecommendedRecipesSection } from '@/components/recipe-detail/recipe-recommend/RecommendedRecipesSection';
+import { ScrollToIngredientsButton } from '@/components/recipe-detail/ScrollToIngredientsButton';
 import { UserFeedback } from '@/components/recipe-detail/user-feedback/UserFeedback';
 import { LIMIT } from '@/utils/const';
 import { getRecipeById, getRecipes } from '@/utils/micro-cms/micro-cms';
@@ -81,6 +82,7 @@ export default async function RecipePage({
         <RecommendedRecipesSection />
         <BreadcrumbsContainer recipeId={recipeId} />
       </div>
+      <ScrollToIngredientsButton />
     </>
   );
 }
