@@ -38,7 +38,7 @@ export const ScrollToIngredientsButton = () => {
       onClick={scrollToIngredients}
       aria-label='材料セクションに戻る'
     >
-      <ArrowUp className='h-6 w-6' />
+      <ArrowUp className='!size-4' />
     </Button>
   );
 };

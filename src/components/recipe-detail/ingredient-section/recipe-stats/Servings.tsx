@@ -1,6 +1,5 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Minus, Plus } from 'lucide-react';
 import { useServings } from './servings.context';
@@ -18,30 +17,33 @@ export const Servings = () => {
         role='group'
         aria-labelledby='servings-label'
       >
-        <Button
-          variant='outline'
-          size='icon'
+        {/* clickイベントが伝搬されないのでネイティブのボタンを使用 */}
+        <button
+          type='button'
           onClick={decrementServings}
           aria-label='人数を減らす'
-          className='w-12 h-12 rounded-full'
+          className='w-12 h-12 rounded-full border border-input bg-background hover:bg-accent flex items-center justify-center relative'
         >
-          <Minus />
-        </Button>
+          <span className='pointer-events-none absolute inset-0 flex items-center justify-center'>
+            <Minus className='h-4 w-4' />
+          </span>
+        </button>
         <output
           id='servings-output'
           className='text-xl font-light min-w-[2ch] text-center'
         >
           {servings}
         </output>
-        <Button
-          variant='outline'
-          size='icon'
+        <button
+          type='button'
           onClick={incrementServings}
           aria-label='人数を増やす'
-          className='w-12 h-12 rounded-full'
+          className='w-12 h-12 rounded-full border border-input bg-background hover:bg-accent flex items-center justify-center relative'
         >
-          <Plus />
-        </Button>
+          <span className='pointer-events-none absolute inset-0 flex items-center justify-center'>
+            <Plus className='h-4 w-4' />
+          </span>
+        </button>
       </div>
     </div>
   );
