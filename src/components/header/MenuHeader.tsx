@@ -1,20 +1,12 @@
 'use client';
 
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuList,
-  navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip';
-import { Lock, UserCircle } from 'lucide-react';
+import { UserCircle } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -40,6 +32,7 @@ export const MenuHeader = () => {
         {/* 右側のナビゲーション */}
         <NavigationMenu>
           <NavigationMenuList>
+            {/* ブログセクション - 一時的にコメントアウト
             <NavigationMenuItem>
               <TooltipProvider>
                 <Tooltip>
@@ -57,32 +50,20 @@ export const MenuHeader = () => {
                       </Badge>
                     </div>
                   </TooltipTrigger>
-                  <TooltipContent>
+                  <TooltipContent></TooltipContent>
                     <p>もうすぐ公開予定です！</p>
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
             </NavigationMenuItem>
+            */}
 
             <NavigationMenuItem>
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Link href='/mypage'>
-                      <Button
-                        variant='ghost'
-                        className='opacity-100'
-                        size='icon'
-                      >
-                        <UserCircle className='h-6 w-6' />
-                      </Button>
-                    </Link>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>マイページへ</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
+              <Link href='/mypage'>
+                <Button variant='ghost' className='opacity-100' size='icon'>
+                  <UserCircle className='h-8 w-8 !size-8' />
+                </Button>
+              </Link>
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
