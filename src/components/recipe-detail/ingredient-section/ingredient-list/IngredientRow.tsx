@@ -13,14 +13,20 @@ export const IngredientRow = ({ ingredient }: { ingredient: Ingredient }) => {
         {ingredient.name}
       </TableCell>
       <TableCell className='flex justify-end py-1 pr-2 space-x-1'>
-        {ingredient.unit.position === 'prefix' && (
-          <span className='font-light'>{ingredient.unit.name}</span>
-        )}
-        <span className='font-sans font-light'>
-          {ingredient.quantity * servings}
-        </span>
-        {ingredient.unit.position === 'suffix' && (
-          <span className='font-light'>{ingredient.unit.name}</span>
+        {ingredient.quantity === 0 ? (
+          <span className='font-light'>適量</span>
+        ) : (
+          <>
+            {ingredient.unit.position === 'prefix' && (
+              <span className='font-light'>{ingredient.unit.name}</span>
+            )}
+            <span className='font-sans font-light'>
+              {ingredient.quantity * servings}
+            </span>
+            {ingredient.unit.position === 'suffix' && (
+              <span className='font-light'>{ingredient.unit.name}</span>
+            )}
+          </>
         )}
       </TableCell>
     </TableRow>
