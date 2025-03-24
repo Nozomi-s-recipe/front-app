@@ -1,21 +1,26 @@
 {
-  "name": "N‘s Recipes",
-  "short_name": "N‘s Recipes",
+  "name": "Nozomi's Recipes",
+  "short_name": "N's Recipes",
+  "start_url": "/",
+  "scope": ".",
+  "description": "Nozomi's Recipes",
+  "orientation": "portrait-primary",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "dir": "ltr",
+  "lang": "ja",
+  "display": "standalone",
+  "categories": ["food", "recipe", "cooking"],
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
       "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "maskable"
+      "type": "image/png"
     },
     {
       "src": "/web-app-manifest-512x512.png",
       "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
+      "type": "image/png"
     }
-  ],
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff",
-  "display": "standalone"
+  ]
 }
