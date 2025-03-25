@@ -37,11 +37,12 @@ export default async function SearchPage(props: Props) {
       <div className='flex flex-col items-center px-8'>
         <SearchField />
       </div>
-      <section className='flex flex-col items-center max-w-sm pt-7 mx-auto'>
+      <div className='flex flex-col items-center'>
+        <h2 className='w-full max-w-7xl text-2xl font-bold pb-8'>検索結果</h2>
         <Suspense fallback={<div>loading...</div>}>
           <AllRecipePreviewListContainer q={q} offset={LIMIT * (current - 1)} />
         </Suspense>
-      </section>
+      </div>
       <Pagination
         totalCount={totalCount}
         current={current}

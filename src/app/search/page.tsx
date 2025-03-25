@@ -30,11 +30,12 @@ export default async function SearchPage({ searchParams }: Props) {
         <SearchField />
       </div>
 
-      <section className='flex flex-col items-center max-w-sm pt-7 mx-auto'>
+      <div className='flex flex-col items-center'>
+        <h2 className='w-full max-w-7xl text-2xl font-bold pb-8'>検索結果</h2>
         <Suspense fallback={<div>loading...</div>}>
           <AllRecipePreviewListContainer q={q} />
         </Suspense>
-      </section>
+      </div>
       <Pagination totalCount={totalCount} basePath='/search' q={q} />
       <div className='px-6'>
         <Breadcrumbs />
