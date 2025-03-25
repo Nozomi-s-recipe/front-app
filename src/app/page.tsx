@@ -31,7 +31,7 @@ export default async function Home() {
         <PopularRecipePreviewCarouselContainer />
       </div>
 
-      <div className='flex flex-col items-center px-8'>
+      <div className='flex flex-col items-center'>
         <h2 className='w-full max-w-7xl text-2xl font-bold pb-8'>レシピ一覧</h2>
         <div className='flex flex-col items-center px-8 pb-8'>
           <SearchField />

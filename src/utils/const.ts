@@ -176,7 +176,7 @@ export const SIDE_MENUS: SideMenu[] = [
 
 export const DEFAULT_SERVINGS = 3;
 
-export const LIMIT = 6;
+export const LIMIT = 12;
 
 export const NEW_RECIPE_DAYS = 7;
 
