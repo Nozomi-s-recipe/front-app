@@ -25,7 +25,7 @@ export default async function Home() {
   return (
     <>
       {/* <Header /> */}
-      <div className='flex flex-col items-center'>
+      <div className='flex flex-col items-center mt-8'>
         <HeroCarousel />
       </div>
 
