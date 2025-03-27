@@ -13,9 +13,9 @@ export function HeroCarousel() {
           <CarouselItem key={index}>
             <div className='p-1'>
               <Card className='border-none shadow-none'>
-                <CardContent className='flex flex-col items-center justify-center p-6 aspect-square'>
-                  <span className='pb-3 text-4xl font-semibold'>
-                    Nozomi‘s Recipes
+                <CardContent className='flex flex-col items-center justify-center p-4 h-48'>
+                  <span className='pb-2 text-4xl font-semibold'>
+                    Nozomi&apos;s Recipes
                   </span>
                   <div className='flex items-start w-full space-x-1'>
                     <div className='flex flex-col'>
