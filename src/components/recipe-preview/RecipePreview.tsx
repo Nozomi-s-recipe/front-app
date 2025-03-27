@@ -2,9 +2,10 @@ import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Menu, RecipeImage } from '@/types/types';
 import { RECIPE_BLUR } from '@/utils/const';
 import { isNewRecipe } from '@/utils/recipe/isNewRecipe';
-import { Clock, Flame, Sparkles, UtensilsCrossed } from 'lucide-react';
+import { Clock, UtensilsCrossed } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { NewBadge, PopularBadge } from './RecipeBadges';
 
 // 型定義を分離
 type RecipeStatus = {
@@ -35,18 +36,8 @@ const StatusBadge = ({ isNew, isPopular }: RecipeStatus) => {
   if (!isNew && !isPopular) return null;
 
   return (
-    <div className='absolute left-1 top-1 z-10 flex items-center gap-1 rounded bg-white/90 px-2 py-1 text-sm font-bold shadow-md'>
-      {isPopular ? (
-        <>
-          <Flame className='h-4 w-4 text-red-500' aria-hidden='true' />
-          <span className='text-red-500'>人気</span>
-        </>
-      ) : (
-        <>
-          <Sparkles className='h-4 w-4 text-yellow-500' aria-hidden='true' />
-          <span className='text-yellow-500'>NEW</span>
-        </>
-      )}
+    <div className='absolute left-1 top-1 z-10 flex items-center gap-0.5 sm:gap-1 rounded bg-white/90 px-1.5 py-0.5 sm:px-2 sm:py-1 text-xs sm:text-sm font-medium sm:font-bold shadow-md'>
+      {isPopular ? <PopularBadge /> : <NewBadge />}
     </div>
   );
 };

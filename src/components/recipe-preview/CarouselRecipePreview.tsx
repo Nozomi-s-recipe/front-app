@@ -3,6 +3,7 @@ import { Clock, UtensilsCrossed } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Badge } from '../ui/badge';
+import { CarouselNewBadge, CarouselPopularBadge } from './RecipeBadges';
 import { RecipePreviewProps } from './RecipePreview';
 
 export const CarouselRecipePreview = ({
@@ -34,8 +35,8 @@ export const CarouselRecipePreview = ({
             sizes='(min-width: 1024px) 33vw, 50vw'
           />
           <div className='absolute left-2 top-2 flex gap-2'>
-            {isPopular && <Badge className='bg-primary'>人気</Badge>}
-            {isNew && <Badge className='bg-green-600'>新着</Badge>}
+            {isPopular && <CarouselPopularBadge />}
+            {isNew && <CarouselNewBadge />}
           </div>
         </div>
         <div className='p-3'>
