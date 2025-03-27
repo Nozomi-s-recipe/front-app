@@ -1,6 +1,8 @@
 import '@/app/globals.css';
 import { Footer } from '@/components/footer/Footer';
 import { MenuHeader } from '@/components/header/MenuHeader';
+import InstallPrompt from '@/components/pwa/InstallPrompt';
+import { ServiceWorkerRegistration } from '@/components/pwa/ServiceWorkerRegistration';
 import { Toaster } from '@/components/ui/sonner';
 import { GoogleTagManager } from '@next/third-parties/google';
 import type { Metadata } from 'next';
@@ -12,7 +14,9 @@ const serviceName = 'Nozomi‘s Recipes';
 export const metadata: Metadata = {
   metadataBase: new URL('https://n-recipes.com'),
   appleWebApp: {
-    title: "N's Recipes",
+    title: serviceName,
+    capable: true,
+    statusBarStyle: 'default',
   },
   title: serviceName,
   description: description,
@@ -42,6 +46,8 @@ export default function RootLayout({
           <MenuHeader />
           <main className='container mx-auto px-6 md:px-16 lg:px-24'>
             {children}
+            <ServiceWorkerRegistration />
+            <InstallPrompt />
           </main>
           <Footer />
         </div>
