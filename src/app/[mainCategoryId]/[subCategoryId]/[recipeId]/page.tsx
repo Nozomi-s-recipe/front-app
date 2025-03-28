@@ -1,5 +1,6 @@
 // import { Breadcrumbs } from '@/components/BreadCrumbs';
 import { BreadcrumbsContainer } from '@/components/BreadCrumbs.container';
+import { ProfileCard } from '@/components/profile/ProfileCard';
 import { CookingStepSectionContainer } from '@/components/recipe-detail/cooking-step-section/CookingStepSection.container';
 import { IngredientSectionContainer } from '@/components/recipe-detail/ingredient-section/IngredientSection.container';
 import { RecipeOverviewContainer } from '@/components/recipe-detail/recipe-overview/RecipeOverview.container';
@@ -78,6 +79,9 @@ export default async function RecipePage({
         </div>
         <div className='mb-8'>
           <UserFeedback recipeId={recipeId} />
+        </div>
+        <div className='mb-8'>
+          <ProfileCard />
         </div>
         <RecommendedRecipesSection />
         <BreadcrumbsContainer recipeId={recipeId} />

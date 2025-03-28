@@ -2,7 +2,7 @@ import { RecipeDetailSkelton } from '@/components/recipe-detail/skelton/RecipeDe
 
 export default function Loading() {
   return (
-    <div className='mb-16'>
+    <div className='my-16'>
       <RecipeDetailSkelton />
     </div>
   );
