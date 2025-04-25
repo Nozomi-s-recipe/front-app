@@ -6,7 +6,7 @@ export const Calorie = ({ calories }: CalorieProps) => {
   return (
     <div className='flex flex-col items-center space-y-2'>
       <label id='calories-label' className=''>
-        カロリー
+        カロリー(1食分あたり)
       </label>
       {/* outputを使用して、これが計算された値であることを示す */}
       <output aria-labelledby='calories-label' className='flex items-center'>
