@@ -9,7 +9,8 @@ on:
     types: [micro-cms-add-new-recipe-event]
 
 jobs:
-  docker:
+  build-and-deploy:
+    name: Build and Deploy to Google Cloud Run
     runs-on: ubuntu-latest
 
     env:
@@ -42,15 +43,13 @@ jobs:
           echo "Checking build args..."
           echo "MICROCMS_SERVICE_DOMAIN exists: $([[ ! -z "$MICROCMS_SERVICE_DOMAIN" ]] && echo 'Yes' || echo 'No')"
           echo "MICROCMS_API_KEY exists: $([[ ! -z "$MICROCMS_API_KEY" ]] && echo 'Yes' || echo 'No')"
-          echo "HASURA_BACKEND_URL exists: $([[ ! -z "$HASURA_BACKEND_URL" ]] && echo 'Yes' || echo 'No')"
           echo "NEXT_PUBLIC_SUPABASE_URL exists: $([[ ! -z "$NEXT_PUBLIC_SUPABASE_URL" ]] && echo 'Yes' || echo 'No')"
           echo "NEXT_PUBLIC_SUPABASE_ANON_KEY exists: $([[ ! -z "$NEXT_PUBLIC_SUPABASE_ANON_KEY" ]] && echo 'Yes' || echo 'No')"
           echo "NEXT_PUBLIC_GOOGLE_CLIENT_ID exists: $([[ ! -z "$NEXT_PUBLIC_GOOGLE_CLIENT_ID" ]] && echo 'Yes' || echo 'No')"
 
-          docker build -t $IMAGE_NAME \
+          docker build --no-cache -t $IMAGE_NAME \
             --build-arg MICROCMS_SERVICE_DOMAIN="$MICROCMS_SERVICE_DOMAIN" \
             --build-arg MICROCMS_API_KEY="$MICROCMS_API_KEY" \
-            --build-arg HASURA_BACKEND_URL="$HASURA_BACKEND_URL" \
             --build-arg NEXT_PUBLIC_SUPABASE_URL="$NEXT_PUBLIC_SUPABASE_URL" \
             --build-arg NEXT_PUBLIC_SUPABASE_ANON_KEY="$NEXT_PUBLIC_SUPABASE_ANON_KEY" \
             --build-arg NEXT_PUBLIC_GOOGLE_CLIENT_ID="$NEXT_PUBLIC_GOOGLE_CLIENT_ID" \
