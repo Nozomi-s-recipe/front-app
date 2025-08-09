@@ -17,5 +17,5 @@ export async function POST() {
   revalidatePath('/', 'layout');
 
   // Next.jsのredirect関数を使用（相対パス）
-  redirect('/login');
+  redirect('/');
 }
