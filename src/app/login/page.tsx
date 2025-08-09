@@ -1,4 +1,3 @@
-import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -6,9 +5,6 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { login, signup } from './actions';
 import GoogleSignIn from './GoogleSignIn';
 
 export default function LoginPage() {
@@ -31,7 +27,7 @@ export default function LoginPage() {
           <div className='flex justify-center'>
             <GoogleSignIn />
           </div>
-          <div className='relative'>
+          {/* <div className='relative'>
             <div className='absolute inset-0 flex items-center'>
               <span className='w-full border-t' />
             </div>
@@ -75,7 +71,7 @@ export default function LoginPage() {
                 </Button>
               </div>
             </div>
-          </form>
+          </form> */}
         </CardContent>
       </Card>
     </div>

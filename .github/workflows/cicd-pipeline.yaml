@@ -1,4 +1,4 @@
-name: CI/CD pipeline for moment-cocoro service lp
+name: CI/CD pipeline for noz-front-app
 
 on:
   push:
@@ -34,7 +34,6 @@ jobs:
           MICROCMS_SERVICE_DOMAIN: ${{ vars.MICROCMS_SERVICE_DOMAIN }}
           MICROCMS_API_KEY: ${{ secrets.MICROCMS_API_KEY }}
           HASURA_BACKEND_URL: ${{ vars.HASURA_BACKEND_URL }}
-          SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
           NEXT_PUBLIC_GOOGLE_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_GOOGLE_CLIENT_ID }}
@@ -44,7 +43,6 @@ jobs:
           echo "MICROCMS_SERVICE_DOMAIN exists: $([[ ! -z "$MICROCMS_SERVICE_DOMAIN" ]] && echo 'Yes' || echo 'No')"
           echo "MICROCMS_API_KEY exists: $([[ ! -z "$MICROCMS_API_KEY" ]] && echo 'Yes' || echo 'No')"
           echo "HASURA_BACKEND_URL exists: $([[ ! -z "$HASURA_BACKEND_URL" ]] && echo 'Yes' || echo 'No')"
-          echo "SUPABASE_DB_PASSWORD exists: $([[ ! -z "$SUPABASE_DB_PASSWORD" ]] && echo 'Yes' || echo 'No')"
           echo "NEXT_PUBLIC_SUPABASE_URL exists: $([[ ! -z "$NEXT_PUBLIC_SUPABASE_URL" ]] && echo 'Yes' || echo 'No')"
           echo "NEXT_PUBLIC_SUPABASE_ANON_KEY exists: $([[ ! -z "$NEXT_PUBLIC_SUPABASE_ANON_KEY" ]] && echo 'Yes' || echo 'No')"
           echo "NEXT_PUBLIC_GOOGLE_CLIENT_ID exists: $([[ ! -z "$NEXT_PUBLIC_GOOGLE_CLIENT_ID" ]] && echo 'Yes' || echo 'No')"
@@ -53,7 +51,6 @@ jobs:
             --build-arg MICROCMS_SERVICE_DOMAIN="$MICROCMS_SERVICE_DOMAIN" \
             --build-arg MICROCMS_API_KEY="$MICROCMS_API_KEY" \
             --build-arg HASURA_BACKEND_URL="$HASURA_BACKEND_URL" \
-            --build-arg SUPABASE_DB_PASSWORD="$SUPABASE_DB_PASSWORD" \
             --build-arg NEXT_PUBLIC_SUPABASE_URL="$NEXT_PUBLIC_SUPABASE_URL" \
             --build-arg NEXT_PUBLIC_SUPABASE_ANON_KEY="$NEXT_PUBLIC_SUPABASE_ANON_KEY" \
             --build-arg NEXT_PUBLIC_GOOGLE_CLIENT_ID="$NEXT_PUBLIC_GOOGLE_CLIENT_ID" \
