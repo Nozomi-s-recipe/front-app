@@ -21,8 +21,7 @@ export const IngredientRow = ({ ingredient }: { ingredient: Ingredient }) => {
               <span className='font-light'>{ingredient.unit.name}</span>
             )}
             <span className='font-sans font-light'>
-              {/*  */}
-              {(ingredient.quantity * servings).toFixed(2)}
+              {parseFloat((ingredient.quantity * servings).toFixed(2))}
             </span>
             {ingredient.unit.position === 'suffix' && (
               <span className='font-light'>{ingredient.unit.name}</span>
