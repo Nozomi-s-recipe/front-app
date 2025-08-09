@@ -4,6 +4,7 @@ import { MenuHeader } from '@/components/header/MenuHeader';
 import InstallPrompt from '@/components/pwa/InstallPrompt';
 import { ServiceWorkerRegistration } from '@/components/pwa/ServiceWorkerRegistration';
 import { Toaster } from '@/components/ui/sonner';
+import { AuthProvider } from '@/providers/AuthProvider';
 import { GoogleTagManager } from '@next/third-parties/google';
 import type { Metadata } from 'next';
 
@@ -42,16 +43,18 @@ export default function RootLayout({
     <html lang='ja'>
       <GoogleTagManager gtmId='GTM-TZFSFDLH' />
       <body>
-        <div className='min-h-screen bg-background'>
-          <MenuHeader />
-          <main className='container mx-auto px-6 md:px-16 lg:px-24'>
-            {children}
-            <ServiceWorkerRegistration />
-            <InstallPrompt />
-          </main>
-          <Footer />
-        </div>
-        <Toaster />
+        <AuthProvider>
+          <div className='min-h-screen bg-background'>
+            <MenuHeader />
+            <main className='container mx-auto px-6 md:px-16 lg:px-24'>
+              {children}
+              <ServiceWorkerRegistration />
+              <InstallPrompt />
+            </main>
+            <Footer />
+          </div>
+          <Toaster />
+        </AuthProvider>
       </body>
     </html>
   );
