@@ -7,6 +7,7 @@ import { Toaster } from '@/components/ui/sonner';
 import { AuthProvider } from '@/providers/AuthProvider';
 import { GoogleTagManager } from '@next/third-parties/google';
 import type { Metadata } from 'next';
+import Head from 'next/head';
 import Script from 'next/script';
 
 const description =
@@ -42,14 +43,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang='ja'>
-      <head>
+      <Head>
         <Script
           async
           src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4065667299872259`}
           crossOrigin='anonymous'
           strategy='afterInteractive'
         />
-      </head>
+      </Head>
       <GoogleTagManager gtmId='GTM-TZFSFDLH' />
       <body>
         <AuthProvider>
