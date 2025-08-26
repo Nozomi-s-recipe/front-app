@@ -7,7 +7,6 @@ import { Toaster } from '@/components/ui/sonner';
 import { AuthProvider } from '@/providers/AuthProvider';
 import { GoogleTagManager } from '@next/third-parties/google';
 import type { Metadata } from 'next';
-import Script from 'next/script';
 
 const description =
   '赤身肉、加工肉、バターを使わない健康レシピを発信してます。栄養士がじっくり考えたレシピを投稿しています。◎';
@@ -45,14 +44,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang='ja'>
-      <head>
-        <Script
-          async
-          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4065667299872259`}
-          crossOrigin='anonymous'
-          strategy='afterInteractive'
-        />
-      </head>
       <GoogleTagManager gtmId='GTM-TZFSFDLH' />
       <body>
         <AuthProvider>
