@@ -44,6 +44,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang='ja'>
+      <head>
+        {/* AdSense自動広告コード追加（推奨） */}
+        <script
+          async
+          src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4065667299872259'
+          crossOrigin='anonymous'
+        />
+      </head>
       <GoogleTagManager gtmId='GTM-TZFSFDLH' />
       <body>
         <AuthProvider>
