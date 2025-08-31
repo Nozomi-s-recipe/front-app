@@ -1,3 +1,6 @@
 User-Agent: *
 Allow: /
-Disallow: 
+
+# AdSense クローラー用
+User-Agent: Mediapartners-Google
+Allow: /
