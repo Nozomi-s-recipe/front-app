@@ -46,9 +46,10 @@ export default function RootLayout({
   return (
     <html lang='ja'>
       <head>
-        {/* AdSense自動広告コード追加（推奨） */}
+        {/* AdSense自動広告コード追加（推奨） - defer to prevent CLS */}
         <script
           async
+          defer
           src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4065667299872259'
           crossOrigin='anonymous'
         />

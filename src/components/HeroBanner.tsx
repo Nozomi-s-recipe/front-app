@@ -4,19 +4,18 @@ import Link from 'next/link';
 export const HeroBanner = () => {
   return (
     <section className='w-full bg-primary/5'>
-      <div className='relative h-80 flex justify-center items-center'>
+      <div className='relative h-80 flex justify-center items-center overflow-hidden'>
         {/* ヒーローバナーイメージ */}
-        {/* micro cmsのcdnの方が早いのでimgタグを使用 */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={
-            'https://images.microcms-assets.io/assets/888d632d12c2409a941139ea8e9d5adc/26a98d028d2e43c78304c72e358bd18b/hero-banner-compressed.jpg?fm=webp&q=80&w=390&h=320'
-          }
-          alt='hero banner image'
-          width={390}
-          height={320}
-          fetchPriority='high'
-        />
+        <div className='relative w-full max-w-[390px] h-80'>
+          <Image
+            src='https://images.microcms-assets.io/assets/888d632d12c2409a941139ea8e9d5adc/26a98d028d2e43c78304c72e358bd18b/hero-banner-compressed.jpg?fm=webp&q=80&w=390&h=320'
+            alt='hero banner image'
+            fill
+            priority
+            sizes='(max-width: 768px) 100vw, 390px'
+            className='object-cover'
+          />
+        </div>
 
         {/* タイトル等 */}
         <h1 className='absolute text-3xl font-medium tracking-tight text-center  min-w-80'>
