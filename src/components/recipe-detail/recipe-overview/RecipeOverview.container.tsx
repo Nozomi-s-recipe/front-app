@@ -24,10 +24,7 @@ type RecipeMetaInfo = {
 export const RecipeOverviewContainer = async ({
   recipeId,
 }: RecipeOverviewContainerProps) => {
-  const [microCmsResponse] = await Promise.all([
-    getRecipeById(recipeId),
-    // HasuraGetRecipeById({ recipeId }),
-  ]);
+  const microCmsResponse = await getRecipeById(recipeId);
 
   const recipeMetaInfo: RecipeMetaInfo = {
     image: {
