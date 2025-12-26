@@ -93,11 +93,24 @@ export const SearchSuggestions = forwardRef<
               role='option'
               aria-selected={index === selectedIndex}
             >
-              <div className='font-medium'>{suggestion.name}</div>
+              <div className='flex items-center gap-2'>
+                <div className='font-medium flex-1'>{suggestion.name}</div>
+                {suggestion.matchType === 'ingredient' && (
+                  <span className='text-xs px-2 py-0.5 bg-green-100 text-green-700 rounded-full'>
+                    材料
+                  </span>
+                )}
+              </div>
               <div className='text-xs text-gray-500 mt-1'>
                 {suggestion.mainCategory.join(', ')} ›{' '}
                 {suggestion.subCategory.join(', ')}
               </div>
+              {suggestion.matchType === 'ingredient' &&
+                suggestion.matchedIngredients && (
+                  <div className='text-xs text-green-600 mt-1'>
+                    含まれる材料: {suggestion.matchedIngredients.join(', ')}
+                  </div>
+                )}
             </Link>
           );
         })}

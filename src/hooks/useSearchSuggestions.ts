@@ -5,6 +5,8 @@ export type SearchSuggestion = {
   name: string;
   mainCategory: string[];
   subCategory: string[];
+  matchType: 'title' | 'ingredient';
+  matchedIngredients?: string[];
 };
 
 export const useSearchSuggestions = (query: string, debounceMs = 300) => {
