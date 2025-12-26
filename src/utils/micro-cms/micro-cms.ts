@@ -31,7 +31,9 @@ export const getTags = async (queries?: MicroCMSQueries) => {
 export const getRecipes = async (queries?: MicroCMSQueries) => {
   const listData = await client.getList<Recipe>({
     customRequestInit: {
-      cache: 'force-cache',
+      next: {
+        revalidate: 60,
+      },
     },
     endpoint: 'recipes',
     queries,
