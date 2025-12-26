@@ -42,7 +42,6 @@ next-env.d.ts
 
 *storybook.log
 
-# project planning and specs
+# project planning (keep specs for implementation tracking)
 /plans
-/specs
 /screenshots
