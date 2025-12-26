@@ -41,3 +41,7 @@ yarn-error.log*
 next-env.d.ts
 
 *storybook.log
+
+# project planning (keep specs for implementation tracking)
+/plans
+/screenshots

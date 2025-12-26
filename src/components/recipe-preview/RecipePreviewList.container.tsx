@@ -1,7 +1,7 @@
 import { Menu } from '@/types/types';
 import { getRecipes } from '@/utils/micro-cms/micro-cms';
 import { formatRecipePreview } from '@/utils/recipe/formatRecipePreview';
-import { RecipePreviewList } from './RecipePreviewList';
+import { FilteredRecipeList } from './FilteredRecipeList';
 
 type MainCategoryProps = {
   mainCategory: Menu;
@@ -28,5 +28,5 @@ export const RecipePreviewListContainer = async ({
   });
   const recipePreviewList = contents.map(formatRecipePreview);
 
-  return <RecipePreviewList recipePreviews={recipePreviewList} />;
+  return <FilteredRecipeList recipes={recipePreviewList} pageType='category' />;
 };
