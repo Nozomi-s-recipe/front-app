@@ -241,13 +241,48 @@ N-recipes.comの成長ロードマップを優先度別に整理します。
     * マッチした材料の表示（最大2件）
     * 材料マッチの視覚的区別（バッジ表示）
 
+* **基本フィルター機能（完了）** - 2025-12-26
+  * **調理時間フィルター**
+    * 5段階の時間範囲選択（15分以内、15-30分、30-45分、45-60分、60分以上）
+    * 単一選択（ラジオボタン）
+    * 関連: [`TimeFilter`](src/components/filters/TimeFilter.tsx)
+  
+  * **ジャンルフィルター**
+    * 複数ジャンル選択可能（チェックボックス）
+    * OR論理（選択したジャンルのいずれかにマッチ）
+    * 関連: [`GenreFilter`](src/components/filters/GenreFilter.tsx)
+  
+  * **材料数フィルター**
+    * 5段階の材料数範囲選択（5個以下、6-10個、11-15個、16-20個、20個以上）
+    * 単一選択（ラジオボタン）
+    * 関連: [`IngredientCountFilter`](src/components/filters/IngredientCountFilter.tsx)
+  
+  * **統合機能**
+    * フィルター間のAND論理（全条件を満たすレシピを表示）
+    * URLパラメータでの状態管理（共有可能）
+    * ブラウザ戻る/進むボタン対応
+    * アクティブフィルター表示（削除可能なピル表示）
+    * レスポンシブUI（デスクトップ: サイドバー、モバイル: ドロワー）
+    * 関連: [`FilteredRecipeList`](src/components/recipe-preview/FilteredRecipeList.tsx), [`useRecipeFilters`](src/hooks/useRecipeFilters.ts)
+  
+  * **アクセシビリティ対応**
+    * ARIA ラベルとキーボードナビゲーション
+    * スクリーンリーダー対応
+    * フォーカス管理
+    * WCAG 2.1 AA準拠
+  
+  * **アナリティクス**
+    * フィルター適用イベント追跡
+    * 結果なしシナリオ追跡
+    * モバイルドロワー開閉追跡
+    * 関連: [`analytics.ts`](src/utils/analytics.ts)
+
 #### 🚧 実装予定
 
 * **検索機能（Phase 5: 最適化）**
   * クライアントサイドキャッシング
   * パフォーマンス最適化
   * アクセシビリティ改善
-* **基本フィルター機能**
 * **ナビゲーション改善**
 * **モバイル最適化の継続**
 
