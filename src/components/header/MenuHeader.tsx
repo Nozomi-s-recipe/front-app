@@ -8,7 +8,9 @@ import {
 import { useAuth } from '@/providers/AuthProvider';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Suspense } from 'react';
 import { AvatarIcon } from './AvatorIcon';
+import { HeaderSearch } from './HeaderSearch';
 
 export const MenuHeader = () => {
   const { user, loading } = useAuth();
@@ -20,25 +22,35 @@ export const MenuHeader = () => {
   // console.log('menu header user', user);
 
   return (
-    <div className='w-full bg-white border-b'>
-      <div className='max-w-4xl mx-auto p-4 flex items-center justify-between'>
+    <div className='sticky top-0 z-50 w-full bg-white border-b shadow-sm'>
+      <div className='max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-2'>
         {/* 左側のロゴ */}
-        <div>
+        <div className='flex-shrink-0'>
           <Link href='/' aria-label='ホームへ戻る' prefetch={true}>
             <figure className='m-0'>
               <Image
                 src='/service-logo.svg'
                 alt='service logo'
-                width={64}
-                height={64}
+                width={48}
+                height={48}
                 unoptimized
+                className='md:w-16 md:h-16'
               />
             </figure>
           </Link>
         </div>
 
+        {/* 中央の検索バー */}
+        <Suspense
+          fallback={
+            <div className='flex-1 max-w-md mx-4 h-9 bg-gray-100 rounded-md animate-pulse' />
+          }
+        >
+          <HeaderSearch />
+        </Suspense>
+
         {/* 右側のナビゲーション */}
-        <NavigationMenu>
+        <NavigationMenu className='flex-shrink-0'>
           <NavigationMenuList>
             {/* ブログセクション - 一時的にコメントアウト
             <NavigationMenuItem>

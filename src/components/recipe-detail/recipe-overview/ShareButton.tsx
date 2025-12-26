@@ -49,17 +49,17 @@ const ShareButtons = () => {
     <div className='flex flex-col items-center gap-1'>
       <p className='text-xs text-gray-500 pb-2'>\ レシピをシェア /</p>
       <div className='flex items-center gap-2'>
-        <TwitterShareButton url={pageUrl} title={pageTitle}>
-          <div>
+        <div>
+          <TwitterShareButton url={pageUrl} title={pageTitle}>
             <XIcon size={32} round className='cursor-pointer' />
-          </div>
-        </TwitterShareButton>
+          </TwitterShareButton>
+        </div>
 
-        <LineShareButton url={pageUrl} title={pageTitle}>
-          <div>
+        <div>
+          <LineShareButton url={pageUrl} title={pageTitle}>
             <LineIcon size={32} round className='cursor-pointer' />
-          </div>
-        </LineShareButton>
+          </LineShareButton>
+        </div>
 
         <Button
           variant='outline'
