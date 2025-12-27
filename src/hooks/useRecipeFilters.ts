@@ -27,11 +27,33 @@ export function useRecipeFilters(recipes: RecipeMetadata[]) {
   // Parse current filters from URL parameters
   const filters = useMemo(() => decodeFilters(searchParams), [searchParams]);
 
-  // Filter recipes based on current filter state
-  const filteredRecipes = useMemo(
-    () => filterRecipes(recipes, filters),
-    [recipes, filters]
-  );
+  // Filter recipes based on current filter state with performance tracking
+  const filteredRecipes = useMemo(() => {
+    const startTime = performance.now();
+    const result = filterRecipes(recipes, filters);
+    const endTime = performance.now();
+    const filterTime = endTime - startTime;
+
+    // Log performance in development
+    if (process.env.NODE_ENV === 'development') {
+      console.log(
+        `[Filter Performance] Filtered ${recipes.length} recipes to ${
+          result.length
+        } in ${filterTime.toFixed(2)}ms`
+      );
+
+      // Warn if performance requirement not met (<3000ms)
+      if (filterTime > 3000) {
+        console.warn(
+          `⚠️ Filter performance warning: ${filterTime.toFixed(
+            2
+          )}ms exceeds 3000ms requirement`
+        );
+      }
+    }
+
+    return result;
+  }, [recipes, filters]);
 
   // Update filters (updates URL)
   const updateFilters = useCallback(

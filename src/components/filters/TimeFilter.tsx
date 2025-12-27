@@ -1,12 +1,13 @@
 /**
  * Time filter component with radio group UI
- * Implementation for T011
+ * Implementation for T011, optimized with React.memo for T065
  *
  * @see specs/001-recipe-filter/quickstart.md
  */
 
 'use client';
 
+import { memo } from 'react';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { TIME_FILTER_OPTIONS } from '@/lib/filters/filterTypes';
@@ -17,7 +18,10 @@ interface TimeFilterProps {
   onChange: (value: TimeRange | undefined) => void;
 }
 
-export function TimeFilter({ value, onChange }: TimeFilterProps) {
+export const TimeFilter = memo(function TimeFilter({
+  value,
+  onChange,
+}: TimeFilterProps) {
   return (
     <div className='space-y-3' role='group' aria-label='調理時間フィルター'>
       <h3 className='font-semibold text-sm'>調理時間</h3>
@@ -49,4 +53,4 @@ export function TimeFilter({ value, onChange }: TimeFilterProps) {
       )}
     </div>
   );
-}
+});

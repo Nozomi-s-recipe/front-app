@@ -16,7 +16,7 @@ N-recipes.comの成長ロードマップを優先度別に整理します。
      * [詳細仕様](plans/search-enhancement-spec.md) | [実装計画](plans/search-enhancement-implementation-plan.md)
    * ⏳ **次フェーズ**: レシピタイトル・材料での検索
    * ⏳ **次フェーズ**: 検索サジェスト機能
-2. **基本フィルター機能** ⭐️⭐️⭐️
+2. **基本フィルター機能** ⭐️⭐️⭐️ ✅ **完了** - 2025-12-26
    * 調理時間での絞り込み
    * ジャンル別フィルター
    * 材料数での絞り込み
@@ -242,40 +242,90 @@ N-recipes.comの成長ロードマップを優先度別に整理します。
     * 材料マッチの視覚的区別（バッジ表示）
 
 * **基本フィルター機能（完了）** - 2025-12-26
-  * **調理時間フィルター**
+  
+  * **調理時間フィルター（User Story 1 - P1）**
     * 5段階の時間範囲選択（15分以内、15-30分、30-45分、45-60分、60分以上）
-    * 単一選択（ラジオボタン）
+    * 単一選択（ラジオボタン方式）
+    * 時間データが欠けているレシピは自動除外
     * 関連: [`TimeFilter`](src/components/filters/TimeFilter.tsx)
   
-  * **ジャンルフィルター**
-    * 複数ジャンル選択可能（チェックボックス）
-    * OR論理（選択したジャンルのいずれかにマッチ）
+  * **ジャンルフィルター（User Story 2 - P2）**
+    * 複数ジャンル同時選択可能（チェックボックス方式）
+    * OR論理（選択したジャンルのいずれかにマッチするレシピを表示）
+    * 既存カテゴリー分類と完全統合
+    * ジャンルタグが欠けているレシピは自動除外
     * 関連: [`GenreFilter`](src/components/filters/GenreFilter.tsx)
   
-  * **材料数フィルター**
+  * **材料数フィルター（User Story 3 - P3）**
     * 5段階の材料数範囲選択（5個以下、6-10個、11-15個、16-20個、20個以上）
-    * 単一選択（ラジオボタン）
+    * 単一選択（ラジオボタン方式）
+    * 材料数データが欠けているレシピは自動除外
     * 関連: [`IngredientCountFilter`](src/components/filters/IngredientCountFilter.tsx)
   
-  * **統合機能**
-    * フィルター間のAND論理（全条件を満たすレシピを表示）
-    * URLパラメータでの状態管理（共有可能）
-    * ブラウザ戻る/進むボタン対応
-    * アクティブフィルター表示（削除可能なピル表示）
-    * レスポンシブUI（デスクトップ: サイドバー、モバイル: ドロワー）
-    * 関連: [`FilteredRecipeList`](src/components/recipe-preview/FilteredRecipeList.tsx), [`useRecipeFilters`](src/hooks/useRecipeFilters.ts)
+  * **複合フィルター機能（User Story 4 - P2）**
+    * ハイブリッド論理演算
+      * 同一フィルター内: OR論理（例: 和食 OR イタリアン）
+      * フィルター間: AND論理（例: 和食 AND 30分以内 AND 5個以下）
+    * アクティブフィルターの視覚的表示
+      * 個別削除可能なピル表示
+      * 「すべてクリア」ボタン
+      * レシピ件数の動的表示
+    * 結果が0件の場合の適切なメッセージ表示
+    * 関連: [`ActiveFilters`](src/components/filters/ActiveFilters.tsx), [`filterRecipes`](src/lib/filters/filterRecipes.ts)
   
-  * **アクセシビリティ対応**
-    * ARIA ラベルとキーボードナビゲーション
+  * **URL状態管理とナビゲーション**
+    * フィルター状態をURLパラメータにエンコード
+    * URL共有・ブックマーク対応
+    * ブラウザ戻る/進むボタン完全対応
+    * ページネーション間でのフィルター状態維持
+    * セッション内での状態保持（ブラウザ終了時にクリア）
+    * 関連: [`filterUrlParams`](src/lib/filters/filterUrlParams.ts), [`useRecipeFilters`](src/hooks/useRecipeFilters.ts)
+  
+  * **レスポンシブUI設計**
+    * デスクトップ（≥1024px）: 固定サイドバー表示
+      * スティッキー配置（スクロール追従）
+      * 常時表示で即座にアクセス可能
+    * モバイル/タブレット（<1024px）: 引き出しドロワー
+      * 初期状態: 折りたたみ
+      * フィルターボタンで開閉
+      * フォーカストラップで使いやすさ向上
+    * 320px幅の小型画面でも完全動作
+    * 関連: [`FilterSidebar`](src/components/filters/FilterSidebar.tsx), [`FilterDrawer`](src/components/filters/FilterDrawer.tsx)
+  
+  * **アクセシビリティ（WCAG 2.1 AA準拠）**
+    * ARIA ラベル完備
+      * フィルターセクション: `role="search"`
+      * 状態変更の音声通知: `aria-live="polite"`
+      * 選択状態の明示: `aria-checked`
+    * キーボードナビゲーション完全対応
+      * Tab/Shift+Tab: フォーカス移動
+      * Enter/Space: 選択切り替え
+      * Escape: ドロワー閉じる
     * スクリーンリーダー対応
-    * フォーカス管理
-    * WCAG 2.1 AA準拠
+      * 結果件数の自動通知
+      * フィルター変更の通知
+    * 色コントラスト比4.5:1以上確保
+    * フォーカス可視化とフォーカス管理
   
-  * **アナリティクス**
-    * フィルター適用イベント追跡
-    * 結果なしシナリオ追跡
-    * モバイルドロワー開閉追跡
+  * **アナリティクス統合**
+    * `filter_applied`: フィルター適用イベント
+    * `filter_cleared`: フィルター削除イベント
+    * `filter_no_results`: 結果0件イベント
+    * `filter_drawer_opened`: モバイルドロワー開閉追跡
+    * Google Analytics 4との統合
     * 関連: [`analytics.ts`](src/utils/analytics.ts)
+  
+  * **パフォーマンス**
+    * クライアントサイドフィルタリング（<3秒）
+    * メモ化による再計算最適化
+    * ページロード時間<2秒維持
+    * スクロールなしでのURL更新
+  
+  * **主要コンポーネント**
+    * [`FilterSection`](src/components/filters/FilterSection.tsx): フィルターセクション共通ラッパー
+    * [`FilterButton`](src/components/filters/FilterButton.tsx): モバイル用トグルボタン
+    * [`useRecipeFilters`](src/hooks/useRecipeFilters.ts): フィルター状態管理フック
+    * [`filterTypes.ts`](src/lib/filters/filterTypes.ts): 型定義とヘルパー関数
 
 #### 🚧 実装予定
 

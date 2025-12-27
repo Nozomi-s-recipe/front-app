@@ -1,12 +1,13 @@
 /**
  * Active filters display component with individual remove buttons
- * Implementation for T035, T036, T037
+ * Implementation for T035, T036, T037, optimized with React.memo for T065
  *
  * @see specs/001-recipe-filter/quickstart.md
  */
 
 'use client';
 
+import { memo } from 'react';
 import { X } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import type {
@@ -32,7 +33,7 @@ interface ActiveFiltersProps {
  * Display active filters as removable pills/badges
  * Shows individual filters with X buttons and "Clear all" option
  */
-export function ActiveFilters({
+export const ActiveFilters = memo(function ActiveFilters({
   filters,
   availableGenres,
   onClearFilter,
@@ -141,4 +142,4 @@ export function ActiveFilters({
       </button>
     </div>
   );
-}
+});

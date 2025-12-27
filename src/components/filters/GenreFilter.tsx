@@ -1,12 +1,13 @@
 /**
  * Genre/Category filter component with multi-select checkboxes
- * Implementation for T021
+ * Implementation for T021, optimized with React.memo for T065
  *
  * @see specs/001-recipe-filter/quickstart.md
  */
 
 'use client';
 
+import { memo } from 'react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import type { Genre } from '@/lib/filters/filterTypes';
@@ -24,7 +25,7 @@ interface GenreFilterProps {
  * Genre filter component with multi-select checkboxes
  * Uses OR logic - recipes matching ANY selected genre are shown
  */
-export function GenreFilter({
+export const GenreFilter = memo(function GenreFilter({
   genres,
   selectedGenres,
   onChange,
@@ -80,4 +81,4 @@ export function GenreFilter({
       )}
     </div>
   );
-}
+});

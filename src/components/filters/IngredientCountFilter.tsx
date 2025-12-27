@@ -1,12 +1,13 @@
 /**
  * Ingredient count filter component with radio group UI
- * Implementation for T029
+ * Implementation for T029, optimized with React.memo for T065
  *
  * @see specs/001-recipe-filter/quickstart.md
  */
 
 'use client';
 
+import { memo } from 'react';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { INGREDIENT_FILTER_OPTIONS } from '@/lib/filters/filterTypes';
@@ -21,7 +22,7 @@ interface IngredientCountFilterProps {
  * Ingredient count filter component with radio group for single-select
  * Allows users to filter recipes by number of ingredients
  */
-export function IngredientCountFilter({
+export const IngredientCountFilter = memo(function IngredientCountFilter({
   value,
   onChange,
 }: IngredientCountFilterProps) {
@@ -59,4 +60,4 @@ export function IngredientCountFilter({
       )}
     </div>
   );
-}
+});
