@@ -18,9 +18,7 @@ export const ShowMore = ({ image, mainCategory, color }: ShowMoreProps) => {
         <Image
           src={`${image.src}?w=112&h=80&q=60&fit=crop&fm=webp`}
           alt={image.alt}
-          style={{
-            objectFit: 'cover',
-          }}
+          className='object-cover'
           fill
           quality={60}
           placeholder='blur'

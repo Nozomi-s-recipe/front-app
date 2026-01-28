@@ -14,6 +14,18 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Homepage redesign color palette
+        cream: 'var(--color-bg-primary)',
+        coral: {
+          DEFAULT: 'var(--color-accent-primary)',
+          light: 'var(--color-accent-secondary)',
+          tertiary: 'var(--color-accent-tertiary)',
+        },
+        'text-primary': 'var(--color-text-primary)',
+        'text-secondary': 'var(--color-text-secondary)',
+        'text-muted': 'var(--color-text-muted)',
+        'border-color': 'var(--color-border)',
+
         md: {
           primary: 'var(--md-sys-color-primary)',
           'on-primary': 'var(--md-sys-color-on-primary)',
@@ -90,7 +102,26 @@ export default {
           '5': 'hsl(var(--chart-5))',
         },
       },
+      fontFamily: {
+        crimson: ['var(--font-crimson)', 'serif'],
+        outfit: ['var(--font-outfit)', 'sans-serif'],
+      },
+      boxShadow: {
+        sm: 'var(--shadow-sm)',
+        md: 'var(--shadow-md)',
+        lg: 'var(--shadow-lg)',
+      },
       keyframes: {
+        fadeInUp: {
+          from: {
+            opacity: '0',
+            transform: 'translateY(20px)',
+          },
+          to: {
+            opacity: '1',
+            transform: 'translateY(0)',
+          },
+        },
         slideIn: {
           '0%': {
             transform: 'translateX(100%)',
@@ -109,6 +140,7 @@ export default {
         },
       },
       animation: {
+        fadeInUp: 'fadeInUp 0.6s ease-out backwards',
         slideIn: 'slideIn 0.3s ease-out',
         fadeIn: 'fadeIn 0.3s ease-out',
       },

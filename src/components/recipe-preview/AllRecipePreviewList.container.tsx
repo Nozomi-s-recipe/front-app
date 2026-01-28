@@ -1,7 +1,7 @@
 import { LIMIT } from '@/utils/const';
 import { getRecipes } from '@/utils/micro-cms/micro-cms';
 import { formatRecipePreview } from '@/utils/recipe/formatRecipePreview';
-import { FilteredRecipeList } from './FilteredRecipeList';
+import { SimpleRecipeList } from './SimpleRecipeList';
 
 type Props = {
   q?: string;
@@ -16,5 +16,5 @@ export const AllRecipePreviewListContainer = async ({ q, offset }: Props) => {
   });
   const recipePreviewList = contents.map(formatRecipePreview);
 
-  return <FilteredRecipeList recipes={recipePreviewList} pageType='search' />;
+  return <SimpleRecipeList recipes={recipePreviewList} />;
 };

@@ -19,7 +19,7 @@ export const NumericalDisplay = ({
       <output aria-labelledby={`${title}-label`} className='flex items-center'>
         <span
           className='font-sans text-xl font-light'
-          style={{ minWidth }} // 動的な最小幅
+          style={{ minWidth }} // 動的な最小幅は保持（レイアウト崩れ防止のため必要）
         >
           {value}
         </span>

@@ -12,9 +12,15 @@ export const RecipePreviewList = ({
   }
 
   return (
-    <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-4'>
-      {recipePreviews.map((recipe) => (
-        <div key={recipe.recipeId} className='w-fit mx-auto'>
+    <div className='grid gap-8 grid-cols-[repeat(auto-fill,minmax(340px,1fr))]'>
+      {recipePreviews.map((recipe, index) => (
+        <div
+          key={recipe.recipeId}
+          className='animate-fadeInUp'
+          style={{
+            animationDelay: `${Math.min(index * 0.1, 0.6)}s`,
+          }}
+        >
           <RecipePreview {...recipe} />
         </div>
       ))}

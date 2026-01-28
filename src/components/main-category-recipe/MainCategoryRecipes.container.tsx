@@ -21,7 +21,8 @@ export const MainCategoryRecipesContainer = async ({
     filters: `mainCategory[contains]${mainCategory.id}`,
   });
 
-  if (res.totalCount === 0) return;
+  // レシピが3件未満の場合は表示しない
+  if (res.totalCount < 3 || res.contents.length < 3) return null;
 
   return (
     <MainCategoryRecipes
