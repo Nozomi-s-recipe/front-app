@@ -5,6 +5,7 @@ import SearchField from '@/components/search/SearchField';
 import { HomeContent } from '@/components/home/HomeContent';
 import { AllRecipePreviewListContainer } from '@/components/recipe-preview/AllRecipePreviewList.container';
 import { RandomRecipePreviewListContainer } from '@/components/recipe-preview/RandomRecipePreviewList.container';
+import { CategoryTabContentContainer } from '@/components/home/CategoryTabContent.container';
 import { LIMIT } from '@/utils/const';
 import { getRecipes } from '@/utils/micro-cms/micro-cms';
 import { Suspense } from 'react';
@@ -37,6 +38,11 @@ export default async function Home() {
         recommendedRecipes={
           <Suspense fallback={<div>loading...</div>}>
             <RandomRecipePreviewListContainer />
+          </Suspense>
+        }
+        categoryRecipes={
+          <Suspense fallback={<div>loading...</div>}>
+            <CategoryTabContentContainer />
           </Suspense>
         }
       />
