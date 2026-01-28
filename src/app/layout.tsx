@@ -8,6 +8,22 @@ import { AuthProvider } from '@/providers/AuthProvider';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { GoogleTagManager } from '@next/third-parties/google';
 import type { Metadata } from 'next';
+import { Crimson_Pro, Outfit } from 'next/font/google';
+
+// Configure Google Fonts with optimization
+const crimsonPro = Crimson_Pro({
+  subsets: ['latin'],
+  weight: ['300', '400', '600'],
+  variable: '--font-crimson',
+  display: 'swap',
+});
+
+const outfit = Outfit({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600'],
+  variable: '--font-outfit',
+  display: 'swap',
+});
 
 const description =
   '赤身肉、加工肉、バターを使わない健康レシピを発信してます。栄養士がじっくり考えたレシピを投稿しています。◎';
@@ -44,7 +60,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='ja'>
+    <html lang='ja' className={`${crimsonPro.variable} ${outfit.variable}`}>
       <head>
         {/* AdSense自動広告コード追加（推奨） - defer to prevent CLS */}
         <script

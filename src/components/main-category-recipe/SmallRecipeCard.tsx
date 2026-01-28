@@ -26,9 +26,7 @@ export const SmallRecipeCard = ({
         <Image
           src={`${image.src}?w=112&h=80&q=60&fit=crop&fm=webp`}
           alt={image.alt}
-          style={{
-            objectFit: 'cover',
-          }}
+          className='object-cover'
           sizes='112px'
           quality={60}
           placeholder='blur'

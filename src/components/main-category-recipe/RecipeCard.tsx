@@ -46,9 +46,7 @@ export const RecipeCard = ({
         <Image
           src={`${image.src}?w=${width}&h=${height}&q=80&fit=crop?fm=webp`}
           alt={image.alt}
-          style={{
-            objectFit: 'cover',
-          }}
+          className='object-cover'
           priority={isPriority}
           quality={80}
           fill

@@ -1,11 +1,10 @@
 import { Breadcrumbs } from '@/components/BreadCrumbs';
-import { HeroCarousel } from '@/components/header/HeroCarousel';
 import Pagination from '@/components/pagenation/Pagenation';
 import { ProfileCard } from '@/components/profile/ProfileCard';
-import { AllRecipePreviewListContainer } from '@/components/recipe-preview/AllRecipePreviewList.container';
-import { NewRecipePreviewCarouselContainer } from '@/components/recipe-preview/NewRecipePreviewCarousel.container';
-import { PopularRecipePreviewCarouselContainer } from '@/components/recipe-preview/PopularRecipePreviewCarousel.container';
 import SearchField from '@/components/search/SearchField';
+import { HomeContent } from '@/components/home/HomeContent';
+import { AllRecipePreviewListContainer } from '@/components/recipe-preview/AllRecipePreviewList.container';
+import { RandomRecipePreviewListContainer } from '@/components/recipe-preview/RandomRecipePreviewList.container';
 import { LIMIT } from '@/utils/const';
 import { getRecipes } from '@/utils/micro-cms/micro-cms';
 import { Suspense } from 'react';
@@ -21,36 +20,35 @@ export default async function Home() {
 
   return (
     <>
-      {/* <Header /> */}
-      <div className='flex flex-col items-center my-8'>
-        <HeroCarousel />
-      </div>
-
-      <div className='flex flex-col items-center px-8 pb-8'>
-        <NewRecipePreviewCarouselContainer />
-      </div>
-      <div className='flex flex-col items-center px-8 pb-16'>
-        <PopularRecipePreviewCarouselContainer />
-      </div>
-
-      <div className='flex flex-col items-center'>
-        <h2 className='w-full max-w-7xl text-2xl font-bold pb-8'>レシピ一覧</h2>
-        <div className='flex flex-col items-center px-8 pb-8'>
+      {/* Hero section with search */}
+      <div className='w-full max-w-7xl mx-auto py-8 md:py-12'>
+        <div className='flex flex-col items-center mb-6 md:mb-8'>
           <SearchField />
         </div>
-
-        <Suspense fallback={<div>loading...</div>}>
-          <AllRecipePreviewListContainer />
-        </Suspense>
       </div>
+
+      {/* Tab navigation and recipe list */}
+      <HomeContent
+        allRecipes={
+          <Suspense fallback={<div>loading...</div>}>
+            <AllRecipePreviewListContainer />
+          </Suspense>
+        }
+        recommendedRecipes={
+          <Suspense fallback={<div>loading...</div>}>
+            <RandomRecipePreviewListContainer />
+          </Suspense>
+        }
+      />
+
       <Pagination totalCount={totalCount} />
 
       {/* プロフィールカード */}
-      <div className='flex flex-col items-center px-8 py-12'>
+      <div className='flex flex-col items-center py-8 md:py-12'>
         <ProfileCard />
       </div>
 
-      <div className='px-6'>
+      <div>
         <Breadcrumbs />
       </div>
     </>

@@ -6,14 +6,18 @@ import {
   NavigationMenuList,
 } from '@/components/ui/navigation-menu';
 import { useAuth } from '@/providers/AuthProvider';
+import { useScrolled } from '@/hooks/useScrolled';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Suspense } from 'react';
+import { Suspense, useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { AvatarIcon } from './AvatorIcon';
-import { HeaderSearch } from './HeaderSearch';
 
 export const MenuHeader = () => {
   const { user, loading } = useAuth();
+  const isScrolled = useScrolled(50);
+  const pathname = usePathname();
+  const isHomepage = pathname === '/';
   // const supabase = await createClient();
   // const {
   //   data: { user },
@@ -21,35 +25,51 @@ export const MenuHeader = () => {
 
   // console.log('menu header user', user);
 
+  // Handle logo click for smooth scroll on homepage
+  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (isHomepage) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   return (
-    <div className='sticky top-0 z-50 w-full bg-white border-b shadow-sm'>
-      <div className='max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-2'>
-        {/* 左側のロゴ */}
-        <div className='flex-shrink-0'>
-          <Link href='/' aria-label='ホームへ戻る' prefetch={true}>
-            <figure className='m-0'>
-              <Image
-                src='/service-logo.svg'
-                alt='service logo'
-                width={48}
-                height={48}
-                unoptimized
-                className='md:w-16 md:h-16'
-              />
-            </figure>
+    <header
+      className={`sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-border-color transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] ${
+        isScrolled ? 'py-2 shadow-sm' : 'py-4 shadow-none'
+      }`}
+    >
+      <div className='max-w-7xl mx-auto px-4 flex items-center justify-between gap-4'>
+        {/* Left: Logo with gradient N icon + site name */}
+        <div className='flex items-center gap-3 flex-shrink-0'>
+          <Link
+            href='/'
+            aria-label='ホームへ戻る'
+            prefetch={true}
+            onClick={handleLogoClick}
+            className='flex items-center gap-3 transition-opacity hover:opacity-80'
+          >
+            {/* Logo SVG */}
+            <Image
+              src='/service-logo.svg'
+              alt='Nozomi&#39;s Recipes Logo'
+              width={36}
+              height={36}
+              className='w-9 h-9'
+            />
+            {/* Site Name */}
+            <span className='font-semibold text-lg tracking-tight text-text-primary'>
+              Nozomi&apos;s Recipes
+            </span>
           </Link>
+
+          {/* Tagline - hidden on mobile */}
+          <div className='hidden md:block text-xs font-normal tracking-wider ml-4 text-text-muted'>
+            赤身肉・加工肉・バターを使わないレシピ
+          </div>
         </div>
 
-        {/* 中央の検索バー */}
-        <Suspense
-          fallback={
-            <div className='flex-1 max-w-md mx-4 h-9 bg-gray-100 rounded-md animate-pulse' />
-          }
-        >
-          <HeaderSearch />
-        </Suspense>
-
-        {/* 右側のナビゲーション */}
+        {/* Right: Navigation */}
         <NavigationMenu className='flex-shrink-0'>
           <NavigationMenuList>
             {/* ブログセクション - 一時的にコメントアウト
@@ -87,6 +107,6 @@ export const MenuHeader = () => {
           </NavigationMenuList>
         </NavigationMenu>
       </div>
-    </div>
+    </header>
   );
 };

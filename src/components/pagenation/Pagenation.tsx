@@ -1,3 +1,5 @@
+'use client';
+
 import { LIMIT } from '@/utils/const';
 import Link from 'next/link';
 
@@ -15,7 +17,7 @@ export default function Pagination({
   q,
 }: Props) {
   const pages = Array.from({ length: Math.ceil(totalCount / LIMIT) }).map(
-    (_, i) => i + 1
+    (_, i) => i + 1,
   );
   return (
     <ul className='flex items-center justify-center py-6 mt-6'>
@@ -24,12 +26,12 @@ export default function Pagination({
           {current !== p ? (
             <Link
               href={`${basePath}/p/${p}` + (q ? `?q=${q}` : '')}
-              className='flex items-center justify-center transition-colors rounded w-9 h-9 hover:bg-gray-100'
+              className='flex items-center justify-center transition-all duration-300 rounded-lg w-10 h-10 font-medium hover:bg-coral-tertiary text-text-secondary'
             >
               {p}
             </Link>
           ) : (
-            <span className='flex items-center justify-center text-white bg-blue-500 rounded w-9 h-9'>
+            <span className='flex items-center justify-center text-white rounded-lg w-10 h-10 font-semibold bg-coral'>
               {p}
             </span>
           )}
