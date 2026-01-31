@@ -7,6 +7,9 @@ import { LIMIT } from '@/utils/const';
 import { getRecipes } from '@/utils/micro-cms/micro-cms';
 import { Suspense } from 'react';
 
+// Force dynamic rendering since FilteredRecipeListSection uses useSearchParams
+export const dynamic = 'force-dynamic';
+
 // Next.js will invalidate the cache when a
 // request comes in, at most once every 60 seconds.
 export const revalidate = 60;
@@ -33,7 +36,7 @@ export default async function Home() {
         <TodayPickCardContainer />
       </Suspense>
 
-      {/* Recipe List with Filtering */}
+      {/* Recipe List with Filtering - Wrapped in Suspense for useSearchParams */}
       <Suspense
         fallback={
           <section className='px-5 py-5'>

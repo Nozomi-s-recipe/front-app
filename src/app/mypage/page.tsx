@@ -2,6 +2,9 @@ import { FavoriteRecipes } from '@/components/mypage/FavoriteRecipes';
 import { UserGreeting } from '@/components/mypage/UserGreeting';
 import { createClient } from '@/utils/supabase/server';
 
+// Force dynamic rendering since this page uses cookies
+export const dynamic = 'force-dynamic';
+
 export default async function MyPage() {
   const supabase = await createClient();
   const {
