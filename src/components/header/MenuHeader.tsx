@@ -7,17 +7,29 @@ import {
 } from '@/components/ui/navigation-menu';
 import { useAuth } from '@/providers/AuthProvider';
 import { useScrolled } from '@/hooks/useScrolled';
+import { useFavorites } from '@/hooks/useFavorites';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Suspense, useEffect, useState } from 'react';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { AvatarIcon } from './AvatorIcon';
+import { ChevronLeft, Heart } from 'lucide-react';
 
-export const MenuHeader = () => {
+interface MenuHeaderProps {
+  showBackButton?: boolean;
+  showFavoriteButton?: boolean;
+}
+
+export const MenuHeader = ({
+  showBackButton = false,
+  showFavoriteButton = false,
+}: MenuHeaderProps = {}) => {
   const { user, loading } = useAuth();
   const isScrolled = useScrolled(50);
   const pathname = usePathname();
   const isHomepage = pathname === '/';
+  const router = useRouter();
+  const { favorites } = useFavorites();
   // const supabase = await createClient();
   // const {
   //   data: { user },
@@ -40,8 +52,17 @@ export const MenuHeader = () => {
       }`}
     >
       <div className='max-w-7xl mx-auto px-4 flex items-center justify-between gap-4'>
-        {/* Left: Logo with gradient N icon + site name */}
+        {/* Left: Back button (optional) + Logo with gradient N icon + site name */}
         <div className='flex items-center gap-3 flex-shrink-0'>
+          {showBackButton && (
+            <button
+              onClick={() => router.back()}
+              className='w-10 h-10 bg-md-surface-variant rounded-xl flex items-center justify-center hover:bg-md-outline transition-colors flex-shrink-0'
+              aria-label='戻る'
+            >
+              <ChevronLeft className='w-5 h-5 stroke-md-on-surface-variant stroke-2' />
+            </button>
+          )}
           <Link
             href='/'
             aria-label='ホームへ戻る'
@@ -97,13 +118,29 @@ export const MenuHeader = () => {
               </TooltipProvider>
             </NavigationMenuItem>
             */}
+            {showFavoriteButton && (
+              <NavigationMenuItem>
+                <Link
+                  href='/mypage'
+                  className='relative w-10 h-10 bg-md-surface-variant rounded-xl flex items-center justify-center hover:bg-md-outline transition-colors'
+                  aria-label='お気に入り'
+                >
+                  <Heart className='w-5 h-5 stroke-md-on-surface-variant stroke-2 fill-none' />
+                  {favorites.length > 0 && (
+                    <span className='absolute top-1 right-1 min-w-4 h-4 px-1 bg-destructive rounded-lg text-[10px] font-semibold text-destructive-foreground flex items-center justify-center'>
+                      {favorites.length}
+                    </span>
+                  )}
+                </Link>
+              </NavigationMenuItem>
+            )}
             <NavigationMenuItem>
               {loading ? (
                 <div className='h-8 w-8 rounded-full bg-gray-200 animate-pulse' />
               ) : (
                 <AvatarIcon user={user} />
               )}
-            </NavigationMenuItem>{' '}
+            </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
       </div>

@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recipe Detail - Cacao Maca Walnut Milk</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-text-primary: #2d3748;
+      --color-text-secondary: #6b7a90;
+      --color-text-muted: #8d99ae;
+      --color-accent: #4a5568;
+      --color-border: #e8ecf1;
+      --color-bg-card: #ffffff;
+      --color-bg-page: #f0f4f8;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'DM Sans', -apple-system, sans-serif;
+      --radius-card: 32px;
+      --radius-small: 12px;
+      --shadow-card: 0 10px 40px rgba(0, 0, 0, 0.08);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--color-bg-page);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    /* ============================================
+       COMPONENT: RecipeDetailCard
+       メインのカードコンテナ
+       Props: children
+    ============================================ */
+    .recipe-detail-card {
+      width: 100%;
+      max-width: 400px;
+      background: var(--color-bg-card);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+    }
+
+    /* ============================================
+       COMPONENT: RecipeHeroImage
+       レシピのメイン画像セクション
+       Props: imageUrl, onBack, onFavorite, isFavorite
+    ============================================ */
+    .recipe-hero {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+    }
+
+    .recipe-hero__image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ============================================
+       COMPONENT: BackButton
+       戻るボタン
+       Props: onClick
+    ============================================ */
+    .back-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease;
+    }
+
+    .back-button:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .back-button svg {
+      width: 20px;
+      height: 20px;
+      stroke: white;
+      stroke-width: 2;
+    }
+
+    /* ============================================
+       COMPONENT: FavoriteButton
+       お気に入りボタン
+       Props: onClick, isFavorite
+    ============================================ */
+    .favorite-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease;
+    }
+
+    .favorite-button:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .favorite-button svg {
+      width: 22px;
+      height: 22px;
+      stroke: white;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .favorite-button.is-favorite svg {
+      fill: white;
+    }
+
+    /* ============================================
+       COMPONENT: RecipeContent
+       レシピ情報のコンテンツエリア
+       Props: children
+    ============================================ */
+    .recipe-content {
+      padding: 28px 28px 32px;
+    }
+
+    /* ============================================
+       COMPONENT: RecipeHeader
+       タイトルと説明文
+       Props: title, description
+    ============================================ */
+    .recipe-header {
+      margin-bottom: 16px;
+    }
+
+    .recipe-header__title {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+      margin-bottom: 6px;
+      letter-spacing: -0.02em;
+    }
+
+    .recipe-header__description {
+      font-size: 14px;
+      color: var(--color-text-secondary);
+      line-height: 1.5;
+    }
+
+    /* ============================================
+       COMPONENT: RecipeMeta
+       いいね数・調理時間・ポーション数の表示
+       Props: likes, time, portions
+    ============================================ */
+    .recipe-meta {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .recipe-meta__item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: var(--color-text-secondary);
+    }
+
+    .recipe-meta__item svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--color-text-muted);
+      stroke-width: 1.5;
+      fill: none;
+    }
+
+    /* ============================================
+       COMPONENT: PortionSelector
+       ポーション数の調整UI
+       Props: value, onChange, min, max
+    ============================================ */
+    .portion-selector {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      padding: 16px 0;
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+      margin-bottom: 24px;
+    }
+
+    .portion-selector__button {
+      width: 36px;
+      height: 36px;
+      border: none;
+      background: transparent;
+      font-size: 24px;
+      color: var(--color-text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.2s ease;
+    }
+
+    .portion-selector__button:hover {
+      color: var(--color-text-primary);
+    }
+
+    .portion-selector__icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .portion-selector__icon svg {
+      width: 28px;
+      height: 28px;
+      stroke: var(--color-text-muted);
+      stroke-width: 1.5;
+      fill: none;
+    }
+
+    /* ============================================
+       COMPONENT: RecipeTabs
+       タブナビゲーション
+       Props: tabs, activeTab, onChange
+    ============================================ */
+    .recipe-tabs {
+      display: flex;
+      gap: 32px;
+      margin-bottom: 20px;
+    }
+
+    .recipe-tabs__tab {
+      background: none;
+      border: none;
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--color-text-muted);
+      cursor: pointer;
+      padding: 0;
+      padding-bottom: 8px;
+      position: relative;
+      transition: color 0.2s ease;
+    }
+
+    .recipe-tabs__tab:hover {
+      color: var(--color-text-secondary);
+    }
+
+    .recipe-tabs__tab.is-active {
+      color: var(--color-text-primary);
+    }
+
+    .recipe-tabs__tab.is-active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 24px;
+      height: 3px;
+      background: var(--color-text-primary);
+      border-radius: 2px;
+    }
+
+    /* ============================================
+       COMPONENT: IngredientSection
+       材料セクション
+       Props: title, items
+    ============================================ */
+    .ingredient-section {
+      margin-bottom: 20px;
+    }
+
+    .ingredient-section__title {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--color-text-primary);
+      margin-bottom: 12px;
+    }
+
+    /* ============================================
+       COMPONENT: IngredientList
+       材料リスト
+       Props: items
+    ============================================ */
+    .ingredient-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* ============================================
+       COMPONENT: IngredientItem
+       個々の材料アイテム
+       Props: text
+    ============================================ */
+    .ingredient-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+    }
+
+    .ingredient-item__bullet {
+      width: 6px;
+      height: 6px;
+      min-width: 6px;
+      background: var(--color-text-muted);
+      border-radius: 50%;
+      margin-top: 8px;
+    }
+
+    /* ============================================
+       COMPONENT: SectionDivider
+       セクション区切り線
+    ============================================ */
+    .section-divider {
+      height: 1px;
+      background: var(--color-border);
+      margin: 16px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- COMPONENT: RecipeDetailCard -->
+  <article class="recipe-detail-card">
+    
+    <!-- COMPONENT: RecipeHeroImage -->
+    <div class="recipe-hero">
+      <img 
+        src="https://images.unsplash.com/photo-1544252890-c60c7d663296?w=800&h=800&fit=crop" 
+        alt="Cacao Maca Walnut Milk" 
+        class="recipe-hero__image"
+      >
+      
+      <!-- COMPONENT: BackButton -->
+      <button class="back-button" aria-label="Go back">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M15 18l-6-6 6-6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      
+      <!-- COMPONENT: FavoriteButton -->
+      <button class="favorite-button" aria-label="Add to favorites">
+        <svg viewBox="0 0 24 24">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+    <!-- /RecipeHeroImage -->
+
+    <!-- COMPONENT: RecipeContent -->
+    <div class="recipe-content">
+      
+      <!-- COMPONENT: RecipeHeader -->
+      <header class="recipe-header">
+        <h1 class="recipe-header__title">Cacao Maca Walnut Milk</h1>
+        <p class="recipe-header__description">Easy, quick and yet so delicious!</p>
+      </header>
+      <!-- /RecipeHeader -->
+
+      <!-- COMPONENT: RecipeMeta -->
+      <div class="recipe-meta">
+        <span class="recipe-meta__item">
+          <svg viewBox="0 0 24 24">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          239
+        </span>
+        <span class="recipe-meta__item">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+          10'
+        </span>
+        <span class="recipe-meta__item">
+          2 portion
+        </span>
+      </div>
+      <!-- /RecipeMeta -->
+
+      <!-- COMPONENT: PortionSelector -->
+      <div class="portion-selector">
+        <button class="portion-selector__button" aria-label="Decrease portions">−</button>
+        <span class="portion-selector__icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </span>
+        <button class="portion-selector__button" aria-label="Increase portions">+</button>
+      </div>
+      <!-- /PortionSelector -->
+
+      <!-- COMPONENT: RecipeTabs -->
+      <nav class="recipe-tabs" role="tablist">
+        <button class="recipe-tabs__tab is-active" role="tab" aria-selected="true">Ingredients</button>
+        <button class="recipe-tabs__tab" role="tab" aria-selected="false">Preparations</button>
+        <button class="recipe-tabs__tab" role="tab" aria-selected="false">Reviews</button>
+      </nav>
+      <!-- /RecipeTabs -->
+
+      <!-- COMPONENT: IngredientSection -->
+      <section class="ingredient-section">
+        <h2 class="ingredient-section__title">For The Walnut Milk</h2>
+        
+        <!-- COMPONENT: IngredientList -->
+        <ul class="ingredient-list">
+          <!-- COMPONENT: IngredientItem -->
+          <li class="ingredient-item">
+            <span class="ingredient-item__bullet"></span>
+            <span>1 cup walnuts soaked overnight or for at least 8 hours</span>
+          </li>
+          <!-- /IngredientItem -->
+          
+          <!-- COMPONENT: IngredientItem -->
+          <li class="ingredient-item">
+            <span class="ingredient-item__bullet"></span>
+            <span>3-4 cups water use 3 cups for a creamier consistency, or 4 cups for a thinner consistency</span>
+          </li>
+          <!-- /IngredientItem -->
+          
+          <!-- COMPONENT: IngredientItem -->
+          <li class="ingredient-item">
+            <span class="ingredient-item__bullet"></span>
+            <span>Pinch sea salt</span>
+          </li>
+          <!-- /IngredientItem -->
+        </ul>
+        <!-- /IngredientList -->
+      </section>
+      <!-- /IngredientSection -->
+
+      <!-- COMPONENT: SectionDivider -->
+      <hr class="section-divider">
+      <!-- /SectionDivider -->
+
+      <!-- COMPONENT: IngredientSection -->
+      <section class="ingredient-section">
+        <h2 class="ingredient-section__title">For The Cacao Maca Walnut Milk</h2>
+        <!-- 追加の材料リストがここに入る -->
+      </section>
+      <!-- /IngredientSection -->
+
+    </div>
+    <!-- /RecipeContent -->
+
+  </article>
+  <!-- /RecipeDetailCard -->
+
+</body>
+</html>

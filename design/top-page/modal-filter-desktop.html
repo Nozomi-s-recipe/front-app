@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>詳細検索 - モーダル（デスクトップ版）</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-text-primary: #2d3748;
+      --color-text-secondary: #6b7a90;
+      --color-text-muted: #8d99ae;
+      --color-border: #e8ecf1;
+      --color-bg-card: #ffffff;
+      --color-bg-page: #f5f7fa;
+      --color-bg-hover: #e8ecf1;
+      --color-selected: #2d3748;
+      --color-overlay: rgba(0, 0, 0, 0.5);
+      --font-body: 'DM Sans', 'Noto Sans JP', -apple-system, sans-serif;
+      --shadow-modal: 0 20px 60px rgba(0, 0, 0, 0.2);
+      --radius-lg: 24px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--color-bg-page);
+      min-height: 100vh;
+    }
+
+    /* ============================================
+       PAGE: 背景となるページ（デモ用）
+    ============================================ */
+    .page-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px;
+      opacity: 0.4;
+    }
+
+    .page-content h1 {
+      font-size: 28px;
+      color: var(--color-text-primary);
+      margin-bottom: 16px;
+    }
+
+    .page-content p {
+      font-size: 16px;
+      color: var(--color-text-muted);
+      margin-bottom: 24px;
+    }
+
+    .demo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .demo-card {
+      height: 200px;
+      background: var(--color-bg-card);
+      border-radius: var(--radius-md);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    /* ============================================
+       COMPONENT: ModalOverlay
+       オーバーレイ背景
+       Props: isOpen, onClose
+    ============================================ */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--color-overlay);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      opacity: 1;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.is-hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* ============================================
+       COMPONENT: Modal
+       モーダル本体
+       Props: isOpen, onClose, children
+    ============================================ */
+    .modal {
+      width: 100%;
+      max-width: 560px;
+      max-height: calc(100vh - 80px);
+      background: var(--color-bg-card);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-modal);
+      display: flex;
+      flex-direction: column;
+      transform: scale(1);
+      transition: transform 0.3s ease;
+    }
+
+    .modal-overlay.is-hidden .modal {
+      transform: scale(0.95);
+    }
+
+    /* ============================================
+       COMPONENT: ModalHeader
+       ヘッダー（タイトル＋閉じるボタン）
+       Props: title, onClose
+    ============================================ */
+    .modal__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 28px;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .modal__title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .modal__title-icon {
+      font-size: 22px;
+    }
+
+    .modal__close {
+      width: 36px;
+      height: 36px;
+      background: var(--color-bg-page);
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .modal__close:hover {
+      background: var(--color-bg-hover);
+    }
+
+    .modal__close svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--color-text-secondary);
+      stroke-width: 2;
+    }
+
+    /* ============================================
+       COMPONENT: ModalContent
+       スクロール可能なコンテンツエリア
+       Props: children
+    ============================================ */
+    .modal__content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 28px;
+    }
+
+    /* ============================================
+       COMPONENT: FilterSection
+       フィルターセクション
+       Props: title, icon, children
+    ============================================ */
+    .filter-section {
+      margin-bottom: 28px;
+    }
+
+    .filter-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .filter-section__title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .filter-section__title-icon {
+      font-size: 16px;
+    }
+
+    /* ============================================
+       COMPONENT: TimeChips
+       調理時間チップ（横並び）
+    ============================================ */
+    .time-chips {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .time-chip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 18px;
+      background: var(--color-bg-page);
+      border: 2px solid transparent;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .time-chip:hover {
+      background: var(--color-bg-hover);
+      transform: translateY(-1px);
+    }
+
+    .time-chip.is-selected {
+      background: rgba(45, 55, 72, 0.06);
+      border-color: var(--color-selected);
+    }
+
+    .time-chip__icon {
+      font-size: 18px;
+    }
+
+    .time-chip__label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+    }
+
+    .time-chip.is-selected .time-chip__label {
+      color: var(--color-text-primary);
+      font-weight: 600;
+    }
+
+    /* ============================================
+       COMPONENT: GenreGrid
+       ジャンルグリッド（デスクトップは横に広く）
+    ============================================ */
+    .genre-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .genre-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 18px 12px;
+      background: var(--color-bg-page);
+      border: 2px solid transparent;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .genre-card:hover {
+      background: var(--color-bg-hover);
+      transform: translateY(-2px);
+    }
+
+    .genre-card.is-selected {
+      background: rgba(45, 55, 72, 0.06);
+      border-color: var(--color-selected);
+    }
+
+    .genre-card__emoji {
+      font-size: 28px;
+      line-height: 1;
+    }
+
+    .genre-card__label {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      text-align: center;
+    }
+
+    .genre-card.is-selected .genre-card__label {
+      color: var(--color-text-primary);
+      font-weight: 600;
+    }
+
+    /* ============================================
+       COMPONENT: IngredientChips
+       材料数チップ
+    ============================================ */
+    .ingredient-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .ingredient-chip {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 12px 18px;
+      background: var(--color-bg-page);
+      border: 2px solid transparent;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+    }
+
+    .ingredient-chip:hover {
+      background: var(--color-bg-hover);
+    }
+
+    .ingredient-chip.is-selected {
+      background: var(--color-selected);
+      border-color: var(--color-selected);
+      color: white;
+    }
+
+    .ingredient-chip__icon {
+      font-size: 14px;
+    }
+
+    /* ============================================
+       COMPONENT: SelectedSummary
+       選択中のフィルターサマリー
+    ============================================ */
+    .selected-summary {
+      padding: 16px 18px;
+      background: var(--color-bg-page);
+      border-radius: 12px;
+      margin-bottom: 24px;
+    }
+
+    .selected-summary__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .selected-summary__label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+    }
+
+    .selected-summary__clear {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--color-text-muted);
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+
+    .selected-summary__clear:hover {
+      color: var(--color-text-secondary);
+    }
+
+    .selected-summary__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .selected-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      background: var(--color-bg-card);
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--color-text-primary);
+    }
+
+    .selected-tag__remove {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 16px;
+      height: 16px;
+      background: var(--color-bg-page);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      padding: 0;
+      margin-left: 2px;
+      transition: background 0.2s ease;
+    }
+
+    .selected-tag__remove svg {
+      width: 10px;
+      height: 10px;
+      stroke: var(--color-text-muted);
+      stroke-width: 2.5;
+    }
+
+    .selected-tag__remove:hover {
+      background: var(--color-bg-hover);
+    }
+
+    .selected-tag__remove:hover svg {
+      stroke: var(--color-text-primary);
+    }
+
+    /* ============================================
+       COMPONENT: ModalFooter
+       フッター（リセット＋適用ボタン）
+       Props: onReset, onApply, resultCount
+    ============================================ */
+    .modal__footer {
+      display: flex;
+      gap: 14px;
+      padding: 20px 28px;
+      border-top: 1px solid var(--color-border);
+      background: var(--color-bg-card);
+      border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    }
+
+    .reset-button {
+      padding: 14px 28px;
+      background: var(--color-bg-page);
+      border: none;
+      border-radius: 12px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .reset-button:hover {
+      background: var(--color-bg-hover);
+      color: var(--color-text-primary);
+    }
+
+    .apply-button {
+      flex: 1;
+      padding: 14px 28px;
+      background: var(--color-selected);
+      border: none;
+      border-radius: 12px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 600;
+      color: white;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .apply-button:hover {
+      background: #1a202c;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(45, 55, 72, 0.3);
+    }
+
+    .apply-button__count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 28px;
+      height: 28px;
+      padding: 0 10px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 14px;
+      font-size: 13px;
+    }
+
+    /* ============================================
+       キーボードショートカットヒント
+    ============================================ */
+    .keyboard-hint {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--color-text-muted);
+      margin-top: 12px;
+      justify-content: center;
+    }
+
+    .keyboard-hint kbd {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 20px;
+      height: 20px;
+      padding: 0 6px;
+      background: var(--color-bg-page);
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 背景：ページコンテンツ（薄暗く表示） -->
+  <div class="page-content">
+    <h1>新着レシピ</h1>
+    <p>詳細検索をクリックすると、モーダルが表示されます。</p>
+    <div class="demo-grid">
+      <div class="demo-card"></div>
+      <div class="demo-card"></div>
+      <div class="demo-card"></div>
+      <div class="demo-card"></div>
+      <div class="demo-card"></div>
+      <div class="demo-card"></div>
+    </div>
+  </div>
+
+  <!-- COMPONENT: ModalOverlay -->
+  <div class="modal-overlay">
+    
+    <!-- COMPONENT: Modal -->
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      
+      <!-- COMPONENT: ModalHeader -->
+      <header class="modal__header">
+        <h2 class="modal__title" id="modal-title">
+          <span class="modal__title-icon">🔍</span>
+          詳細検索
+        </h2>
+        <button class="modal__close" aria-label="閉じる">
+          <svg viewBox="0 0 24 24" fill="none">
+            <line x1="18" y1="6" x2="6" y2="18" stroke-linecap="round"/>
+            <line x1="6" y1="6" x2="18" y2="18" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </header>
+      <!-- /ModalHeader -->
+
+      <!-- COMPONENT: ModalContent -->
+      <div class="modal__content">
+
+        <!-- COMPONENT: SelectedSummary -->
+        <div class="selected-summary">
+          <div class="selected-summary__header">
+            <span class="selected-summary__label">選択中のフィルター</span>
+            <button class="selected-summary__clear" type="button">すべてクリア</button>
+          </div>
+          <div class="selected-summary__tags">
+            <span class="selected-tag">
+              ⚡ 15分以内
+              <button class="selected-tag__remove" aria-label="削除">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <line x1="18" y1="6" x2="6" y2="18"/>
+                  <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+              </button>
+            </span>
+            <span class="selected-tag">
+              🍚 ご飯もの
+              <button class="selected-tag__remove" aria-label="削除">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <line x1="18" y1="6" x2="6" y2="18"/>
+                  <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+              </button>
+            </span>
+            <span class="selected-tag">
+              ✨ 5個以下
+              <button class="selected-tag__remove" aria-label="削除">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <line x1="18" y1="6" x2="6" y2="18"/>
+                  <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+              </button>
+            </span>
+          </div>
+        </div>
+        <!-- /SelectedSummary -->
+
+        <!-- COMPONENT: FilterSection (調理時間) -->
+        <section class="filter-section">
+          <h3 class="filter-section__title">
+            <span class="filter-section__title-icon">⏱️</span>
+            調理時間
+          </h3>
+          <div class="time-chips">
+            <button class="time-chip is-selected" type="button">
+              <span class="time-chip__icon">⚡</span>
+              <span class="time-chip__label">15分以内</span>
+            </button>
+            <button class="time-chip" type="button">
+              <span class="time-chip__icon">🕐</span>
+              <span class="time-chip__label">15〜30分</span>
+            </button>
+            <button class="time-chip" type="button">
+              <span class="time-chip__icon">🕑</span>
+              <span class="time-chip__label">30〜45分</span>
+            </button>
+            <button class="time-chip" type="button">
+              <span class="time-chip__icon">🕒</span>
+              <span class="time-chip__label">45〜60分</span>
+            </button>
+            <button class="time-chip" type="button">
+              <span class="time-chip__icon">🍲</span>
+              <span class="time-chip__label">60分以上</span>
+            </button>
+          </div>
+        </section>
+        <!-- /FilterSection -->
+
+        <!-- COMPONENT: FilterSection (ジャンル) -->
+        <section class="filter-section">
+          <h3 class="filter-section__title">
+            <span class="filter-section__title-icon">🍽️</span>
+            ジャンル
+          </h3>
+          <div class="genre-grid">
+            <button class="genre-card is-selected" type="button">
+              <span class="genre-card__emoji">🍚</span>
+              <span class="genre-card__label">ご飯もの</span>
+            </button>
+            <button class="genre-card" type="button">
+              <span class="genre-card__emoji">🍤</span>
+              <span class="genre-card__label">揚げ物</span>
+            </button>
+            <button class="genre-card" type="button">
+              <span class="genre-card__emoji">🔥</span>
+              <span class="genre-card__label">焼き物</span>
+            </button>
+            <button class="genre-card" type="button">
+              <span class="genre-card__emoji">🥗</span>
+              <span class="genre-card__label">和物・サラダ</span>
+            </button>
+            <button class="genre-card" type="button">
+              <span class="genre-card__emoji">🍳</span>
+              <span class="genre-card__label">炒め物</span>
+            </button>
+            <button class="genre-card" type="button">
+              <span class="genre-card__emoji">🍲</span>
+              <span class="genre-card__label">煮物</span>
+            </button>
+            <button class="genre-card" type="button">
+              <span class="genre-card__emoji">🥘</span>
+              <span class="genre-card__label">蒸し物</span>
+            </button>
+            <button class="genre-card" type="button">
+              <span class="genre-card__emoji">🍜</span>
+              <span class="genre-card__label">麺類</span>
+            </button>
+          </div>
+        </section>
+        <!-- /FilterSection -->
+
+        <!-- COMPONENT: FilterSection (材料数) -->
+        <section class="filter-section">
+          <h3 class="filter-section__title">
+            <span class="filter-section__title-icon">🥕</span>
+            材料数
+          </h3>
+          <div class="ingredient-chips">
+            <button class="ingredient-chip is-selected" type="button">
+              <span class="ingredient-chip__icon">✨</span>
+              5個以下
+            </button>
+            <button class="ingredient-chip" type="button">
+              6〜10個
+            </button>
+            <button class="ingredient-chip" type="button">
+              11〜15個
+            </button>
+            <button class="ingredient-chip" type="button">
+              16〜20個
+            </button>
+            <button class="ingredient-chip" type="button">
+              20個以上
+            </button>
+          </div>
+        </section>
+        <!-- /FilterSection -->
+
+        <!-- キーボードヒント（デスクトップ向け） -->
+        <p class="keyboard-hint">
+          <kbd>Esc</kbd> で閉じる・<kbd>Enter</kbd> で適用
+        </p>
+
+      </div>
+      <!-- /ModalContent -->
+
+      <!-- COMPONENT: ModalFooter -->
+      <footer class="modal__footer">
+        <button class="reset-button" type="button">
+          リセット
+        </button>
+        <button class="apply-button" type="button">
+          レシピを見る
+          <span class="apply-button__count">12</span>
+        </button>
+      </footer>
+      <!-- /ModalFooter -->
+
+    </div>
+    <!-- /Modal -->
+
+  </div>
+  <!-- /ModalOverlay -->
+
+</body>
+</html>

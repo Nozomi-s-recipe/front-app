@@ -1,14 +1,17 @@
-import { Breadcrumbs } from '@/components/BreadCrumbs';
-import { RecipePreviewListContainer } from '@/components/recipe-preview/RecipePreviewList.container';
+import { CategoryHero } from '@/components/category/CategoryHero';
+import { CategoryFilterSection } from '@/components/category/CategoryFilterSection';
+import { ActiveFiltersBar } from '@/components/category/ActiveFiltersBar';
+import { CategoryRecipeList } from '@/components/category/CategoryRecipeList';
 import { getMainCategoryByMainId } from '@/utils/const';
+import { getRecipes } from '@/utils/micro-cms/micro-cms';
+import type { RecipeMetadata } from '@/lib/filters/filterTypes';
 
-// export async function generateStaticParams() {
-//   const res = await getRecipes();
-
-//   return res.contents.map((recipe) => ({
-//     mainCategoryId: recipe.mainCategory[0],
-//   }));
-// }
+const CATEGORY_EMOJIS: Record<string, string> = {
+  mediterranean: '🌊',
+  japanese: '🍣',
+  chinese: '🥟',
+  sweets: '🍰',
+};
 
 export default async function MainCategoryPage({
   params,
@@ -18,15 +21,33 @@ export default async function MainCategoryPage({
   const { mainCategoryId } = await params;
   const mainCategory = getMainCategoryByMainId(mainCategoryId);
 
+  if (!mainCategory) {
+    return <div>Category not found</div>;
+  }
+
+  // Fetch recipes for this category
+  const { contents } = await getRecipes({
+    filters: `mainCategory[contains]${mainCategory.id}`,
+  });
+
+  // Convert recipes to RecipeMetadata format for filtering
+  const recipeMeta: RecipeMetadata[] = contents.map((recipe) => ({
+    id: recipe.id,
+    cookingTime: recipe.cookingTime,
+    genres: recipe.subCategory,
+    ingredientCount: recipe.ingredients.length + recipe.seasonings.length,
+  }));
+
   return (
     <>
-      <h1 className='max-w-sm py-8 mx-auto text-2xl font-bold'>
-        {mainCategory?.name}
-      </h1>
-      <div className='flex-1'>
-        <RecipePreviewListContainer mainCategory={mainCategory!} />
-      </div>
-      <Breadcrumbs />
+      <CategoryHero
+        category={mainCategory}
+        recipeCount={contents.length}
+        emoji={CATEGORY_EMOJIS[mainCategory.id] || '🍽️'}
+      />
+      <CategoryFilterSection recipes={recipeMeta} />
+      <ActiveFiltersBar recipes={recipeMeta} />
+      <CategoryRecipeList recipes={contents} totalCount={contents.length} />
     </>
   );
 }
