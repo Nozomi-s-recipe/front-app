@@ -174,7 +174,7 @@ export const SIDE_MENUS: SideMenu[] = [
   },
 ];
 
-export const DEFAULT_SERVINGS = 3;
+export const DEFAULT_SERVINGS = 2;
 
 export const LIMIT = 12;
 
@@ -194,7 +194,7 @@ type SideMenu = {
 };
 
 export const getMainCategoryByMainId = (
-  mainCategoryId: string
+  mainCategoryId: string,
 ): Menu | undefined => {
   return SIDE_MENUS.find((menu) => menu.mainCategory.id === mainCategoryId)
     ?.mainCategory;
@@ -202,6 +202,6 @@ export const getMainCategoryByMainId = (
 
 export const getSubCategoryById = (subCategoryId: string): Menu | undefined => {
   return SIDE_MENUS.flatMap((menu) => menu.subCategories).find(
-    (subCategory) => subCategory.id === subCategoryId
+    (subCategory) => subCategory.id === subCategoryId,
   );
 };

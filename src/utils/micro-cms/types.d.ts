@@ -16,11 +16,33 @@ export type Ingredient = {
   unit: Unit[];
 };
 
+// ビタミンの型定義
+export type Vitamin = {
+  fieldId: 'vitamins';
+  vitaminA?: number;
+  vitaminB1?: number;
+  vitaminB2?: number;
+  vitaminB3?: number;
+  vitaminB5?: number;
+  vitaminB6?: number;
+  vitaminB9?: number;
+  vitaminB12?: number;
+  vitaminC?: number;
+  vitaminD?: number;
+  vitaminE?: number;
+  vitaminK?: number;
+};
+
 // 栄養成分の型定義
 export type Nutrient = {
   fieldId: 'nutrient';
-  calories: number;
-  protein: number;
+  calories?: number;
+  proteins?: number;
+  fats?: number;
+  carbohydrates?: number;
+  dietaryFiber?: number;
+  salt?: number;
+  vitamins?: Vitamin[];
 };
 
 // 調理手順の型定義

@@ -1,0 +1,496 @@
+{
+  "apiFields": [
+    {
+      "fieldId": "isPopular",
+      "name": "人気レシピ",
+      "kind": "boolean",
+      "required": false
+    },
+    {
+      "fieldId": "name",
+      "name": "レシピ名",
+      "kind": "text",
+      "required": false
+    },
+    {
+      "fieldId": "description",
+      "name": "レシピの説明",
+      "kind": "textArea",
+      "required": false
+    },
+    {
+      "fieldId": "image",
+      "name": "レシピ画像",
+      "kind": "media",
+      "required": false
+    },
+    {
+      "fieldId": "mainCategory",
+      "name": "メインカテゴリ",
+      "kind": "select",
+      "required": false,
+      "selectItems": [
+        { "id": "7W0R_Tz16d", "value": "mediterranean" },
+        { "id": "Pd1M0_T13W", "value": "japanese" },
+        { "id": "L4Hn3yPDXh", "value": "chinese" },
+        { "id": "RpJHYY1EUi", "value": "sweets" }
+      ],
+      "selectInitialValue": [""],
+      "multipleSelect": false
+    },
+    {
+      "fieldId": "subCategory",
+      "name": "サブカテゴリ",
+      "kind": "select",
+      "description": "選択肢は他の項目と重複しないように命名すること。URLで使用するのでケバブケースで定義する。",
+      "required": false,
+      "selectItems": [
+        { "id": "zEI0QD5q_a", "value": "--japanese---" },
+        { "id": "UDf0BJGHU-", "value": "japanese-rice-dishes" },
+        { "id": "u-c7dAUlzB", "value": "japanese-noodles" },
+        { "id": "qxry2hQDv_", "value": "japanese-soups" },
+        { "id": "tfzXc7QSPt", "value": "japanese-hot-pots" },
+        { "id": "WQ-0UmlI50", "value": "japanese-fried-dishes" },
+        { "id": "zWsp1M6Nen", "value": "japanese-simmered-dishes" },
+        { "id": "mpyaAnu5bn", "value": "japanese-steamed-dishes" },
+        { "id": "6aDZX8L69b", "value": "japanese-grilled-dishes" },
+        { "id": "9dn9Lz8cWN", "value": "japanese-side-dishes-and-salads" },
+        { "id": "L8-VDxIg70", "value": "japanese-pickles-and-fermented-foods" },
+        { "id": "gj6AWpEXDw", "value": "---mediterranean---" },
+        { "id": "dsg0lKZh7x", "value": "mediterranean-pasta-and-spaghetti" },
+        { "id": "QyVNH0duaT", "value": "mediterranean-gratin-and-doria" },
+        { "id": "wnrJdnbDAR", "value": "mediterranean-meat-dishes" },
+        { "id": "8ktPsKo63N", "value": "mediterranean-seafood-dishes" },
+        {
+          "id": "GmgwELN4oJ",
+          "value": "mediterranean-omelette-and-egg-dishes"
+        },
+        { "id": "sJfYNzDcr1", "value": "mediterranean-sandwiches-and-bread" },
+        { "id": "s_GSmpFxsg", "value": "mediterranean-appetizers-and-salads" },
+        { "id": "2OZ8b0Y1TN", "value": "mediterranean-sauces-and-dressings" },
+        { "id": "yO-q1FGqDq", "value": "---chinese---" },
+        { "id": "stN3lu194_", "value": "chinese-stir-fry" },
+        { "id": "0piRmW1Ap7", "value": "chinese-fried-dishes" },
+        { "id": "wXGuO_JSAT", "value": "chinese-braised-dishes" },
+        { "id": "8yo5sa3FJ6", "value": "chinese-noodles" },
+        { "id": "VaJW5GB4VR", "value": "chinese-rice-dishes" },
+        { "id": "HtPJ15oIyH", "value": "chinese-dim-sum-and-dumplings" },
+        { "id": "pDk8SME8sK", "value": "chinese-soups" },
+        { "id": "WYvV2tTy_2", "value": "chinese-steamed-dishes" },
+        { "id": "i6RhLzdLS-", "value": "chinese-appetizers-and-salads" },
+        { "id": "fHfaYwufj0", "value": "chinese-seasonings-and-sauces" },
+        { "id": "56N6rlo4a-", "value": "---sweets---" },
+        { "id": "xRcejKUZQb", "value": "sweets-cakes" },
+        { "id": "kYZ27j-hii", "value": "sweets-cookies-and-biscuits" },
+        { "id": "IbfkdyDUkf", "value": "sweets-bread-and-muffins" },
+        { "id": "PrRSLwnMPv", "value": "sweets-puddings-and-jellies" },
+        { "id": "Bb1EDX-KYN", "value": "sweets-ice-cream-and-sherbet" },
+        { "id": "3x6GrHcNTC", "value": "sweets-japanese-confections" }
+      ],
+      "selectInitialValue": [],
+      "multipleSelect": false
+    },
+    {
+      "fieldId": "cookingTime",
+      "name": "調理時間",
+      "kind": "number",
+      "description": "調理時間を「分」で入力してください。",
+      "required": false
+    },
+    {
+      "fieldId": "nutrient",
+      "name": "栄養素",
+      "kind": "custom",
+      "required": false,
+      "customFieldCreatedAt": "2025-01-02T06:36:02.845Z"
+    },
+    {
+      "fieldId": "tags",
+      "name": "タグ",
+      "kind": "relationList",
+      "required": false,
+      "referenceDisplayItem": "TIOA_QcdY1"
+    },
+    {
+      "fieldId": "ingredients",
+      "name": "食材",
+      "kind": "repeater",
+      "description": "レシピに使用する食材を入力します。",
+      "required": false,
+      "customFieldCreatedAtList": ["2025-01-02T04:13:54.717Z"]
+    },
+    {
+      "fieldId": "seasonings",
+      "name": "調味料",
+      "kind": "repeater",
+      "description": "レシピで使用する調味料を入力します。",
+      "required": false,
+      "customFieldCreatedAtList": ["2025-01-02T04:13:54.717Z"]
+    },
+    { "fieldId": "note", "name": "備考", "kind": "text", "required": false },
+    {
+      "fieldId": "cookingSteps",
+      "name": "調理ステップ",
+      "kind": "repeater",
+      "required": false,
+      "customFieldCreatedAtList": ["2025-01-02T04:44:51.534Z"]
+    }
+  ],
+  "customFields": [
+    {
+      "createdAt": "2025-01-02T04:13:54.717Z",
+      "fieldId": "ingredient",
+      "name": "食材",
+      "fields": [
+        {
+          "idValue": "hu5RS31VQF",
+          "fieldId": "name",
+          "name": "食材名",
+          "kind": "text",
+          "required": true
+        },
+        {
+          "idValue": "Ki203ZIRay",
+          "fieldId": "quantity",
+          "name": "数量",
+          "kind": "number",
+          "description": "単位で「お好み・適量」を使う場合は０にする。",
+          "required": false
+        },
+        {
+          "idValue": "RgkSF_2llw",
+          "fieldId": "unit",
+          "name": "単位",
+          "kind": "repeater",
+          "description": "「お好み」「適量」を選択する場合は、quantityを0にします。",
+          "required": false,
+          "customFieldCreatedAtList": ["2025-01-02T04:17:39.229Z"],
+          "repeaterCountLimitValidation": {
+            "repeatCount": { "min": 1, "max": 1 }
+          }
+        }
+      ],
+      "position": [["hu5RS31VQF", "RgkSF_2llw"], ["Ki203ZIRay"]],
+      "updatedAt": "2025-02-11T11:28:15.002Z",
+      "viewerGroup": "ZZ8"
+    },
+    {
+      "createdAt": "2025-01-02T04:17:39.229Z",
+      "fieldId": "unit",
+      "name": "単位",
+      "fields": [
+        {
+          "idValue": "okFJUmnWLx",
+          "fieldId": "name",
+          "name": "単位名",
+          "kind": "select",
+          "required": false,
+          "selectItems": [
+            { "id": "52vrwk8823", "value": "大さじ" },
+            { "id": "q_UmzKdL4d", "value": "小さじ" },
+            { "id": "OQzaLOvGJJ", "value": "個" },
+            { "id": "YJ6bon6p4Z", "value": "匹" },
+            { "id": "syJEwrv96G", "value": "g" },
+            { "id": "UXJfQveY7S", "value": "振り" },
+            { "id": "dJBJ7tOXzS", "value": "枚" },
+            { "id": "mKhCJgyg5q", "value": "片" },
+            { "id": "TSTv_z0bXq", "value": "本" },
+            { "id": "CmZP8VCVtI", "value": "ml" },
+            { "id": "xLJ96tFJ7c", "value": "cm" }
+          ],
+          "selectInitialValue": [],
+          "multipleSelect": false
+        },
+        {
+          "idValue": "zU5guMXE3T",
+          "fieldId": "position",
+          "name": "単位の表示位置",
+          "kind": "select",
+          "description": "prefix: 前につく単位 / suffix: 後ろにつく単位",
+          "required": false,
+          "selectItems": [
+            { "id": "gNDunOH3Vf", "value": "prefix" },
+            { "id": "U4vZkhPac7", "value": "suffix" }
+          ],
+          "selectInitialValue": ["U4vZkhPac7"],
+          "multipleSelect": false
+        }
+      ],
+      "position": [["-Qinu962NI", "okFJUmnWLx"], ["zU5guMXE3T"]],
+      "updatedAt": "2025-12-26T02:40:37.065Z",
+      "viewerGroup": "ZZ8"
+    },
+    {
+      "createdAt": "2025-01-02T04:44:51.534Z",
+      "fieldId": "cookingStep",
+      "name": "調理ステップ",
+      "fields": [
+        {
+          "idValue": "HDWwEgeY_y",
+          "fieldId": "name",
+          "name": "ステップ名",
+          "kind": "text",
+          "required": true
+        },
+        {
+          "idValue": "AMt6YEkdpu",
+          "fieldId": "description",
+          "name": "ステップの説明",
+          "kind": "textArea",
+          "required": true
+        },
+        {
+          "idValue": "Vd8e73qKb3",
+          "fieldId": "image",
+          "name": "調理ステップの画像",
+          "kind": "media",
+          "required": false
+        },
+        {
+          "idValue": "BrKYlWi231",
+          "fieldId": "tips",
+          "name": "ポイント",
+          "kind": "textArea",
+          "required": false
+        }
+      ],
+      "position": [
+        ["HDWwEgeY_y", "Vd8e73qKb3"],
+        ["AMt6YEkdpu", "BrKYlWi231"]
+      ],
+      "updatedAt": "2025-01-02T04:44:51.534Z",
+      "viewerGroup": "ZZ8"
+    },
+    {
+      "createdAt": "2025-01-02T06:29:31.515Z",
+      "fieldId": "category",
+      "name": "カテゴリ",
+      "fields": [
+        {
+          "idValue": "0KQpCpvkzY",
+          "fieldId": "primary",
+          "name": "メインカテゴリ",
+          "kind": "select",
+          "required": true,
+          "selectItems": [
+            { "id": "LD2s1pWTY7", "value": "地中海料理" },
+            { "id": "1BTp4Y-dcb", "value": "和食" },
+            { "id": "agYaPF_ag0", "value": "洋食" },
+            { "id": "xpnjy_yzfx", "value": "中華料理" }
+          ],
+          "selectInitialValue": [],
+          "multipleSelect": false
+        },
+        {
+          "idValue": "gezLYmZZI8",
+          "fieldId": "secondary",
+          "name": "サブカテゴリ",
+          "kind": "select",
+          "required": true,
+          "selectItems": [
+            { "id": "mWAZP6IlCK", "value": "---和食---" },
+            { "id": "tRSe-ofShc", "value": "ご飯もの" },
+            { "id": "nwOyhDfYUk", "value": "麺類" },
+            { "id": "tJZM12yUD_", "value": "---地中海料理---" },
+            { "id": "BMGtlXaqcA", "value": "パスタ" },
+            { "id": "jRZ8Diz6nf", "value": "魚介料理" },
+            { "id": "B3KDa5ufry", "value": "肉料理" },
+            { "id": "pNtbQsDSrV", "value": "前菜" },
+            { "id": "BTevALLtKg", "value": "スープ&シチュー" },
+            { "id": "oR77HqEmkE", "value": "---中華---" }
+          ],
+          "selectInitialValue": [],
+          "multipleSelect": false
+        }
+      ],
+      "position": [["0KQpCpvkzY"], ["gezLYmZZI8"]],
+      "updatedAt": "2025-01-02T06:42:02.604Z",
+      "viewerGroup": "ZZ8"
+    },
+    {
+      "createdAt": "2025-01-02T06:36:02.845Z",
+      "fieldId": "nutrient",
+      "name": "栄養素",
+      "fields": [
+        {
+          "idValue": "nlJUA1Tjam",
+          "fieldId": "calories",
+          "name": "カロリー",
+          "kind": "number",
+          "description": "「kcal」で入力してください。",
+          "required": false
+        },
+        {
+          "idValue": "UXiFYateVT",
+          "fieldId": "proteins",
+          "name": "タンパク質",
+          "kind": "number",
+          "description": "「g」で入力してください。",
+          "required": false
+        },
+        {
+          "idValue": "SNWku8pKAp",
+          "fieldId": "fats",
+          "name": "脂質",
+          "kind": "number",
+          "required": false
+        },
+        {
+          "idValue": "KhbZTJ3spR",
+          "fieldId": "carbohydrates",
+          "name": "炭水化物",
+          "kind": "number",
+          "required": false
+        },
+        {
+          "idValue": "6LWtYd7He3",
+          "fieldId": "dietaryFiber",
+          "name": "食物繊維",
+          "kind": "number",
+          "required": false
+        },
+        {
+          "idValue": "e9UAMXBerE",
+          "fieldId": "salt",
+          "name": "食塩相当量",
+          "kind": "number",
+          "required": false
+        },
+        {
+          "idValue": "AUa90tqbxr",
+          "fieldId": "vitamins",
+          "name": "ビタミン",
+          "kind": "repeater",
+          "required": false,
+          "customFieldCreatedAtList": ["2025-02-16T13:30:39.452Z"]
+        }
+      ],
+      "position": [
+        [
+          "nlJUA1Tjam",
+          "SNWku8pKAp",
+          "KhbZTJ3spR",
+          "WSYgnrmQcP",
+          "6LWtYd7He3",
+          "e9UAMXBerE",
+          "mTSNFznsMq",
+          "AUa90tqbxr"
+        ],
+        ["UXiFYateVT"]
+      ],
+      "updatedAt": "2025-02-16T13:37:16.272Z",
+      "viewerGroup": "ZZ8"
+    },
+    {
+      "createdAt": "2025-02-16T13:30:39.452Z",
+      "fieldId": "vitamins",
+      "name": "ビタミン",
+      "fields": [
+        {
+          "idValue": "4u26OWkW4d",
+          "fieldId": "vitaminA",
+          "name": "ビタミンA",
+          "kind": "number",
+          "required": false
+        },
+        {
+          "idValue": "MCk_MpM7zP",
+          "fieldId": "vitaminB1",
+          "name": "ビタミンB1",
+          "kind": "number",
+          "required": false
+        },
+        {
+          "idValue": "eAAzOFaFJi",
+          "fieldId": "vitaminB2",
+          "name": "ビタミンB2",
+          "kind": "number",
+          "required": false
+        },
+        {
+          "idValue": "R3GS5PAmQm",
+          "fieldId": "vitaminB3",
+          "name": "ビタミンB3",
+          "kind": "number",
+          "required": false
+        },
+        {
+          "idValue": "j9YMSznFFj",
+          "fieldId": "vitaminB5",
+          "name": "ビタミンB5",
+          "kind": "number",
+          "required": false
+        },
+        {
+          "idValue": "63UTbvwgqK",
+          "fieldId": "vitaminB6",
+          "name": "ビタミンB6",
+          "kind": "number",
+          "required": false
+        },
+        {
+          "idValue": "CiUNOWdbZ8",
+          "fieldId": "vitaminB9",
+          "name": "ビタミンB9",
+          "kind": "number",
+          "required": false
+        },
+        {
+          "idValue": "Z1W4nBO7Ph",
+          "fieldId": "vitaminB12",
+          "name": "ビタミンB12",
+          "kind": "number",
+          "required": false
+        },
+        {
+          "idValue": "Ho0zIrRD02",
+          "fieldId": "vitaminC",
+          "name": "ビタミンC",
+          "kind": "number",
+          "required": false
+        },
+        {
+          "idValue": "5ELL56mmIA",
+          "fieldId": "vitaminD",
+          "name": "ビタミンD",
+          "kind": "number",
+          "required": false
+        },
+        {
+          "idValue": "1oemRfsWmR",
+          "fieldId": "vitaminE",
+          "name": "ビタミンE",
+          "kind": "number",
+          "required": false
+        },
+        {
+          "idValue": "s6K5ZhNV-l",
+          "fieldId": "vitaminK",
+          "name": "ビタミンK",
+          "kind": "number",
+          "required": false
+        }
+      ],
+      "position": [
+        [
+          "4u26OWkW4d",
+          "j9YMSznFFj",
+          "Z1W4nBO7Ph",
+          "5ELL56mmIA",
+          "1oemRfsWmR",
+          "s6K5ZhNV-l"
+        ],
+        [
+          "eAAzOFaFJi",
+          "MCk_MpM7zP",
+          "R3GS5PAmQm",
+          "63UTbvwgqK",
+          "CiUNOWdbZ8",
+          "Ho0zIrRD02"
+        ]
+      ],
+      "updatedAt": "2025-02-16T13:30:39.452Z",
+      "viewerGroup": "ZZ8"
+    }
+  ]
+}

@@ -1,18 +1,7 @@
-// import { Breadcrumbs } from '@/components/BreadCrumbs';
-import { BreadcrumbsContainer } from '@/components/BreadCrumbs.container';
-import { ProfileCard } from '@/components/profile/ProfileCard';
-import { CookingStepSectionContainer } from '@/components/recipe-detail/cooking-step-section/CookingStepSection.container';
-import { IngredientSectionContainer } from '@/components/recipe-detail/ingredient-section/IngredientSection.container';
-import { RecipeOverviewContainer } from '@/components/recipe-detail/recipe-overview/RecipeOverview.container';
-import { RecipeOverviewSkeleton } from '@/components/recipe-detail/recipe-overview/RecipeOverviewSkeleton';
-import { RecommendedRecipesSection } from '@/components/recipe-detail/recipe-recommend/RecommendedRecipesSection';
-import { ScrollToIngredientsButton } from '@/components/recipe-detail/ScrollToIngredientsButton';
-import { UserFeedback } from '@/components/recipe-detail/user-feedback/UserFeedback';
+import { ModernRecipeDetail } from '@/components/recipe-detail/modern/ModernRecipeDetail';
 import { LIMIT } from '@/utils/const';
 import { getRecipeById, getRecipes } from '@/utils/micro-cms/micro-cms';
 import { Metadata } from 'next';
-import { Suspense } from 'react';
-// import { getRecipeById } from '@/lib/micro-cms/micro-cms';
 
 // Next.js will invalidate the cache when a
 // request comes in, at most once every 60 seconds.
@@ -68,29 +57,7 @@ export default async function RecipePage({
   params: Promise<RecipePageProps>;
 }) {
   const { recipeId } = await params;
+  const recipe = await getRecipeById(recipeId);
 
-  return (
-    <>
-      <Suspense fallback={<RecipeOverviewSkeleton />}>
-        <RecipeOverviewContainer recipeId={recipeId} />
-      </Suspense>
-      <div className='max-w-sm mx-auto flex flex-col px-4 pt-8'>
-        <div className='mb-8'>
-          <IngredientSectionContainer recipeId={recipeId} />
-        </div>
-        <div className='mb-12'>
-          <CookingStepSectionContainer recipeId={recipeId} />
-        </div>
-        <div className='mb-8'>
-          <UserFeedback recipeId={recipeId} />
-        </div>
-        <div className='mb-8'>
-          <ProfileCard />
-        </div>
-        <RecommendedRecipesSection />
-        <BreadcrumbsContainer recipeId={recipeId} />
-      </div>
-      <ScrollToIngredientsButton />
-    </>
-  );
+  return <ModernRecipeDetail recipe={recipe} recipeId={recipeId} />;
 }
