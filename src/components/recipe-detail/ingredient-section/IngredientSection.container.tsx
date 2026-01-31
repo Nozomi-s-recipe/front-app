@@ -17,7 +17,10 @@ export const IngredientSectionContainer = async ({
   return (
     <ServingsProvider>
       <div id='ingredient-section' className='pb-4'>
-        <RecipeStats cookingTime={cookingTime} calories={nutrient.calories} />
+        <RecipeStats
+          cookingTime={cookingTime}
+          calories={nutrient.calories ?? 0}
+        />
       </div>
       {note && (
         <div className='pt-2 pb-6 text-sm'>

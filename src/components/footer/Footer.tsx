@@ -19,7 +19,6 @@ const footerNavigation = {
     title: 'カテゴリー',
     links: [
       { name: '和食', href: '/japanese' },
-      { name: '洋食', href: '/western' },
       { name: '中華', href: '/chinese' },
       { name: '地中海食', href: '/mediterranean' },
       { name: 'すべてのカテゴリー', href: '/p/1', icon: true },
@@ -28,7 +27,6 @@ const footerNavigation = {
   support: {
     title: 'サポート',
     links: [
-      { name: '運営者プロフィール', href: '/profile' },
       { name: 'お問い合わせ', href: '/contact' },
       { name: 'よくある質問', href: '/faq' },
     ],

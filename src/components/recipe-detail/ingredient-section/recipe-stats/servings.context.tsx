@@ -12,7 +12,7 @@ interface ServingsContextType {
 
 // Context の作成（初期値として null! を使用）
 const ServingsContext = createContext<ServingsContextType | undefined>(
-  undefined
+  undefined,
 );
 
 // Provider Props の型定義
@@ -24,7 +24,8 @@ interface ServingsProviderProps {
 export const ServingsProvider = ({ children }: ServingsProviderProps) => {
   const [servings, setServings] = useState<number>(DEFAULT_SERVINGS);
 
-  const incrementServings = () => setServings((prev) => prev + 1);
+  const incrementServings = () =>
+    setServings((prev) => (prev < 10 ? prev + 1 : 10));
   const decrementServings = () =>
     setServings((prev) => (prev > 1 ? prev - 1 : 1));
 

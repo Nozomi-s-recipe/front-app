@@ -10,6 +10,7 @@ import {
 import { getMainCategoryByMainId, getSubCategoryById } from '@/utils/const';
 import { Slash } from 'lucide-react';
 import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 
 type BreadcrumbsProps = {
   recipeName?: string;
@@ -101,12 +102,12 @@ export const Breadcrumbs = ({ recipeName }: BreadcrumbsProps) => {
                 </span>
               ) : (
                 <>
-                  <a
+                  <Link
                     href={item.path}
                     className='text-muted-foreground hover:text-md-on-surface transition-colors'
                   >
                     {item.label}
-                  </a>
+                  </Link>
                   <span className='text-[10px]'>›</span>
                 </>
               )}

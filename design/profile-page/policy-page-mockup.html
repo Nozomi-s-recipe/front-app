@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>レシピポリシー | Nozomi's Recipes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-primary: #2d4a3e;
+      --color-primary-light: #3d6b5a;
+      --color-accent: #5b7e6f;
+      --color-accent-warm: #e8a54b;
+      --color-text: #1a2e28;
+      --color-text-secondary: #5a6e68;
+      --color-text-muted: #8a9e98;
+      --color-bg: #f5f7f6;
+      --color-card: #ffffff;
+      --color-border: #e8edeb;
+      --color-good: #4a7c59;
+      --color-good-bg: #eef5f0;
+      --color-bad: #a65d57;
+      --color-bad-bg: #faf0ef;
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
+      --shadow-lg: 0 8px 40px rgba(0,0,0,0.12);
+      --radius-sm: 12px;
+      --radius-md: 20px;
+      --radius-lg: 28px;
+      --radius-full: 9999px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    /* ===== Mobile Container ===== */
+    .mobile-container {
+      max-width: 430px;
+      margin: 0 auto;
+      background: var(--color-bg);
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* ===== Hero Section ===== */
+    .hero-section {
+      position: relative;
+      height: 280px;
+      background: linear-gradient(165deg, #2d4a3e 0%, #4a7c59 50%, #6b9b7a 100%);
+      border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .hero-pattern {
+      position: absolute;
+      inset: 0;
+      opacity: 0.1;
+      background-image: 
+        radial-gradient(circle at 20% 80%, white 1px, transparent 1px),
+        radial-gradient(circle at 80% 20%, white 1px, transparent 1px),
+        radial-gradient(circle at 40% 40%, white 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .hero-nav {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+    }
+
+    .nav-btn {
+      width: 44px;
+      height: 44px;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      border: none;
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .nav-btn:hover {
+      background: rgba(255,255,255,0.3);
+      transform: scale(1.05);
+    }
+
+    .nav-btn svg {
+      width: 22px;
+      height: 22px;
+      stroke: white;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .hero-content {
+      position: absolute;
+      bottom: 40px;
+      left: 24px;
+      right: 24px;
+    }
+
+    .hero-icon {
+      width: 56px;
+      height: 56px;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-size: 26px;
+      font-weight: 700;
+      color: white;
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+
+    .hero-subtitle {
+      font-size: 14px;
+      color: rgba(255,255,255,0.8);
+    }
+
+    /* ===== Content Card ===== */
+    .content-card {
+      background: var(--color-card);
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      margin-top: -24px;
+      position: relative;
+      z-index: 20;
+      padding: 32px 24px 60px;
+      min-height: calc(100vh - 256px);
+    }
+
+    /* ===== Intro Section ===== */
+    .intro-section {
+      margin-bottom: 36px;
+    }
+
+    .intro-question {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--color-primary);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .intro-text {
+      font-size: 15px;
+      color: var(--color-text-secondary);
+      line-height: 2;
+    }
+
+    .intro-text p {
+      margin-bottom: 16px;
+    }
+
+    .intro-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    .intro-highlight {
+      background: linear-gradient(transparent 60%, rgba(74, 124, 89, 0.15) 60%);
+      padding: 0 2px;
+    }
+
+    /* ===== Policy Cards ===== */
+    .policy-section {
+      margin-bottom: 32px;
+    }
+
+    .policy-card {
+      border-radius: var(--radius-md);
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+
+    .policy-card.good {
+      background: var(--color-good-bg);
+      border: 1px solid rgba(74, 124, 89, 0.2);
+    }
+
+    .policy-card.bad {
+      background: var(--color-bad-bg);
+      border: 1px solid rgba(166, 93, 87, 0.2);
+    }
+
+    .policy-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .policy-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+    }
+
+    .policy-card.good .policy-icon {
+      background: var(--color-good);
+      color: white;
+    }
+
+    .policy-card.bad .policy-icon {
+      background: var(--color-bad);
+      color: white;
+    }
+
+    .policy-title {
+      flex: 1;
+    }
+
+    .policy-number {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 2px;
+    }
+
+    .policy-card.good .policy-number {
+      color: var(--color-good);
+    }
+
+    .policy-card.bad .policy-number {
+      color: var(--color-bad);
+    }
+
+    .policy-title h2 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--color-text);
+      line-height: 1.4;
+    }
+
+    .policy-list {
+      list-style: none;
+    }
+
+    .policy-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .policy-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .policy-item-number {
+      width: 24px;
+      height: 24px;
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .policy-card.good .policy-item-number {
+      background: var(--color-good);
+      color: white;
+    }
+
+    .policy-card.bad .policy-item-number {
+      background: var(--color-bad);
+      color: white;
+    }
+
+    .policy-item-text {
+      font-size: 14px;
+      color: var(--color-text);
+      line-height: 1.6;
+      padding-top: 2px;
+    }
+
+    .policy-item-note {
+      font-size: 12px;
+      color: var(--color-text-muted);
+      margin-top: 4px;
+    }
+
+    /* ===== Reference Section ===== */
+    .reference-section {
+      background: var(--color-bg);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      text-align: center;
+    }
+
+    .reference-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--color-text-muted);
+      margin-bottom: 12px;
+    }
+
+    .reference-book {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      text-align: left;
+      padding: 16px;
+      background: white;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.2s;
+    }
+
+    .reference-book:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .book-cover {
+      width: 60px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .book-cover span {
+      font-size: 24px;
+    }
+
+    .book-info {
+      flex: 1;
+    }
+
+    .book-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-text);
+      line-height: 1.5;
+      margin-bottom: 4px;
+    }
+
+    .book-author {
+      font-size: 12px;
+      color: var(--color-text-muted);
+    }
+
+    .book-arrow {
+      width: 32px;
+      height: 32px;
+      background: var(--color-bg);
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .book-arrow svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--color-text-muted);
+      stroke-width: 2;
+      fill: none;
+    }
+
+    /* ===== Footer Navigation ===== */
+    .footer-nav {
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .footer-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 0;
+      text-decoration: none;
+      color: var(--color-text);
+      border-bottom: 1px solid var(--color-border);
+      transition: all 0.2s;
+    }
+
+    .footer-link:last-child {
+      border-bottom: none;
+    }
+
+    .footer-link:hover {
+      color: var(--color-primary);
+    }
+
+    .footer-link-text {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer-link-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--color-bg);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    .footer-link-label {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .footer-link svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--color-text-muted);
+      stroke-width: 2;
+      fill: none;
+    }
+
+    /* ===== Desktop Adaptation ===== */
+    @media (min-width: 768px) {
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px;
+        background: linear-gradient(135deg, #e8edeb 0%, #d8e0dd 100%);
+      }
+
+      .mobile-container {
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-lg);
+        overflow: hidden;
+        min-height: auto;
+        max-height: 900px;
+        overflow-y: auto;
+      }
+
+      .hero-section {
+        height: 240px;
+      }
+
+      .content-card {
+        min-height: auto;
+      }
+    }
+
+    /* ===== Scrollbar ===== */
+    @media (min-width: 768px) {
+      .mobile-container::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      .mobile-container::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      .mobile-container::-webkit-scrollbar-thumb {
+        background: var(--color-border);
+        border-radius: 3px;
+      }
+
+      .mobile-container::-webkit-scrollbar-thumb:hover {
+        background: var(--color-text-muted);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="mobile-container">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-pattern"></div>
+      <nav class="hero-nav">
+        <button class="nav-btn back" onclick="history.back()">
+          <svg viewBox="0 0 24 24">
+            <path d="M15 18l-6-6 6-6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button class="nav-btn share">
+          <svg viewBox="0 0 24 24">
+            <circle cx="18" cy="5" r="3"/>
+            <circle cx="6" cy="12" r="3"/>
+            <circle cx="18" cy="19" r="3"/>
+            <path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/>
+          </svg>
+        </button>
+      </nav>
+      <div class="hero-content">
+        <div class="hero-icon">📋</div>
+        <h1 class="hero-title">レシピポリシー</h1>
+        <p class="hero-subtitle">Nozomi's Recipesが大切にしていること</p>
+      </div>
+    </section>
+
+    <!-- Content Card -->
+    <main class="content-card">
+      <!-- Intro Section -->
+      <section class="intro-section">
+        <p class="intro-question">カラダによい食べ物ってなんだろう？</p>
+        <div class="intro-text">
+          <p>以前の私は疲れ体質で、少しでもカラダに良いものをと思い、根拠のない健康情報に振り回されていました。</p>
+          <p>ところが、<span class="intro-highlight">ある本に沿った食生活をすることで、カラダが疲れにくくなり</span>、仕事・プライベートを楽しめるようになりました。</p>
+          <p>本レシピサイトでは、以下のポリシーによる、カラダに悪い食材を使わない、カラダに嬉しいレシピを考案・発信します。</p>
+        </div>
+      </section>
+
+      <!-- Policy Section -->
+      <section class="policy-section">
+        <!-- Good Foods -->
+        <article class="policy-card good">
+          <div class="policy-header">
+            <div class="policy-icon">✓</div>
+            <div class="policy-title">
+              <div class="policy-number">Policy 01</div>
+              <h2>健康に良い食材を<br>積極的に使用します</h2>
+            </div>
+          </div>
+          <ul class="policy-list">
+            <li class="policy-item">
+              <span class="policy-item-number">1</span>
+              <div>
+                <div class="policy-item-text">魚</div>
+              </div>
+            </li>
+            <li class="policy-item">
+              <span class="policy-item-number">2</span>
+              <div>
+                <div class="policy-item-text">野菜と果物</div>
+                <div class="policy-item-note">※じゃがいもは除く</div>
+              </div>
+            </li>
+            <li class="policy-item">
+              <span class="policy-item-number">3</span>
+              <div>
+                <div class="policy-item-text">茶色い炭水化物</div>
+                <div class="policy-item-note">全粒粉、玄米、そば等</div>
+              </div>
+            </li>
+            <li class="policy-item">
+              <span class="policy-item-number">4</span>
+              <div>
+                <div class="policy-item-text">オリーブオイル</div>
+              </div>
+            </li>
+            <li class="policy-item">
+              <span class="policy-item-number">5</span>
+              <div>
+                <div class="policy-item-text">ナッツ類</div>
+              </div>
+            </li>
+          </ul>
+        </article>
+
+        <!-- Bad Foods -->
+        <article class="policy-card bad">
+          <div class="policy-header">
+            <div class="policy-icon">✕</div>
+            <div class="policy-title">
+              <div class="policy-number">Policy 02</div>
+              <h2>健康に悪い食材を<br>極力使用しません</h2>
+            </div>
+          </div>
+          <ul class="policy-list">
+            <li class="policy-item">
+              <span class="policy-item-number">1</span>
+              <div>
+                <div class="policy-item-text">赤い肉</div>
+                <div class="policy-item-note">豚肉、牛肉、羊肉等。鶏肉は含まない</div>
+              </div>
+            </li>
+            <li class="policy-item">
+              <span class="policy-item-number">2</span>
+              <div>
+                <div class="policy-item-text">加工肉</div>
+                <div class="policy-item-note">ハム、ベーコン、ソーセージ</div>
+              </div>
+            </li>
+            <li class="policy-item">
+              <span class="policy-item-number">3</span>
+              <div>
+                <div class="policy-item-text">白い炭水化物</div>
+                <div class="policy-item-note">白米、うどん、パスタ、じゃがいも等</div>
+              </div>
+            </li>
+            <li class="policy-item">
+              <span class="policy-item-number">4</span>
+              <div>
+                <div class="policy-item-text">飽和脂肪酸を多く含む物</div>
+                <div class="policy-item-note">バター等</div>
+              </div>
+            </li>
+          </ul>
+        </article>
+      </section>
+
+      <!-- Reference Section -->
+      <section class="reference-section">
+        <p class="reference-label">参考書籍</p>
+        <a href="#" class="reference-book">
+          <div class="book-cover">
+            <span>📖</span>
+          </div>
+          <div class="book-info">
+            <div class="book-title">世界一シンプルで科学的に証明された究極の食事</div>
+            <div class="book-author">津川 友介 著</div>
+          </div>
+          <div class="book-arrow">
+            <svg viewBox="0 0 24 24">
+              <path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </a>
+      </section>
+
+      <!-- Footer Navigation -->
+      <nav class="footer-nav">
+        <a href="/" class="footer-link">
+          <div class="footer-link-text">
+            <div class="footer-link-icon">🏠</div>
+            <span class="footer-link-label">トップページ</span>
+          </div>
+          <svg viewBox="0 0 24 24">
+            <path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a href="/profile" class="footer-link">
+          <div class="footer-link-text">
+            <div class="footer-link-icon">👩‍🍳</div>
+            <span class="footer-link-label">運営者プロフィール</span>
+          </div>
+          <svg viewBox="0 0 24 24">
+            <path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a href="/faq" class="footer-link">
+          <div class="footer-link-text">
+            <div class="footer-link-icon">❓</div>
+            <span class="footer-link-label">よくある質問</span>
+          </div>
+          <svg viewBox="0 0 24 24">
+            <path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>
