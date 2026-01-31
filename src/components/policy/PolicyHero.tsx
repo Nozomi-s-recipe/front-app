@@ -39,7 +39,7 @@ export function PolicyHero() {
         <div className='w-14 h-14 bg-white/20 backdrop-blur-md rounded-[20px] flex items-center justify-center text-3xl mb-4'>
           📋
         </div>
-        <h1 className='text-[26px] font-bold text-white leading-tight mb-2'>
+        <h1 className='text-[26px] font-crimson font-semibold text-white leading-tight mb-2'>
           レシピポリシー
         </h1>
         <p className='text-sm text-white/80'>

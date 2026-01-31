@@ -66,7 +66,9 @@ export const IngredientsTab = ({
     prefix: string,
   ) => (
     <div className='mb-7'>
-      <h3 className='text-[15px] font-semibold text-[#1a2e28] mb-4'>{title}</h3>
+      <h3 className='text-[15px] font-crimson font-semibold text-[#1a2e28] mb-4'>
+        {title}
+      </h3>
       <ul className='list-none'>
         {items.map((item, index) => {
           const id = `${prefix}-${index}`;

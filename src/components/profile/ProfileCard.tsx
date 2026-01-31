@@ -33,7 +33,7 @@ export const ProfileCard = () => {
             </Link>
 
             <div className='flex flex-col items-center sm:items-start gap-3'>
-              <h2 className='text-2xl font-bold tracking-tight text-text-primary'>
+              <h2 className='text-2xl font-crimson font-semibold tracking-tight text-text-primary'>
                 Nozomi
               </h2>
               <Button

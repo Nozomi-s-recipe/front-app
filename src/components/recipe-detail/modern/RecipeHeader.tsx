@@ -17,7 +17,7 @@ export const RecipeHeader = ({
 }: RecipeHeaderProps) => {
   return (
     <header className='mb-6'>
-      <h1 className='text-[22px] font-bold text-[#1a2e28] leading-tight mb-2'>
+      <h1 className='text-[22px] font-crimson font-semibold text-[#1a2e28] leading-tight mb-2'>
         {title}
       </h1>
       {subtitle && (

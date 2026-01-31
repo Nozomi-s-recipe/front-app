@@ -15,7 +15,7 @@ export function ReferenceBook() {
           <span className='text-2xl'>📖</span>
         </div>
         <div className='flex-1 min-w-0'>
-          <div className='text-[13px] font-semibold text-gray-900 leading-snug mb-1'>
+          <div className='text-[13px] font-crimson font-semibold text-gray-900 leading-snug mb-1'>
             世界一シンプルで科学的に証明された究極の食事
           </div>
           <div className='text-xs text-gray-500'>津川 友介 著</div>

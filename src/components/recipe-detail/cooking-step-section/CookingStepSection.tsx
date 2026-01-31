@@ -26,7 +26,7 @@ export const CookingStepSection = ({
     <section className='min-w-80'>
       <Collapsible open={isOpen} onOpenChange={setIsOpen}>
         <CollapsibleTrigger className='flex items-center justify-between w-full pb-1 mb-2 border-b-2 border-primary'>
-          <h2 className='text-xl'>作り方</h2>
+          <h2 className='text-xl font-crimson font-semibold'>作り方</h2>
           <ChevronUp
             className={`transform transition-duration-200 ${
               isOpen ? '' : 'rotate-180'
