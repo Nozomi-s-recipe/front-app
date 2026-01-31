@@ -35,7 +35,7 @@ export default async function MainCategoryPage({
   const recipeMeta = recipesToMetadata(contents);
 
   return (
-    <>
+    <div className='min-h-screen bg-white max-w-[430px] mx-auto'>
       <CategoryHero
         category={mainCategory}
         recipeCount={contents.length}
@@ -57,6 +57,6 @@ export default async function MainCategoryPage({
           totalCount={contents.length}
         />
       </Suspense>
-    </>
+    </div>
   );
 }
