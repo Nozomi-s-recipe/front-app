@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>詳細検索 - ボトムシート</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-text-primary: #2d3748;
+      --color-text-secondary: #6b7a90;
+      --color-text-muted: #8d99ae;
+      --color-border: #e8ecf1;
+      --color-bg-card: #ffffff;
+      --color-bg-page: #f5f7fa;
+      --color-bg-hover: #e8ecf1;
+      --color-selected: #2d3748;
+      --color-overlay: rgba(0, 0, 0, 0.5);
+      --font-body: 'DM Sans', 'Noto Sans JP', -apple-system, sans-serif;
+      --shadow-sheet: 0 -4px 32px rgba(0, 0, 0, 0.15);
+      --radius-lg: 24px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--color-bg-page);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* ============================================
+       PAGE: 背景となるトップページ（デモ用）
+    ============================================ */
+    .page {
+      width: 100%;
+      max-width: 430px;
+      background: var(--color-bg-card);
+      min-height: 100vh;
+      position: relative;
+    }
+
+    .page-content {
+      padding: 20px;
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .page-content h2 {
+      font-size: 16px;
+      color: var(--color-text-primary);
+      margin-bottom: 12px;
+    }
+
+    .page-content p {
+      font-size: 14px;
+      color: var(--color-text-muted);
+      line-height: 1.6;
+    }
+
+    .demo-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .demo-card {
+      height: 80px;
+      background: var(--color-bg-page);
+      border-radius: var(--radius-md);
+    }
+
+    /* ============================================
+       COMPONENT: BottomSheetOverlay
+       オーバーレイ背景
+       Props: isOpen, onClose
+    ============================================ */
+    .bottom-sheet-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--color-overlay);
+      z-index: 100;
+      opacity: 1;
+      transition: opacity 0.3s ease;
+    }
+
+    .bottom-sheet-overlay.is-hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* ============================================
+       COMPONENT: BottomSheet
+       ボトムシート本体
+       Props: isOpen, onClose, children
+    ============================================ */
+    .bottom-sheet {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 430px;
+      max-height: 85vh;
+      background: var(--color-bg-card);
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      box-shadow: var(--shadow-sheet);
+      z-index: 101;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease;
+    }
+
+    .bottom-sheet.is-hidden {
+      transform: translateX(-50%) translateY(100%);
+    }
+
+    /* ============================================
+       COMPONENT: BottomSheetHandle
+       ドラッグハンドル
+    ============================================ */
+    .bottom-sheet__handle {
+      display: flex;
+      justify-content: center;
+      padding: 12px;
+      cursor: grab;
+    }
+
+    .bottom-sheet__handle-bar {
+      width: 36px;
+      height: 4px;
+      background: var(--color-border);
+      border-radius: 2px;
+    }
+
+    /* ============================================
+       COMPONENT: BottomSheetHeader
+       ヘッダー（タイトル＋閉じるボタン）
+       Props: title, onClose
+    ============================================ */
+    .bottom-sheet__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px 16px;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .bottom-sheet__title {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+    }
+
+    .bottom-sheet__close {
+      width: 32px;
+      height: 32px;
+      background: var(--color-bg-page);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease;
+    }
+
+    .bottom-sheet__close:hover {
+      background: var(--color-bg-hover);
+    }
+
+    .bottom-sheet__close svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--color-text-secondary);
+      stroke-width: 2;
+    }
+
+    /* ============================================
+       COMPONENT: BottomSheetContent
+       スクロール可能なコンテンツエリア
+       Props: children
+    ============================================ */
+    .bottom-sheet__content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+    }
+
+    /* ============================================
+       COMPONENT: FilterSection
+       フィルターセクション
+       Props: title, icon, children
+    ============================================ */
+    .filter-section {
+      margin-bottom: 24px;
+    }
+
+    .filter-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .filter-section__title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .filter-section__title-icon {
+      font-size: 14px;
+    }
+
+    /* ============================================
+       COMPONENT: TimeChips
+       調理時間チップ
+    ============================================ */
+    .time-chips {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding-bottom: 2px;
+    }
+
+    .time-chips::-webkit-scrollbar {
+      display: none;
+    }
+
+    .time-chip {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      padding: 12px 14px;
+      background: var(--color-bg-page);
+      border: 2px solid transparent;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      min-width: 68px;
+    }
+
+    .time-chip:hover {
+      background: var(--color-bg-hover);
+    }
+
+    .time-chip.is-selected {
+      background: rgba(45, 55, 72, 0.06);
+      border-color: var(--color-selected);
+    }
+
+    .time-chip__icon {
+      font-size: 18px;
+    }
+
+    .time-chip__label {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      white-space: nowrap;
+    }
+
+    .time-chip.is-selected .time-chip__label {
+      color: var(--color-text-primary);
+      font-weight: 600;
+    }
+
+    /* ============================================
+       COMPONENT: GenreGrid
+       ジャンルグリッド
+    ============================================ */
+    .genre-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .genre-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 14px 8px;
+      background: var(--color-bg-page);
+      border: 2px solid transparent;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .genre-card:hover {
+      background: var(--color-bg-hover);
+    }
+
+    .genre-card.is-selected {
+      background: rgba(45, 55, 72, 0.06);
+      border-color: var(--color-selected);
+    }
+
+    .genre-card__emoji {
+      font-size: 24px;
+      line-height: 1;
+    }
+
+    .genre-card__label {
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      text-align: center;
+    }
+
+    .genre-card.is-selected .genre-card__label {
+      color: var(--color-text-primary);
+      font-weight: 600;
+    }
+
+    /* ============================================
+       COMPONENT: IngredientChips
+       材料数チップ
+    ============================================ */
+    .ingredient-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .ingredient-chip {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 10px 14px;
+      background: var(--color-bg-page);
+      border: 2px solid transparent;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+    }
+
+    .ingredient-chip:hover {
+      background: var(--color-bg-hover);
+    }
+
+    .ingredient-chip.is-selected {
+      background: var(--color-selected);
+      border-color: var(--color-selected);
+      color: white;
+    }
+
+    .ingredient-chip__icon {
+      font-size: 13px;
+    }
+
+    /* ============================================
+       COMPONENT: BottomSheetFooter
+       フッター（リセット＋適用ボタン）
+       Props: onReset, onApply, resultCount
+    ============================================ */
+    .bottom-sheet__footer {
+      display: flex;
+      gap: 12px;
+      padding: 16px 20px;
+      border-top: 1px solid var(--color-border);
+      background: var(--color-bg-card);
+    }
+
+    .reset-button {
+      flex: 1;
+      padding: 14px 16px;
+      background: var(--color-bg-page);
+      border: none;
+      border-radius: 12px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .reset-button:hover {
+      background: var(--color-bg-hover);
+      color: var(--color-text-primary);
+    }
+
+    .apply-button {
+      flex: 2;
+      padding: 14px 16px;
+      background: var(--color-selected);
+      border: none;
+      border-radius: 12px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 600;
+      color: white;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .apply-button:hover {
+      background: #1a202c;
+    }
+
+    .apply-button__count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 24px;
+      height: 24px;
+      padding: 0 8px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      font-size: 12px;
+    }
+
+    /* ============================================
+       COMPONENT: SelectedSummary
+       選択中のフィルターサマリー
+    ============================================ */
+    .selected-summary {
+      padding: 12px 14px;
+      background: var(--color-bg-page);
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .selected-summary__label {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--color-text-muted);
+      margin-bottom: 8px;
+    }
+
+    .selected-summary__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .selected-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 5px 8px;
+      background: var(--color-bg-card);
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--color-text-primary);
+    }
+
+    .selected-tag__remove {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 14px;
+      height: 14px;
+      background: var(--color-bg-page);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      padding: 0;
+      margin-left: 2px;
+    }
+
+    .selected-tag__remove svg {
+      width: 8px;
+      height: 8px;
+      stroke: var(--color-text-muted);
+      stroke-width: 2.5;
+    }
+
+    .selected-tag__remove:hover {
+      background: var(--color-bg-hover);
+    }
+
+    .selected-tag__remove:hover svg {
+      stroke: var(--color-text-primary);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page">
+
+    <!-- 背景：トップページ（薄暗く表示） -->
+    <div class="page-content">
+      <h2>新着レシピ</h2>
+      <p>詳細検索をタップすると、ボトムシートが表示されます。</p>
+      <div class="demo-cards">
+        <div class="demo-card"></div>
+        <div class="demo-card"></div>
+        <div class="demo-card"></div>
+        <div class="demo-card"></div>
+      </div>
+    </div>
+
+    <!-- COMPONENT: BottomSheetOverlay -->
+    <div class="bottom-sheet-overlay"></div>
+    <!-- /BottomSheetOverlay -->
+
+    <!-- COMPONENT: BottomSheet -->
+    <div class="bottom-sheet">
+      
+      <!-- COMPONENT: BottomSheetHandle -->
+      <div class="bottom-sheet__handle">
+        <div class="bottom-sheet__handle-bar"></div>
+      </div>
+      <!-- /BottomSheetHandle -->
+
+      <!-- COMPONENT: BottomSheetHeader -->
+      <header class="bottom-sheet__header">
+        <h2 class="bottom-sheet__title">詳細検索</h2>
+        <button class="bottom-sheet__close" aria-label="閉じる">
+          <svg viewBox="0 0 24 24" fill="none">
+            <line x1="18" y1="6" x2="6" y2="18" stroke-linecap="round"/>
+            <line x1="6" y1="6" x2="18" y2="18" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </header>
+      <!-- /BottomSheetHeader -->
+
+      <!-- COMPONENT: BottomSheetContent -->
+      <div class="bottom-sheet__content">
+
+        <!-- COMPONENT: SelectedSummary -->
+        <div class="selected-summary">
+          <p class="selected-summary__label">選択中のフィルター</p>
+          <div class="selected-summary__tags">
+            <span class="selected-tag">
+              ⚡ 15分以内
+              <button class="selected-tag__remove" aria-label="削除">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <line x1="18" y1="6" x2="6" y2="18"/>
+                  <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+              </button>
+            </span>
+            <span class="selected-tag">
+              🍚 ご飯もの
+              <button class="selected-tag__remove" aria-label="削除">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <line x1="18" y1="6" x2="6" y2="18"/>
+                  <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+              </button>
+            </span>
+            <span class="selected-tag">
+              ✨ 5個以下
+              <button class="selected-tag__remove" aria-label="削除">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <line x1="18" y1="6" x2="6" y2="18"/>
+                  <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+              </button>
+            </span>
+          </div>
+        </div>
+        <!-- /SelectedSummary -->
+
+        <!-- COMPONENT: FilterSection (調理時間) -->
+        <section class="filter-section">
+          <h3 class="filter-section__title">
+            <span class="filter-section__title-icon">⏱️</span>
+            調理時間
+          </h3>
+          <div class="time-chips">
+            <button class="time-chip is-selected" type="button">
+              <span class="time-chip__icon">⚡</span>
+              <span class="time-chip__label">15分以内</span>
+            </button>
+            <button class="time-chip" type="button">
+              <span class="time-chip__icon">🕐</span>
+              <span class="time-chip__label">15〜30分</span>
+            </button>
+            <button class="time-chip" type="button">
+              <span class="time-chip__icon">🕑</span>
+              <span class="time-chip__label">30〜45分</span>
+            </button>
+            <button class="time-chip" type="button">
+              <span class="time-chip__icon">🕒</span>
+              <span class="time-chip__label">45〜60分</span>
+            </button>
+            <button class="time-chip" type="button">
+              <span class="time-chip__icon">🍲</span>
+              <span class="time-chip__label">60分以上</span>
+            </button>
+          </div>
+        </section>
+        <!-- /FilterSection -->
+
+        <!-- COMPONENT: FilterSection (ジャンル) -->
+        <section class="filter-section">
+          <h3 class="filter-section__title">
+            <span class="filter-section__title-icon">🍽️</span>
+            ジャンル
+          </h3>
+          <div class="genre-grid">
+            <button class="genre-card is-selected" type="button">
+              <span class="genre-card__emoji">🍚</span>
+              <span class="genre-card__label">ご飯もの</span>
+            </button>
+            <button class="genre-card" type="button">
+              <span class="genre-card__emoji">🍤</span>
+              <span class="genre-card__label">揚げ物</span>
+            </button>
+            <button class="genre-card" type="button">
+              <span class="genre-card__emoji">🔥</span>
+              <span class="genre-card__label">焼き物</span>
+            </button>
+            <button class="genre-card" type="button">
+              <span class="genre-card__emoji">🥗</span>
+              <span class="genre-card__label">和物・サラダ</span>
+            </button>
+            <button class="genre-card" type="button">
+              <span class="genre-card__emoji">🍳</span>
+              <span class="genre-card__label">炒め物</span>
+            </button>
+            <button class="genre-card" type="button">
+              <span class="genre-card__emoji">🍲</span>
+              <span class="genre-card__label">煮物</span>
+            </button>
+            <button class="genre-card" type="button">
+              <span class="genre-card__emoji">🥘</span>
+              <span class="genre-card__label">蒸し物</span>
+            </button>
+            <button class="genre-card" type="button">
+              <span class="genre-card__emoji">🍜</span>
+              <span class="genre-card__label">麺類</span>
+            </button>
+          </div>
+        </section>
+        <!-- /FilterSection -->
+
+        <!-- COMPONENT: FilterSection (材料数) -->
+        <section class="filter-section">
+          <h3 class="filter-section__title">
+            <span class="filter-section__title-icon">🥕</span>
+            材料数
+          </h3>
+          <div class="ingredient-chips">
+            <button class="ingredient-chip is-selected" type="button">
+              <span class="ingredient-chip__icon">✨</span>
+              5個以下
+            </button>
+            <button class="ingredient-chip" type="button">
+              6〜10個
+            </button>
+            <button class="ingredient-chip" type="button">
+              11〜15個
+            </button>
+            <button class="ingredient-chip" type="button">
+              16〜20個
+            </button>
+            <button class="ingredient-chip" type="button">
+              20個以上
+            </button>
+          </div>
+        </section>
+        <!-- /FilterSection -->
+
+      </div>
+      <!-- /BottomSheetContent -->
+
+      <!-- COMPONENT: BottomSheetFooter -->
+      <footer class="bottom-sheet__footer">
+        <button class="reset-button" type="button">
+          リセット
+        </button>
+        <button class="apply-button" type="button">
+          レシピを見る
+          <span class="apply-button__count">12</span>
+        </button>
+      </footer>
+      <!-- /BottomSheetFooter -->
+
+    </div>
+    <!-- /BottomSheet -->
+
+  </div>
+
+</body>
+</html>

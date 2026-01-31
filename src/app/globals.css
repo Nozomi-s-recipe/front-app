@@ -3,16 +3,32 @@
 @tailwind utilities;
 @layer base {
   :root {
-    /* Homepage redesign color theme */
-    --color-bg-primary: #fff7dd;
-    --color-bg-secondary: #ffffff;
-    --color-text-primary: #2d3436;
-    --color-text-secondary: #636e72;
-    --color-text-muted: #95a3ab;
-    --color-accent-primary: #80a1ba;
-    --color-accent-secondary: #91c4c3;
-    --color-accent-tertiary: #b4debd;
-    --color-border: #e8e6e1;
+    /* Material Design Color System */
+    /* Primary - Main brand color */
+    --md-primary: #7ab2d3;
+    --md-on-primary: #ffffff;
+    --md-primary-container: #dff2eb;
+    --md-on-primary-container: #4a628a;
+
+    /* Secondary - Supporting color */
+    --md-secondary: #b9e5e8;
+    --md-on-secondary: #4a628a;
+    --md-secondary-container: #dff2eb;
+    --md-on-secondary-container: #4a628a;
+
+    /* Surface - Background surfaces */
+    --md-surface: #ffffff;
+    --md-on-surface: #4a628a;
+    --md-surface-variant: #dff2eb;
+    --md-on-surface-variant: #7ab2d3;
+
+    /* Error - Error states */
+    --md-error: #dc2626;
+    --md-on-error: #ffffff;
+
+    /* Outline - Borders and dividers */
+    --md-outline: #b9e5e8;
+    --md-outline-variant: #e0f2f1;
 
     /* Shadows */
     --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
@@ -25,31 +41,22 @@
     --timing-slow: 0.6s;
     --easing: cubic-bezier(0.4, 0, 0.2, 1);
 
-    /* Existing shadcn/ui variables */
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
+    /* Legacy shadcn/ui compatibility (mapped to Material Design tokens) */
+    --background: 0 0% 100%; /* maps to --md-surface */
+    --foreground: 213 25% 40%; /* maps to --md-on-surface */
+    --primary: 200 46% 65%; /* maps to --md-primary */
+    --primary-foreground: 0 0% 100%; /* maps to --md-on-primary */
+    --secondary: 176 40% 85%; /* maps to --md-secondary */
+    --secondary-foreground: 213 25% 40%; /* maps to --md-on-secondary */
+    --muted: 165 52% 92%; /* maps to --md-surface-variant */
+    --muted-foreground: 200 46% 65%; /* maps to --md-on-surface-variant */
+    --accent: 165 52% 92%; /* maps to --md-surface-variant */
+    --accent-foreground: 213 25% 40%; /* maps to --md-on-surface-variant */
+    --destructive: 0 72% 51%; /* maps to --md-error */
+    --destructive-foreground: 0 0% 100%; /* maps to --md-on-error */
+    --border: 176 40% 85%; /* maps to --md-outline */
+    --input: 176 40% 85%; /* maps to --md-outline */
+    --ring: 200 46% 65%; /* maps to --md-primary */
     --radius: 0.5rem;
   }
   .dark {
@@ -85,8 +92,8 @@
   }
   body {
     @apply bg-background text-foreground;
-    background-color: var(--color-bg-primary);
-    color: var(--color-text-primary);
+    background-color: var(--md-surface-variant);
+    color: var(--md-on-surface);
     font-family:
       var(--font-outfit),
       -apple-system,

@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nozomi's Recipes - トップページ修正案 v2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&family=Noto+Sans+JP:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-text-primary: #2d3748;
+      --color-text-secondary: #6b7a90;
+      --color-text-muted: #8d99ae;
+      --color-border: #e8ecf1;
+      --color-bg-card: #ffffff;
+      --color-bg-page: #f5f7fa;
+      --color-bg-hover: #e8ecf1;
+      --color-selected: #2d3748;
+      --color-accent: #e53e3e;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'DM Sans', 'Noto Sans JP', -apple-system, sans-serif;
+      --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.06);
+      --shadow-card-hover: 0 8px 24px rgba(0, 0, 0, 0.1);
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--color-bg-page);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 430px;
+      background: var(--color-bg-card);
+      min-height: 100vh;
+    }
+
+    /* ============================================
+       COMPONENT: Header
+       ヘッダー（ロゴ + お気に入り + アバター）
+    ============================================ */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .header__logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .header__logo-icon {
+      font-size: 28px;
+    }
+
+    .header__logo-text {
+      font-family: var(--font-body);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+    }
+
+    .header__actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* ============================================
+       COMPONENT: FavoriteButton（ヘッダー）
+       お気に入りページへのリンク
+    ============================================ */
+    .header__favorite {
+      width: 40px;
+      height: 40px;
+      background: var(--color-bg-page);
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      position: relative;
+      text-decoration: none;
+    }
+
+    .header__favorite:hover {
+      background: var(--color-bg-hover);
+    }
+
+    .header__favorite svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--color-text-secondary);
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .header__favorite-badge {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      min-width: 16px;
+      height: 16px;
+      padding: 0 4px;
+      background: var(--color-accent);
+      border-radius: 8px;
+      font-size: 10px;
+      font-weight: 600;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .header__avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      object-fit: cover;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+    }
+
+    .header__avatar:hover {
+      opacity: 0.8;
+    }
+
+    /* ============================================
+       COMPONENT: SearchBar
+    ============================================ */
+    .search-section {
+      padding: 16px 20px;
+    }
+
+    .search-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--color-bg-page);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      transition: all 0.2s ease;
+    }
+
+    .search-bar:focus-within {
+      border-color: var(--color-text-muted);
+      background: var(--color-bg-card);
+    }
+
+    .search-bar input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--color-text-primary);
+      outline: none;
+    }
+
+    .search-bar input::placeholder {
+      color: var(--color-text-muted);
+    }
+
+    .search-bar svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--color-text-muted);
+      stroke-width: 2;
+      fill: none;
+      flex-shrink: 0;
+    }
+
+    /* ============================================
+       COMPONENT: CategorySection
+    ============================================ */
+    .category-section {
+      padding: 20px 20px 24px;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .section-header__title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .section-header__title-icon {
+      font-size: 16px;
+    }
+
+    .section-header__link {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .section-header__link:hover {
+      color: var(--color-text-secondary);
+    }
+
+    .section-header__link svg {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
+
+    .category-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 14px 6px;
+      background: var(--color-bg-page);
+      border: 1.5px solid transparent;
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.2s ease;
+    }
+
+    .category-card:hover {
+      background: var(--color-bg-card);
+      border-color: var(--color-border);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-card);
+    }
+
+    .category-card__emoji {
+      font-size: 26px;
+      line-height: 1;
+    }
+
+    .category-card__label {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      text-align: center;
+    }
+
+    /* ============================================
+       COMPONENT: QuickFilterSection
+    ============================================ */
+    .quick-filter-section {
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .quick-filter-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .quick-filter-header__title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .quick-filter-header__title-icon {
+      font-size: 14px;
+    }
+
+    .active-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 18px;
+      height: 18px;
+      padding: 0 5px;
+      background: var(--color-selected);
+      border-radius: 9px;
+      font-size: 10px;
+      font-weight: 600;
+      color: white;
+      margin-left: 6px;
+    }
+
+    .quick-filter-header__link {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .quick-filter-header__link:hover {
+      color: var(--color-text-secondary);
+    }
+
+    .quick-filter-header__link svg {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .quick-filter-row {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding-bottom: 2px;
+    }
+
+    .quick-filter-row::-webkit-scrollbar {
+      display: none;
+    }
+
+    .quick-chip {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 8px 12px;
+      background: var(--color-bg-page);
+      border: 1.5px solid transparent;
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .quick-chip:hover {
+      background: var(--color-bg-hover);
+    }
+
+    .quick-chip.is-selected {
+      background: var(--color-selected);
+      border-color: var(--color-selected);
+      color: white;
+    }
+
+    .quick-chip__icon {
+      font-size: 13px;
+      line-height: 1;
+    }
+
+    .quick-filter-divider {
+      width: 1px;
+      height: 20px;
+      background: var(--color-border);
+      flex-shrink: 0;
+      align-self: center;
+    }
+
+    /* ============================================
+       COMPONENT: TodayPickSection
+       今日のおすすめ（ハイライトカード）
+    ============================================ */
+    .today-pick-section {
+      padding: 20px;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .today-pick-card {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .today-pick-card__image {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+    }
+
+    .today-pick-card__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 60%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 20px;
+    }
+
+    .today-pick-card__badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 10px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+    }
+
+    .today-pick-card__badge-icon {
+      font-size: 12px;
+    }
+
+    .today-pick-card__title {
+      font-size: 17px;
+      font-weight: 600;
+      color: white;
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+
+    .today-pick-card__meta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .today-pick-card__meta-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .today-pick-card__meta-item svg {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
+      stroke-width: 1.5;
+      fill: none;
+    }
+
+    /* ============================================
+       COMPONENT: RecipeListSection
+    ============================================ */
+    .recipe-list-section {
+      padding: 20px;
+    }
+
+    .recipe-list-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .recipe-list-header__title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+    }
+
+    .recipe-list-header__count {
+      font-size: 12px;
+      color: var(--color-text-muted);
+    }
+
+    .recipe-list-header__count strong {
+      color: var(--color-text-primary);
+    }
+
+    .recipe-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* ============================================
+       COMPONENT: RecipeCard
+    ============================================ */
+    .recipe-card {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--color-bg-card);
+      box-shadow: var(--shadow-card);
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.25s ease;
+    }
+
+    .recipe-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-card-hover);
+    }
+
+    .recipe-card__image-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+    }
+
+    .recipe-card__image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .recipe-card__tag {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      padding: 6px 10px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(4px);
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .recipe-card__tag:hover {
+      background: var(--color-text-primary);
+      color: white;
+    }
+
+    .recipe-card__favorite {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 36px;
+      height: 36px;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(4px);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .recipe-card__favorite:hover {
+      background: white;
+      transform: scale(1.05);
+    }
+
+    .recipe-card__favorite svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--color-text-secondary);
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .recipe-card__content {
+      padding: 16px;
+    }
+
+    .recipe-card__title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+      line-height: 1.4;
+      margin-bottom: 10px;
+    }
+
+    .recipe-card__meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .recipe-card__meta-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      color: var(--color-text-muted);
+    }
+
+    .recipe-card__meta-item svg {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
+      stroke-width: 1.5;
+      fill: none;
+    }
+  </style>
+</head>
+<body>
+
+  <main class="page">
+
+    <!-- ============================================
+         COMPONENT: Header
+         お気に入りボタンをヘッダーに移動
+    ============================================ -->
+    <header class="header">
+      <a href="/" class="header__logo">
+        <span class="header__logo-icon">🍳</span>
+        <span class="header__logo-text">Nozomi's Recipes</span>
+      </a>
+      
+      <div class="header__actions">
+        <!-- COMPONENT: FavoriteButton -->
+        <a href="/favorites" class="header__favorite" aria-label="お気に入り">
+          <svg viewBox="0 0 24 24">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
+          <span class="header__favorite-badge">3</span>
+        </a>
+        <!-- /FavoriteButton -->
+        
+        <img 
+          src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&crop=face" 
+          alt="User" 
+          class="header__avatar"
+        >
+      </div>
+    </header>
+    <!-- /Header -->
+
+    <!-- COMPONENT: SearchBar -->
+    <section class="search-section">
+      <div class="search-bar">
+        <input type="text" placeholder="探しているレシピを入力...">
+        <svg viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="8"/>
+          <path d="M21 21l-4.35-4.35" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </section>
+    <!-- /SearchBar -->
+
+    <!-- COMPONENT: CategorySection -->
+    <section class="category-section">
+      <header class="section-header">
+        <h2 class="section-header__title">
+          <span class="section-header__title-icon">📂</span>
+          カテゴリから探す
+        </h2>
+        <a href="/categories" class="section-header__link">
+          すべて
+          <svg viewBox="0 0 24 24">
+            <polyline points="9 18 15 12 9 6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </header>
+
+      <div class="category-grid">
+        <a href="/japanese" class="category-card">
+          <span class="category-card__emoji">🍣</span>
+          <span class="category-card__label">和食</span>
+        </a>
+        <a href="/chinese" class="category-card">
+          <span class="category-card__emoji">🥟</span>
+          <span class="category-card__label">中華</span>
+        </a>
+        <a href="/mediterranean" class="category-card">
+          <span class="category-card__emoji">🌊</span>
+          <span class="category-card__label">地中海</span>
+        </a>
+        <a href="/western" class="category-card">
+          <span class="category-card__emoji">🍝</span>
+          <span class="category-card__label">洋食</span>
+        </a>
+        <a href="/dessert" class="category-card">
+          <span class="category-card__emoji">🍰</span>
+          <span class="category-card__label">デザート</span>
+        </a>
+      </div>
+    </section>
+    <!-- /CategorySection -->
+
+    <!-- COMPONENT: QuickFilterSection -->
+    <section class="quick-filter-section">
+      <header class="quick-filter-header">
+        <h3 class="quick-filter-header__title">
+          <span class="quick-filter-header__title-icon">🔍</span>
+          絞り込み
+        </h3>
+        <a href="/search" class="quick-filter-header__link">
+          詳細検索
+          <svg viewBox="0 0 24 24">
+            <polyline points="9 18 15 12 9 6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </header>
+
+      <div class="quick-filter-row">
+        <button class="quick-chip" type="button">
+          <span class="quick-chip__icon">⚡</span>
+          15分以内
+        </button>
+        <button class="quick-chip" type="button">
+          <span class="quick-chip__icon">🕐</span>
+          30分以内
+        </button>
+
+        <span class="quick-filter-divider"></span>
+
+        <button class="quick-chip" type="button">
+          <span class="quick-chip__icon">🍚</span>
+          ご飯もの
+        </button>
+        <button class="quick-chip" type="button">
+          <span class="quick-chip__icon">🍤</span>
+          揚げ物
+        </button>
+        <button class="quick-chip" type="button">
+          <span class="quick-chip__icon">🔥</span>
+          焼き物
+        </button>
+        <button class="quick-chip" type="button">
+          <span class="quick-chip__icon">🥗</span>
+          和物
+        </button>
+      </div>
+    </section>
+    <!-- /QuickFilterSection -->
+
+    <!-- ============================================
+         COMPONENT: TodayPickSection
+         今日のおすすめ（タブ→ハイライトカードに変更）
+    ============================================ -->
+    <section class="today-pick-section">
+      <header class="section-header">
+        <h2 class="section-header__title">
+          <span class="section-header__title-icon">✨</span>
+          今日のおすすめ
+        </h2>
+      </header>
+
+      <a href="/recipe/today" class="today-pick-card">
+        <img 
+          src="https://images.unsplash.com/photo-1547592180-85f173990554?w=600&h=340&fit=crop" 
+          alt="白だしのやさしい風味が決め手！大豆と根菜の絶品五目煮" 
+          class="today-pick-card__image"
+        >
+        <div class="today-pick-card__overlay">
+          <span class="today-pick-card__badge">
+            <span class="today-pick-card__badge-icon">🏆</span>
+            本日のピックアップ
+          </span>
+          <h3 class="today-pick-card__title">白だしのやさしい風味が決め手！大豆と根菜の絶品五目煮</h3>
+          <div class="today-pick-card__meta">
+            <span class="today-pick-card__meta-item">
+              <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+              15分
+            </span>
+            <span class="today-pick-card__meta-item">
+              <svg viewBox="0 0 24 24">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                <line x1="3" y1="6" x2="21" y2="6"/>
+              </svg>
+              7個
+            </span>
+          </div>
+        </div>
+      </a>
+    </section>
+    <!-- /TodayPickSection -->
+
+    <!-- COMPONENT: RecipeListSection -->
+    <section class="recipe-list-section">
+      <header class="recipe-list-header">
+        <h2 class="recipe-list-header__title">新着レシピ</h2>
+        <span class="recipe-list-header__count"><strong>46</strong>件</span>
+      </header>
+
+      <div class="recipe-list">
+
+        <article class="recipe-card">
+          <div class="recipe-card__image-wrapper">
+            <img 
+              src="https://images.unsplash.com/photo-1596797038530-2c107229654b?w=600&h=450&fit=crop" 
+              alt="本格スパイス香る絶品ドライカレー" 
+              class="recipe-card__image"
+            >
+            <a href="/japanese/rice" class="recipe-card__tag">ご飯もの</a>
+            <button class="recipe-card__favorite" aria-label="お気に入り">
+              <svg viewBox="0 0 24 24">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+              </svg>
+            </button>
+          </div>
+          <div class="recipe-card__content">
+            <h3 class="recipe-card__title">本格スパイス香る絶品ドライカレー｜野菜たっぷり焦がし醤油風味</h3>
+            <div class="recipe-card__meta">
+              <span class="recipe-card__meta-item">
+                <svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+                30分
+              </span>
+              <span class="recipe-card__meta-item">
+                <svg viewBox="0 0 24 24">
+                  <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                  <line x1="3" y1="6" x2="21" y2="6"/>
+                </svg>
+                8個
+              </span>
+            </div>
+          </div>
+        </article>
+
+        <article class="recipe-card">
+          <div class="recipe-card__image-wrapper">
+            <img 
+              src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=600&h=450&fit=crop" 
+              alt="鶏肉とキャベツの味噌炒め" 
+              class="recipe-card__image"
+            >
+            <a href="/chinese/stir-fry" class="recipe-card__tag">炒め物</a>
+            <button class="recipe-card__favorite" aria-label="お気に入り">
+              <svg viewBox="0 0 24 24">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+              </svg>
+            </button>
+          </div>
+          <div class="recipe-card__content">
+            <h3 class="recipe-card__title">鶏肉とキャベツの味噌炒め｜ご飯がすすむコク旨おかず</h3>
+            <div class="recipe-card__meta">
+              <span class="recipe-card__meta-item">
+                <svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+                20分
+              </span>
+              <span class="recipe-card__meta-item">
+                <svg viewBox="0 0 24 24">
+                  <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                  <line x1="3" y1="6" x2="21" y2="6"/>
+                </svg>
+                9個
+              </span>
+            </div>
+          </div>
+        </article>
+
+        <article class="recipe-card">
+          <div class="recipe-card__image-wrapper">
+            <img 
+              src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=600&h=450&fit=crop" 
+              alt="秋鮭と彩り野菜の甘酢炒め" 
+              class="recipe-card__image"
+            >
+            <a href="/japanese/fried" class="recipe-card__tag">揚げ物</a>
+            <button class="recipe-card__favorite" aria-label="お気に入り">
+              <svg viewBox="0 0 24 24">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+              </svg>
+            </button>
+          </div>
+          <div class="recipe-card__content">
+            <h3 class="recipe-card__title">秋鮭と彩り野菜の甘酢炒め｜ご飯が進む絶品おかず</h3>
+            <div class="recipe-card__meta">
+              <span class="recipe-card__meta-item">
+                <svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+                20分
+              </span>
+              <span class="recipe-card__meta-item">
+                <svg viewBox="0 0 24 24">
+                  <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                  <line x1="3" y1="6" x2="21" y2="6"/>
+                </svg>
+                6個
+              </span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+    <!-- /RecipeListSection -->
+
+  </main>
+
+</body>
+</html>

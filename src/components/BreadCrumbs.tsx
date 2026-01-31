@@ -45,20 +45,18 @@ export const Breadcrumbs = ({ recipeName }: BreadcrumbsProps) => {
           break;
 
         case 1:
-          const subCategory = getSubCategoryById(segment);
-          if (subCategory) {
-            items.push({
-              path: `/${segments[0]}/${segment}`,
-              label: subCategory.name,
-            });
-          }
+          // Skip subcategory in URL structure
+          // Don't add anything for the subcategory segment
           break;
 
         case 2:
-          items.push({
-            path: `/${segments[0]}/${segments[1]}/${segment}`,
-            label: recipeName || '',
-          });
+          // This is the recipe in /[mainCategoryId]/[subCategoryId]/[recipeId]
+          if (recipeName) {
+            items.push({
+              path: `/${segments[0]}/${segments[1]}/${segment}`,
+              label: recipeName,
+            });
+          }
           break;
       }
     });
@@ -82,43 +80,40 @@ export const Breadcrumbs = ({ recipeName }: BreadcrumbsProps) => {
   };
 
   return (
-    <div className='flex justify-center w-full'>
-      <div className='w-full max-w-sm pt-20 pb-4'>
-        <script
-          type='application/ld+json'
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+    <>
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
 
-        <nav aria-label='breadcrumb' className='flex'>
-          <BreadcrumbList className='flex flex-wrap items-center gap-1 font-semibold'>
-            {breadcrumbItems.map((item, index) => {
-              const isLast = index === breadcrumbItems.length - 1;
+      <nav
+        aria-label='breadcrumb'
+        className='flex items-center gap-2 px-5 py-3.5 text-xs text-muted-foreground border-b border-md-outline'
+      >
+        {breadcrumbItems.map((item, index) => {
+          const isLast = index === breadcrumbItems.length - 1;
 
-              return (
-                <div key={item.path} className='flex items-center'>
-                  <BreadcrumbItem>
-                    {isLast ? (
-                      <BreadcrumbPage>{item.label}</BreadcrumbPage>
-                    ) : (
-                      <BreadcrumbLink
-                        href={item.path}
-                        // className='text-primary hover:underline'
-                      >
-                        {item.label}
-                      </BreadcrumbLink>
-                    )}
-                  </BreadcrumbItem>
-                  {!isLast && (
-                    <BreadcrumbSeparator>
-                      <Slash />
-                    </BreadcrumbSeparator>
-                  )}
-                </div>
-              );
-            })}
-          </BreadcrumbList>
-        </nav>
-      </div>
-    </div>
+          return (
+            <div key={item.path} className='flex items-center gap-2'>
+              {isLast ? (
+                <span className='text-md-on-surface font-medium'>
+                  {item.label}
+                </span>
+              ) : (
+                <>
+                  <a
+                    href={item.path}
+                    className='text-muted-foreground hover:text-md-on-surface transition-colors'
+                  >
+                    {item.label}
+                  </a>
+                  <span className='text-[10px]'>›</span>
+                </>
+              )}
+            </div>
+          );
+        })}
+      </nav>
+    </>
   );
 };

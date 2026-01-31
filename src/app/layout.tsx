@@ -74,13 +74,9 @@ export default function RootLayout({
       <body>
         <AuthProvider>
           <div className='min-h-screen bg-background'>
-            <MenuHeader />
-            <main className='container mx-auto px-6 md:px-16 lg:px-24'>
-              {children}
-              <ServiceWorkerRegistration />
-              <InstallPrompt />
-            </main>
-            <Footer />
+            {children}
+            <ServiceWorkerRegistration />
+            <InstallPrompt />
           </div>
           <Toaster />
         </AuthProvider>
