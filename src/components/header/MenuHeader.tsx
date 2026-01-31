@@ -5,15 +5,11 @@ import {
   NavigationMenuItem,
   NavigationMenuList,
 } from '@/components/ui/navigation-menu';
-import { useAuth } from '@/providers/AuthProvider';
 import { useScrolled } from '@/hooks/useScrolled';
-import { useFavorites } from '@/hooks/useFavorites';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Suspense, useEffect, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
-import { AvatarIcon } from './AvatorIcon';
-import { ChevronLeft, Heart } from 'lucide-react';
+import { ChevronLeft } from 'lucide-react';
 
 interface MenuHeaderProps {
   showBackButton?: boolean;
@@ -24,18 +20,10 @@ export const MenuHeader = ({
   showBackButton = false,
   showFavoriteButton = false,
 }: MenuHeaderProps = {}) => {
-  const { user, loading } = useAuth();
   const isScrolled = useScrolled(50);
   const pathname = usePathname();
   const isHomepage = pathname === '/';
   const router = useRouter();
-  const { favorites } = useFavorites();
-  // const supabase = await createClient();
-  // const {
-  //   data: { user },
-  // } = await supabase.auth.getUser();
-
-  // console.log('menu header user', user);
 
   // Handle logo click for smooth scroll on homepage
   const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -118,29 +106,6 @@ export const MenuHeader = ({
               </TooltipProvider>
             </NavigationMenuItem>
             */}
-            {showFavoriteButton && (
-              <NavigationMenuItem>
-                <Link
-                  href='/mypage'
-                  className='relative w-10 h-10 bg-md-surface-variant rounded-xl flex items-center justify-center hover:bg-md-outline transition-colors'
-                  aria-label='お気に入り'
-                >
-                  <Heart className='w-5 h-5 stroke-md-on-surface-variant stroke-2 fill-none' />
-                  {favorites.length > 0 && (
-                    <span className='absolute top-1 right-1 min-w-4 h-4 px-1 bg-destructive rounded-lg text-[10px] font-semibold text-destructive-foreground flex items-center justify-center'>
-                      {favorites.length}
-                    </span>
-                  )}
-                </Link>
-              </NavigationMenuItem>
-            )}
-            <NavigationMenuItem>
-              {loading ? (
-                <div className='h-8 w-8 rounded-full bg-gray-200 animate-pulse' />
-              ) : (
-                <AvatarIcon user={user} />
-              )}
-            </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
       </div>
