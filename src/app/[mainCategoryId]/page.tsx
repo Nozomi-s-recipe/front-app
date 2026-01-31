@@ -1,10 +1,11 @@
 import { CategoryHero } from '@/components/category/CategoryHero';
 import { CategoryFilterSection } from '@/components/category/CategoryFilterSection';
 import { ActiveFiltersBar } from '@/components/category/ActiveFiltersBar';
-import { CategoryRecipeList } from '@/components/category/CategoryRecipeList';
+import { FilteredCategoryRecipeList } from '@/components/category/FilteredCategoryRecipeList';
 import { getMainCategoryByMainId } from '@/utils/const';
 import { getRecipes } from '@/utils/micro-cms/micro-cms';
-import type { RecipeMetadata } from '@/lib/filters/filterTypes';
+import { recipesToMetadata } from '@/lib/filters/recipeAdapter';
+import { Suspense } from 'react';
 
 const CATEGORY_EMOJIS: Record<string, string> = {
   mediterranean: '🌊',
@@ -31,12 +32,7 @@ export default async function MainCategoryPage({
   });
 
   // Convert recipes to RecipeMetadata format for filtering
-  const recipeMeta: RecipeMetadata[] = contents.map((recipe) => ({
-    id: recipe.id,
-    cookingTime: recipe.cookingTime,
-    genres: recipe.subCategory,
-    ingredientCount: recipe.ingredients.length + recipe.seasonings.length,
-  }));
+  const recipeMeta = recipesToMetadata(contents);
 
   return (
     <>
@@ -47,7 +43,20 @@ export default async function MainCategoryPage({
       />
       <CategoryFilterSection recipes={recipeMeta} />
       <ActiveFiltersBar recipes={recipeMeta} />
-      <CategoryRecipeList recipes={contents} totalCount={contents.length} />
+      <Suspense
+        fallback={
+          <section className='px-5 py-5'>
+            <div className='text-center py-8 text-muted-foreground'>
+              <p className='text-sm'>読み込み中...</p>
+            </div>
+          </section>
+        }
+      >
+        <FilteredCategoryRecipeList
+          recipes={contents}
+          totalCount={contents.length}
+        />
+      </Suspense>
     </>
   );
 }

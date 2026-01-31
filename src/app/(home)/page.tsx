@@ -2,7 +2,7 @@ import { SimpleSearchBar } from '@/components/home/SimpleSearchBar';
 import { CategoryGrid } from '@/components/home/CategoryGrid';
 import { QuickFilterSection } from '@/components/home/QuickFilterSection';
 import { TodayPickCardContainer } from '@/components/home/TodayPickCard.container';
-import { RecipeListSection } from '@/components/home/RecipeListSection';
+import { FilteredRecipeListSection } from '@/components/home/FilteredRecipeListSection';
 import { LIMIT } from '@/utils/const';
 import { getRecipes } from '@/utils/micro-cms/micro-cms';
 import { Suspense } from 'react';
@@ -33,8 +33,18 @@ export default async function Home() {
         <TodayPickCardContainer />
       </Suspense>
 
-      {/* Recipe List */}
-      <RecipeListSection recipes={contents} totalCount={totalCount} />
+      {/* Recipe List with Filtering */}
+      <Suspense
+        fallback={
+          <section className='px-5 py-5'>
+            <div className='text-center py-8 text-text-muted'>
+              <p className='text-sm'>読み込み中...</p>
+            </div>
+          </section>
+        }
+      >
+        <FilteredRecipeListSection recipes={contents} totalCount={totalCount} />
+      </Suspense>
     </div>
   );
 }

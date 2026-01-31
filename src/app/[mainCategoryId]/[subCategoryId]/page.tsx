@@ -11,7 +11,7 @@ export default async function SubCategoryPage({
 
   // Redirect to main category page with genre filter
   if (subCategory) {
-    redirect(`/${mainCategoryId}?genres=${subCategoryId}`);
+    redirect(`/${mainCategoryId}?genre=${subCategoryId}`);
   }
 
   // If subcategory not found, redirect to main category page
