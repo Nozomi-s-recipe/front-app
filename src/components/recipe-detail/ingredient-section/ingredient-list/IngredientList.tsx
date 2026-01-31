@@ -42,7 +42,7 @@ export const IngredientList = ({
     <div className='min-w-80'>
       <Collapsible open={isOpen} onOpenChange={setIsOpen}>
         <CollapsibleTrigger className='flex items-center justify-between w-full pb-1 border-b-2 border-primary'>
-          <h2 className='text-xl font-medium'>材料</h2>
+          <h2 className='text-xl font-crimson font-semibold'>材料</h2>
           <ChevronUp
             className={`transform transition-duration-200 ${
               isOpen ? '' : 'rotate-180'
@@ -53,7 +53,9 @@ export const IngredientList = ({
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className='px-0 text-lg font-medium'>食材</TableHead>
+                <TableHead className='px-0 text-lg font-crimson font-semibold'>
+                  食材
+                </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -69,7 +71,7 @@ export const IngredientList = ({
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className='px-0 text-lg font-medium'>
+                <TableHead className='px-0 text-lg font-crimson font-semibold'>
                   調味料
                 </TableHead>
               </TableRow>

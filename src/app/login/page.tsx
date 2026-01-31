@@ -11,7 +11,9 @@ export default function LoginPage() {
   return (
     <div className='flex flex-col items-center justify-center min-h-[calc(100vh-200px)] space-y-6'>
       <div className='max-w-[350px] w-full mb-2'>
-        <h2 className='text-lg font-semibold mb-2'>ログインの特典</h2>
+        <h2 className='text-lg font-crimson font-semibold mb-2'>
+          ログインの特典
+        </h2>
         <ul className='text-muted-foreground text-sm list-disc ml-5 mb-3'>
           <li>お気に入り上限が10件→30件に</li>
           <li>別のブラウザでも同じお気に入りを表示</li>

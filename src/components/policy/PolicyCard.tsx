@@ -49,7 +49,7 @@ export function PolicyCard({
           >
             {policyNumber}
           </div>
-          <h2 className='text-[15px] font-semibold text-gray-900 leading-snug'>
+          <h2 className='text-[15px] font-crimson font-semibold text-gray-900 leading-snug'>
             {title}
           </h2>
         </div>

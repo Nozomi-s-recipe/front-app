@@ -48,7 +48,7 @@ export const CarouselRecipePreview = ({
               {subCategory.name}
             </Badge>
           </div>
-          <h3 className='mt-2 line-clamp-2 text-sm font-medium'>
+          <h3 className='mt-2 line-clamp-2 text-sm font-crimson font-semibold'>
             {recipeName}
           </h3>
           <div className='mt-2 flex items-center gap-4 text-xs text-muted-foreground'>

@@ -48,7 +48,7 @@ export const TodayPickCard = ({ recipe }: TodayPickCardProps) => {
 
           {/* Content overlay */}
           <div className='absolute bottom-0 left-0 right-0 p-5'>
-            <h3 className='text-[17px] font-semibold text-white leading-snug mb-2'>
+            <h3 className='text-[17px] font-crimson font-semibold text-white leading-snug mb-2'>
               {recipe.name}
             </h3>
 

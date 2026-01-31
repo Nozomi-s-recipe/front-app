@@ -13,7 +13,7 @@ export default function NotFound() {
           />
         </div>
 
-        <h1 className='text-3xl font-bold text-slate-800 mb-4'>
+        <h1 className='text-3xl font-crimson font-semibold text-slate-800 mb-4'>
           ページが見つかりません
         </h1>
 

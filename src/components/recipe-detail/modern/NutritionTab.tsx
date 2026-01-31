@@ -59,7 +59,7 @@ export const NutritionTab: React.FC<NutritionTabProps> = ({ nutrition }) => {
         nutrition.salt !== undefined ||
         (nutrition.vitamins && nutrition.vitamins.length > 0)) && (
         <div className='bg-[#f5f7f6] rounded-[20px] p-5 mb-5'>
-          <h3 className='text-sm font-semibold text-[#1a2e28] mb-4'>
+          <h3 className='text-sm font-crimson font-semibold text-[#1a2e28] mb-4'>
             詳細な栄養成分
           </h3>
           <ul className='list-none'>
