@@ -66,7 +66,6 @@ export const ModernRecipeDetail = ({
           <RecipeHeader
             title={recipe.name}
             subtitle={recipe.description}
-            likes={0}
             time={`${recipe.cookingTime}分`}
             servings={DEFAULT_SERVINGS}
           />

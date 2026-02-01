@@ -1,9 +1,8 @@
-import { Heart, Clock, Users } from 'lucide-react';
+import { Clock } from 'lucide-react';
 
 type RecipeHeaderProps = {
   title: string;
   subtitle?: string;
-  likes?: number;
   time: string;
   servings: number;
 };
@@ -11,7 +10,6 @@ type RecipeHeaderProps = {
 export const RecipeHeader = ({
   title,
   subtitle,
-  likes = 0,
   time,
   servings,
 }: RecipeHeaderProps) => {
@@ -25,13 +23,6 @@ export const RecipeHeader = ({
       )}
 
       <div className='flex items-center gap-5 mt-4'>
-        <div className='flex items-center gap-1.5 text-sm text-[#5a6e68]'>
-          <Heart
-            className='w-[18px] h-[18px] stroke-[#8a9e98]'
-            strokeWidth={1.5}
-          />
-          <span>{likes}</span>
-        </div>
         <div className='flex items-center gap-1.5 text-sm text-[#5a6e68]'>
           <Clock
             className='w-[18px] h-[18px] stroke-[#8a9e98]'

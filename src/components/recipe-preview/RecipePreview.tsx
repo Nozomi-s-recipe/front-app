@@ -4,10 +4,9 @@ import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Menu, RecipeImage } from '@/types/types';
 import { RECIPE_BLUR } from '@/utils/const';
 import { isNewRecipe } from '@/utils/recipe/isNewRecipe';
-import { Clock, UtensilsCrossed, Heart } from 'lucide-react';
+import { Clock, UtensilsCrossed } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useFavorites } from '@/hooks/useFavorites';
 import { NewBadge, PopularBadge } from './RecipeBadges';
 
 // Type definitions
@@ -19,7 +18,6 @@ type RecipeStatus = {
 type RecipeStats = {
   cookingTime: number;
   ingredientsCount: number;
-  likes?: number;
 };
 
 export interface RecipePreviewProps {
@@ -44,43 +42,12 @@ const CategoryBadge = ({ category }: { category: string }) => (
   </div>
 );
 
-// Favorite button component
-const FavoriteButton = ({
-  recipeId,
-  onClick,
-}: {
-  recipeId: string;
-  onClick: (e: React.MouseEvent) => void;
-}) => {
-  const { isFavorite } = useFavorites();
-  const favorited = isFavorite(recipeId);
-
-  return (
-    <button
-      onClick={onClick}
-      className='absolute top-4 right-4 z-10 w-10 h-10 rounded-full flex items-center justify-center backdrop-blur-sm transition-transform hover:scale-110 bg-white/95 shadow-sm'
-      aria-label={favorited ? 'お気に入りから削除' : 'お気に入りに追加'}
-    >
-      <Heart
-        className={`w-5 h-5 transition-all stroke-coral stroke-2 ${favorited ? 'fill-coral' : 'fill-none'}`}
-      />
-    </button>
-  );
-};
-
 // Recipe statistics component
 const RecipeStatsComponent = ({
   cookingTime,
   ingredientsCount,
-  likes,
 }: RecipeStats) => (
   <div className='flex items-center gap-5 pt-4 border-t border-border-color'>
-    {likes !== undefined && (
-      <div className='flex items-center gap-2 text-sm text-text-secondary'>
-        <Heart className='w-4 h-4 text-text-muted' />
-        <span>{likes}</span>
-      </div>
-    )}
     <div className='flex items-center gap-2 text-sm text-text-secondary'>
       <Clock className='w-4 h-4 text-text-muted' />
       <span>{cookingTime}分</span>
@@ -107,13 +74,6 @@ export const RecipePreview = ({
   description,
 }: RecipePreviewProps) => {
   const isNew = isNewRecipe(new Date(createdAt));
-  const { toggleFavorite } = useFavorites();
-
-  const handleFavoriteClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    toggleFavorite(recipeId);
-  };
 
   const categoryName = subCategory?.name || mainCategory?.name || '和食';
 
@@ -144,9 +104,6 @@ export const RecipePreview = ({
 
           {/* Category badge */}
           <CategoryBadge category={categoryName} />
-
-          {/* Favorite button */}
-          <FavoriteButton recipeId={recipeId} onClick={handleFavoriteClick} />
         </div>
 
         {/* Content */}
@@ -166,7 +123,6 @@ export const RecipePreview = ({
             <RecipeStatsComponent
               cookingTime={cookingTime}
               ingredientsCount={ingredientsCount}
-              likes={likes}
             />
           </div>
         </div>
