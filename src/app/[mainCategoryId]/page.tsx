@@ -41,7 +41,10 @@ export default async function MainCategoryPage({
         recipeCount={contents.length}
         emoji={CATEGORY_EMOJIS[mainCategory.id] || '🍽️'}
       />
-      <CategoryFilterSection recipes={recipeMeta} />
+      <CategoryFilterSection
+        recipes={recipeMeta}
+        mainCategoryId={mainCategory.id}
+      />
       <ActiveFiltersBar recipes={recipeMeta} />
       <Suspense
         fallback={

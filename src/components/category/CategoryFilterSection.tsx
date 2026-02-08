@@ -2,6 +2,7 @@
 
 import { Clock, Utensils, ShoppingBag } from 'lucide-react';
 import { useRecipeFilters } from '@/hooks/useRecipeFilters';
+import { SIDE_MENUS } from '@/utils/const';
 import type {
   TimeRange,
   IngredientRange,
@@ -10,6 +11,7 @@ import type {
 
 interface CategoryFilterSectionProps {
   recipes: RecipeMetadata[];
+  mainCategoryId?: string;
   onFilterChange?: () => void;
 }
 
@@ -21,18 +23,53 @@ const timeOptions: { value: TimeRange; label: string; icon: string }[] = [
   { value: '60+', label: '60分以上', icon: '🍲' },
 ];
 
-const genreOptions = [
-  { value: 'japanese-rice-dishes', label: 'ご飯もの', icon: '🍚' },
-  { value: 'japanese-fried-dishes', label: '揚げ物', icon: '🍤' },
-  { value: 'japanese-grilled-dishes', label: '焼き物', icon: '🔥' },
-  {
-    value: 'japanese-side-dishes-and-salads',
-    label: '和物・サラダ',
-    icon: '🥗',
-  },
-  { value: 'japanese-simmered-dishes', label: '煮物', icon: '🍲' },
-  { value: 'japanese-steamed-dishes', label: '蒸し物', icon: '🥘' },
-];
+// Icon mapping for different subcategories
+const getSubcategoryIcon = (subCategoryId: string): string => {
+  // Mediterranean icons
+  if (subCategoryId.includes('pasta')) return '🍝';
+  if (subCategoryId.includes('gratin')) return '🧀';
+  if (subCategoryId.includes('meat')) return '🥩';
+  if (subCategoryId.includes('seafood')) return '🐟';
+  if (subCategoryId.includes('omelette') || subCategoryId.includes('egg'))
+    return '🥚';
+  if (subCategoryId.includes('sandwich') || subCategoryId.includes('bread'))
+    return '🥖';
+  if (subCategoryId.includes('appetizers') || subCategoryId.includes('salads'))
+    return '🥗';
+  if (subCategoryId.includes('sauce') || subCategoryId.includes('dressing'))
+    return '🧂';
+
+  // Japanese icons
+  if (subCategoryId.includes('rice')) return '🍚';
+  if (subCategoryId.includes('noodles')) return '🍜';
+  if (subCategoryId.includes('soups')) return '🍵';
+  if (subCategoryId.includes('hot-pots')) return '🍲';
+  if (subCategoryId.includes('fried')) return '🍤';
+  if (subCategoryId.includes('simmered')) return '🍲';
+  if (subCategoryId.includes('steamed')) return '🥘';
+  if (subCategoryId.includes('grilled')) return '🔥';
+  if (subCategoryId.includes('side-dishes')) return '🥗';
+  if (subCategoryId.includes('pickles')) return '🥒';
+
+  // Chinese icons
+  if (subCategoryId.includes('stir-fry')) return '🥘';
+  if (subCategoryId.includes('braised')) return '🍜';
+  if (subCategoryId.includes('dim-sum') || subCategoryId.includes('dumplings'))
+    return '🥟';
+  if (subCategoryId.includes('seasonings')) return '🧂';
+
+  // Sweets icons
+  if (subCategoryId.includes('cakes')) return '🍰';
+  if (subCategoryId.includes('cookies') || subCategoryId.includes('biscuits'))
+    return '🍪';
+  if (subCategoryId.includes('muffins')) return '🧁';
+  if (subCategoryId.includes('puddings') || subCategoryId.includes('jellies'))
+    return '🍮';
+  if (subCategoryId.includes('ice-cream')) return '🍨';
+  if (subCategoryId.includes('japanese-confections')) return '🍡';
+
+  return '🍽️'; // Default icon
+};
 
 const ingredientOptions: { value: IngredientRange; label: string }[] = [
   { value: '0-5', label: '✨ 5個以下' },
@@ -44,9 +81,28 @@ const ingredientOptions: { value: IngredientRange; label: string }[] = [
 
 export function CategoryFilterSection({
   recipes,
+  mainCategoryId,
   onFilterChange,
 }: CategoryFilterSectionProps) {
   const { filters, updateFilters, clearAllFilters } = useRecipeFilters(recipes);
+
+  // Get subcategories for the current main category
+  // If no mainCategoryId is provided (search page), show all subcategories
+  const genreOptions = mainCategoryId
+    ? SIDE_MENUS.find(
+        (menu) => menu.mainCategory.id === mainCategoryId,
+      )?.subCategories.map((subCategory) => ({
+        value: subCategory.id,
+        label: subCategory.name,
+        icon: getSubcategoryIcon(subCategory.id),
+      })) || []
+    : SIDE_MENUS.flatMap((menu) =>
+        menu.subCategories.map((subCategory) => ({
+          value: subCategory.id,
+          label: subCategory.name,
+          icon: getSubcategoryIcon(subCategory.id),
+        })),
+      );
 
   const handleTimeClick = (value: TimeRange) => {
     updateFilters({
